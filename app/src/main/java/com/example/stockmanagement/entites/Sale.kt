@@ -13,7 +13,7 @@ data class Sale(
     val salesdate:Date,
     val purchaseid:Int,
     val saleproductcount:Int,
-    val costofproductsaled:Int,
+    val costofproductsold:Int,
     val amountgiven:Int,
     val amountonly:Boolean
 )

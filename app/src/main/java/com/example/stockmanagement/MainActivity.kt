@@ -1,6 +1,9 @@
 package com.example.stockmanagement
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -24,36 +27,24 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        findViewById<Button>(R.id.Btn_Customer).setOnClickListener {
+            val nextscreen = Intent(this, CustomerCreate::class.java)
+            startActivity(nextscreen)
+        }
+
+
         val dao = ManagementDatabase.getInstance(this).managementDao
 
-        // Sample Customer
-        val customers = listOf(
-            Customer(null, "Alice", "9876543210", "New York", Date(System.currentTimeMillis())),
-            Customer(null, "Bob", "1234567890", "Los Angeles", Date(System.currentTimeMillis()))
-        )
+        findViewById<Button>(R.id.Btn_test).setOnClickListener {
+            findViewById<Button>(R.id.Btn_test).setOnClickListener {
+                Toast.makeText(this, "Test this app", Toast.LENGTH_LONG).show()
+                lifecycleScope.launch {
+                    val customerrec = dao.getAllCustomer()
+                    println(customerrec)
+                }
+            }
 
-        // Sample Products
-        val products = listOf(
-            Product(0, "Laptop", "pcs", Date(System.currentTimeMillis()), 1000, 50),
-            Product(0, "Phone", "pcs", Date(System.currentTimeMillis()), 500, 100)
-        )
-
-        // Sample Purchases
-        val purchases = listOf(
-            Purchase(null, "Laptop", Date(System.currentTimeMillis()), 10, 950),
-            Purchase(null, "Phone", Date(System.currentTimeMillis()), 20, 450)
-        )
-
-        // Sample Sales
-        val sales = listOf(
-            Sale(null, "Alice", "Laptop", Date(System.currentTimeMillis()), 1, 2, 2000, 2000, true),
-            Sale(null, "Bob", "Phone", Date(System.currentTimeMillis()), 2, 1, 500, 300, false)
-        )
-        lifecycleScope.launch {
-            customers.forEach { dao.insertCustomer(it) }
-            products.forEach { dao.insertProduct(it) }
-            purchases.forEach { dao.insertPurchase(it) }
-            sales.forEach { dao.insertSale(it) }
         }
     }
 }

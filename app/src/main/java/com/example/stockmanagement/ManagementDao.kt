@@ -24,6 +24,7 @@ interface ManagementDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPurchase(purchase: Purchase)
 
+    // To Get the Entries
     // Customer-realted
     // Get all customer
     @Query("SELECT * FROM Customer")
@@ -63,4 +64,8 @@ interface ManagementDao {
     @Transaction
     @Query("SELECT * FROM Sale WHERE customername = :name")
     suspend fun getSalesByCustomerName(name: String): List<Sale>
+
+    // To update the Entries.
+    // Need to create
+
 }

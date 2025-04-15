@@ -11,5 +11,6 @@ data class Customer(
     val customername: String,
     val phone: String,
     val address: String,
-    val customercreatedDate: Date
+    val customercreatedDate: Date,
+    val amountbalance:Int
 )

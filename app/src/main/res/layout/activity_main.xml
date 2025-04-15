@@ -1,19 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_margin="20dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginBottom="60dp"
+        android:text="Mill Management"
+        android:textSize="22sp"
+        android:textStyle="bold" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/Btn_Sales"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sales"
+        android:layout_marginTop="20dp"/>
+    <Button
+        android:id="@+id/Btn_Purchase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Purchase"
+        android:layout_marginTop="20dp"/>
+    <Button
+        android:id="@+id/Btn_Customer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Customers"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="20dp"/>
+    <Button
+        android:id="@+id/Btn_Product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Products"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/Btn_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test customers"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="20dp" />
+
+</LinearLayout>
