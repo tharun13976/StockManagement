@@ -12,7 +12,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.stockmanagement.entites.Customer
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 class CustomerCreate : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +27,12 @@ class CustomerCreate : AppCompatActivity() {
             insets
         }
         val dao = ManagementDatabase.getInstance(this).managementDao
+
+        // For Getting current date
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        val currentDateString = dateFormat.format(System.currentTimeMillis())
+        val parsedDate = Date(dateFormat.parse(currentDateString)!!.time)
+
         val name= findViewById<EditText>(R.id.ET_CustomerName)
         val address= findViewById<EditText>(R.id.ET_CustomerAddress)
         val phone= findViewById<EditText>(R.id.ET_CustomerNo)
@@ -41,7 +49,7 @@ class CustomerCreate : AppCompatActivity() {
                     customername = name.text.toString(),
                     phone =phone.text.toString(),
                     address = address.text.toString(),
-                    customercreatedDate = Date(System.currentTimeMillis()),
+                    customercreatedDate = parsedDate,
                     amountbalance = 0
                 )
                 lifecycleScope.launch {

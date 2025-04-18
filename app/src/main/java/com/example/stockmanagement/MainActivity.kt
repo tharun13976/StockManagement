@@ -34,17 +34,14 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+
         val dao = ManagementDatabase.getInstance(this).managementDao
-
         findViewById<Button>(R.id.Btn_test).setOnClickListener {
-            findViewById<Button>(R.id.Btn_test).setOnClickListener {
-                Toast.makeText(this, "Test this app", Toast.LENGTH_LONG).show()
-                lifecycleScope.launch {
-                    val customerrec = dao.getAllCustomer()
-                    println(customerrec)
-                }
+            Toast.makeText(this, "Test this app", Toast.LENGTH_LONG).show()
+            lifecycleScope.launch {
+                val customerrec = dao.getAllCustomer()
+                println(customerrec)
             }
-
         }
     }
 }

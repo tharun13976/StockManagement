@@ -7,7 +7,7 @@ import java.util.Date
 @Entity
 data class Product(
     @PrimaryKey(autoGenerate = true)
-    val pid:Int,
+    val pid:Int?=null,
     val productname:String,
     val mesurment:String,
     val productcreateddate:Date,

@@ -11,5 +11,6 @@ data class Purchase(
     val productname:String,
     val stockaddeddate:Date,
     val stockcount:Int,
+    val currentstockcount:Int,
     val stockprice: Int
 )

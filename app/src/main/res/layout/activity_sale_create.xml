@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SaleCreate"
+    android:gravity="center"
+    android:layout_margin="20dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sales Record Creation:-"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:layout_marginBottom="20sp"/>
+    <TableRow>
+        <TextView
+            android:text="Customer Name"
+            android:textSize="16sp"
+            android:gravity="end"/>
+        <AutoCompleteTextView
+            android:id="@+id/AET_CustomerName"
+            android:layout_width="wrap_content"
+            android:layout_height="50sp"
+            android:hint="Enter the Customer Name"
+            android:layout_marginBottom="10dp"/>
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="Date of Sales"
+            android:textSize="16sp"
+            android:gravity="end"/>
+        <EditText
+            android:id="@+id/DP_SaleDate"
+            android:layout_width="wrap_content"
+            android:layout_height="50sp"
+            android:hint="DD/MM/YYYY"
+            android:layout_marginBottom="10dp" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="Product Name"
+            android:textSize="16sp"
+            android:gravity="end"/>
+        <AutoCompleteTextView
+            android:id="@+id/AET_ServiceName"
+            android:layout_width="wrap_content"
+            android:layout_height="50sp"
+            android:hint="Enter the Product Name"
+            android:layout_marginBottom="10dp"/>
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="Product Count"
+            android:textSize="16sp"
+            android:gravity="end"/>
+        <EditText
+            android:id="@+id/DP_ProductCount"
+            android:layout_width="wrap_content"
+            android:layout_height="50sp"
+            android:hint="Enter the Count"
+            android:layout_marginBottom="10dp" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="Amount Given Rs."
+            android:textSize="16sp"
+            android:gravity="end"/>
+        <EditText
+            android:id="@+id/DP_SalesAmountGiven"
+            android:layout_width="wrap_content"
+            android:layout_height="50sp"
+            android:hint="Enter the Amount"
+            android:layout_marginBottom="10dp" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="Total Cost Rs."
+            android:textSize="16sp"
+            android:gravity="end"/>
+
+        <TextView
+            android:id="@+id/DP_TotalCost"
+            android:layout_width="89dp"
+            android:layout_height="50sp"
+            android:layout_gravity="left"
+            android:layout_marginBottom="10dp"
+            android:text="0" />
+    </TableRow>
+
+    <TableRow android:orientation="vertical">
+
+        <TextView
+            android:text="Only Amount"
+            android:textSize="16sp"
+            android:gravity="end"/>
+        <CheckBox
+            android:id="@+id/CB_OnlyAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="50sp"
+            android:layout_gravity="left"
+            android:layout_marginBottom="10dp" />
+    </TableRow>
+    <Button
+        android:layout_width="wrap_content"
+        android:text="Save the Sales Record"
+        />
+</TableLayout>
