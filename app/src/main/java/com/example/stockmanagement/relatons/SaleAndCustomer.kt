@@ -1,4 +1,4 @@
-package com.example.stockmanagement
+package com.example.stockmanagement.relatons
 
 import androidx.room.Embedded
 import androidx.room.Relation

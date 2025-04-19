@@ -38,6 +38,15 @@
         android:text="Customers"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/Btn_CustomerList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Customers List"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="20dp"/>
+
     <Button
         android:id="@+id/Btn_Product"
         android:layout_width="match_parent"

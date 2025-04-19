@@ -9,12 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
-import com.example.stockmanagement.entites.Customer
-import com.example.stockmanagement.entites.Product
-import com.example.stockmanagement.entites.Purchase
-import com.example.stockmanagement.entites.Sale
+import com.example.stockmanagement.customers.CustomerCreate
+import com.example.stockmanagement.customers.CustomerList
+import com.example.stockmanagement.products.ProductCreate
+import com.example.stockmanagement.purchases.PurchaseCreate
+import com.example.stockmanagement.sales.SaleCreate
 import kotlinx.coroutines.launch
-import java.sql.Date
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +34,25 @@ class MainActivity : AppCompatActivity() {
             startActivity(nextscreen)
         }
 
+        findViewById<Button>(R.id.Btn_Product).setOnClickListener {
+            val nextscreen = Intent(this, ProductCreate::class.java)
+            startActivity(nextscreen)
+        }
+
+        findViewById<Button>(R.id.Btn_Purchase).setOnClickListener {
+            val nextscreen = Intent(this, PurchaseCreate::class.java)
+            startActivity(nextscreen)
+        }
+
+        findViewById<Button>(R.id.Btn_Sales).setOnClickListener {
+            val nextscreen = Intent(this, SaleCreate::class.java)
+            startActivity(nextscreen)
+        }
+
+        findViewById<Button>(R.id.Btn_CustomerList).setOnClickListener {
+            val nextscreen = Intent(this, CustomerList::class.java)
+            startActivity(nextscreen)
+        }
 
 
         val dao = ManagementDatabase.getInstance(this).managementDao
@@ -41,6 +61,12 @@ class MainActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 val customerrec = dao.getAllCustomer()
                 println(customerrec)
+                val productrec = dao.getAllProduct()
+                println(productrec)
+                val salerec = dao.getAllSales()
+                println(salerec)
+                val purchaserec = dao.getAllPurchases()
+                println(purchaserec)
             }
         }
     }

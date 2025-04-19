@@ -13,16 +13,19 @@
         android:theme="@style/Theme.StockManagement"
         tools:targetApi="31">
         <activity
-            android:name=".PurchaseCreate"
+            android:name=".customers.CustomerList"
             android:exported="false" />
         <activity
-            android:name=".SaleCreate"
+            android:name=".purchases.PurchaseCreate"
             android:exported="false" />
         <activity
-            android:name=".ProductCreate"
+            android:name=".sales.SaleCreate"
             android:exported="false" />
         <activity
-            android:name=".CustomerCreate"
+            android:name=".products.ProductCreate"
+            android:exported="false" />
+        <activity
+            android:name=".customers.CustomerCreate"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

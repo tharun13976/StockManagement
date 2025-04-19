@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SaleCreate"
+    tools:context=".sales.SaleCreate"
     android:gravity="center"
     android:layout_margin="20dp">
     <TextView
@@ -34,7 +34,7 @@
             android:textSize="16sp"
             android:gravity="end"/>
         <EditText
-            android:id="@+id/DP_SaleDate"
+            android:id="@+id/ET_SaleDate"
             android:layout_width="wrap_content"
             android:layout_height="50sp"
             android:hint="DD/MM/YYYY"
@@ -46,7 +46,7 @@
             android:textSize="16sp"
             android:gravity="end"/>
         <AutoCompleteTextView
-            android:id="@+id/AET_ServiceName"
+            android:id="@+id/AET_ProductName"
             android:layout_width="wrap_content"
             android:layout_height="50sp"
             android:hint="Enter the Product Name"
@@ -58,22 +58,10 @@
             android:textSize="16sp"
             android:gravity="end"/>
         <EditText
-            android:id="@+id/DP_ProductCount"
+            android:id="@+id/ET_ProductCount"
             android:layout_width="wrap_content"
             android:layout_height="50sp"
             android:hint="Enter the Count"
-            android:layout_marginBottom="10dp" />
-    </TableRow>
-    <TableRow>
-        <TextView
-            android:text="Amount Given Rs."
-            android:textSize="16sp"
-            android:gravity="end"/>
-        <EditText
-            android:id="@+id/DP_SalesAmountGiven"
-            android:layout_width="wrap_content"
-            android:layout_height="50sp"
-            android:hint="Enter the Amount"
             android:layout_marginBottom="10dp" />
     </TableRow>
     <TableRow>
@@ -83,15 +71,29 @@
             android:gravity="end"/>
 
         <TextView
-            android:id="@+id/DP_TotalCost"
-            android:layout_width="89dp"
+            android:id="@+id/TV_TotalCost"
+            android:layout_width="wrap_content"
             android:layout_height="50sp"
-            android:layout_gravity="left"
             android:layout_marginBottom="10dp"
-            android:text="0" />
+            android:text=" 0"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:textColor="@color/green"/>
     </TableRow>
-
-    <TableRow android:orientation="vertical">
+    <TableRow>
+        <TextView
+            android:text="Amount Given Rs."
+            android:textSize="16sp"
+            android:gravity="end"/>
+        <EditText
+            android:id="@+id/ET_SalesAmountGiven"
+            android:layout_width="wrap_content"
+            android:layout_height="50sp"
+            android:hint="Enter the Amount"
+            android:layout_marginBottom="10dp" />
+    </TableRow>
+    <TableRow
+        android:orientation="vertical">
 
         <TextView
             android:text="Only Amount"
@@ -105,6 +107,7 @@
             android:layout_marginBottom="10dp" />
     </TableRow>
     <Button
+        android:id="@+id/Btn_SaveSale"
         android:layout_width="wrap_content"
         android:text="Save the Sales Record"
         />

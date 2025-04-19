@@ -6,7 +6,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:id="@+id/main"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".CustomerCreate"
+tools:context=".customers.CustomerCreate"
 android:gravity="center"
 android:layout_margin="20dp">
 <TextView

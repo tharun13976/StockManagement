@@ -1,8 +1,6 @@
-package com.example.stockmanagement
+package com.example.stockmanagement.products
 
-import android.app.DatePickerDialog
 import android.icu.text.SimpleDateFormat
-import android.icu.util.Calendar
 import android.os.Bundle
 import android.util.Log
 import android.widget.AutoCompleteTextView
@@ -14,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.example.stockmanagement.GetListOfData
+import com.example.stockmanagement.ManagementDatabase
+import com.example.stockmanagement.R
 import com.example.stockmanagement.entites.Product
 import kotlinx.coroutines.launch
 import java.util.Date
@@ -33,11 +34,13 @@ class ProductCreate : AppCompatActivity() {
         var measurementtype=findViewById<AutoCompleteTextView>(R.id.AET_ProductMeasurement)
         var startdate=findViewById<EditText>(R.id.ET_ProductStartDate)
 
-        val dao = ManagementDatabase.getInstance(this).managementDao
         val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        startdate.setText(dateFormat.format(GetListOfData(this, this).getCurrentDate()))
+
+        val dao = ManagementDatabase.Companion.getInstance(this).managementDao
 
         startdate.setOnClickListener {
-            GetListOfData.showDatePicker(this,startdate)
+            GetListOfData.Companion.showDatePicker(this,startdate)
         }
 
         findViewById<Button>(R.id.Btn_SaveProduct).setOnClickListener {
@@ -55,7 +58,7 @@ class ProductCreate : AppCompatActivity() {
                     pid = null,
                     productname = name.text.toString(),
                     mesurment = measurementtype.text.toString(),
-                    productcreateddate =  Date(dateFormat.parse(startdate.text.toString())!!.time),
+                    productcreateddate = Date(dateFormat.parse(startdate.text.toString())!!.time),
                     currentprice = 0,
                     currentstockcount = 0
                 )

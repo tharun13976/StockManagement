@@ -1,4 +1,4 @@
-package com.example.stockmanagement
+package com.example.stockmanagement.customers
 
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.example.stockmanagement.ManagementDatabase
+import com.example.stockmanagement.R
 import com.example.stockmanagement.entites.Customer
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -26,7 +28,7 @@ class CustomerCreate : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val dao = ManagementDatabase.getInstance(this).managementDao
+        val dao = ManagementDatabase.Companion.getInstance(this).managementDao
 
         // For Getting current date
         val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
