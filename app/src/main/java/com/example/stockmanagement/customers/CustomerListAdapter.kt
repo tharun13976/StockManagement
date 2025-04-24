@@ -25,7 +25,7 @@ class CustomerListAdapter(
             tvId.text = customer.cid.toString()
             tvName.text = customer.customername
             tvPhone.text =  customer.phone
-            tvBalance.text = customer.amountbalance.toString()
+            tvBalance.text = "Rs. "+customer.amountbalance.toString()
             itemView.setOnClickListener {
                 onItemClick(customer)
             }

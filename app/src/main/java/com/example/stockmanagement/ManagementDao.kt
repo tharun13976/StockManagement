@@ -29,17 +29,23 @@ interface ManagementDao {
 
 
     // To Get the Entries
-    // Customer-realted
+
+    // Customer
     // Get all customer
     @Query("SELECT * FROM Customer")
     suspend fun getAllCustomer():List<Customer>
 
+    // Get all customer short by name
     @Query("SELECT * FROM Customer ORDER BY customername asc")
     suspend fun getAllCustomerShortByName():List<Customer>
 
+    // Get customer of given ID
+    @Query("SELECT * FROM Customer WHERE cid = :id")
+    suspend fun getCustomerById(id: Int): Customer?
+
     // Get customer of given name
     @Query("SELECT * FROM Customer WHERE customername = :name")
-    suspend fun getCustomerByName(name: String): Customer?
+    suspend fun getCustomerByname(name: String): Customer?
 
     // Get customers name only
     @Query("SELECT customername FROM Customer")
@@ -73,8 +79,9 @@ interface ManagementDao {
     // To Get oldest stock of the product
     @Transaction
     @Query("SELECT * FROM Purchase WHERE currentstockcount > 0 AND productname = :productName ORDER BY stockaddeddate ASC LIMIT 1")
-    suspend fun getOldestPurchase(productName: String): PurchaseAndProduct
+    suspend fun getOldestPurchase(productName: String): Purchase
 
+    // Sale-related
     // Sale-related
     // Get all sale
     @Query("SELECT * FROM Sale")
@@ -86,15 +93,15 @@ interface ManagementDao {
     suspend fun getSalesByCustomerName(name: String): List<Sale>
 
     // To update the Record
-    @Update (onConflict = OnConflictStrategy.REPLACE)
+    @Update
     suspend fun updateCustomer(customer: Customer)
 
-    @Update (onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateProduct(customer: Product)
+    @Update
+    suspend fun updateProduct(product: Product)
 
-    @Update (onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updatePurchase(customer: Purchase)
+    @Update
+    suspend fun updatePurchase(purchase: Purchase)
 
-    @Update (onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateSale(customer: Sale)
+    @Update
+    suspend fun updateSale(sale: Sale)
 }

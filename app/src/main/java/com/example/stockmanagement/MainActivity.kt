@@ -2,10 +2,12 @@ package com.example.stockmanagement
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
@@ -28,6 +30,10 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.title = "Main Menu"
 
         findViewById<Button>(R.id.Btn_Customer).setOnClickListener {
             val nextscreen = Intent(this, CustomerCreate::class.java)
@@ -68,6 +74,15 @@ class MainActivity : AppCompatActivity() {
                 val purchaserec = dao.getAllPurchases()
                 println(purchaserec)
             }
+        }
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                // Do nothing when home icon is clicked
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

@@ -8,9 +8,9 @@ import java.util.Date
 data class Product(
     @PrimaryKey(autoGenerate = true)
     val pid:Int?=null,
-    val productname:String,
+    var productname:String,
     val mesurment:String,
     val productcreateddate:Date,
-    val currentprice:Int,
-    val currentstockcount:Int
+    var LatestpriceofoneUnit:Int,
+    var currentstockcount:Int
 )

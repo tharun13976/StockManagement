@@ -6,12 +6,12 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="25dp"
-    android:padding="8dp"
-    android:background="@android:color/white"
+    android:layout_marginTop="45dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginBottom="20dp"
     android:orientation="vertical"
     tools:context=".customers.CustomerList">
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -30,12 +30,19 @@
             android:id="@+id/Btn_FilterByName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Back"/>
+            android:text="Filter"/>
+        <Button
+            android:id="@+id/Btn_Filter2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Filter2"/>
 
     </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RV_CustomerList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="LinearLayoutManager"/>
+        app:layoutManager="LinearLayoutManager"
+        tools:ignore="SpeakableTextPresentCheck" />
 </LinearLayout>

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
@@ -13,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doOnTextChanged
@@ -20,6 +22,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.stockmanagement.GetListOfData
 import com.example.stockmanagement.ManagementDatabase
 import com.example.stockmanagement.R
+import com.example.stockmanagement.entites.Purchase
 import com.example.stockmanagement.entites.Sale
 import kotlinx.coroutines.launch
 import java.util.Date
@@ -35,6 +38,10 @@ class SaleCreate : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        // Set up the toolbar
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val customername = findViewById<AutoCompleteTextView>(R.id.AET_CustomerName)
         val saledate = findViewById<EditText>(R.id.ET_SaleDate)
@@ -52,14 +59,12 @@ class SaleCreate : AppCompatActivity() {
 
         val dataFetcher = GetListOfData(this, this)
         dataFetcher.getAllCustomerNames { customerNames ->
-            val adapter =
-                ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, customerNames)
+            val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, customerNames)
             customername.setAdapter(adapter)
             customername.threshold = 1
         }
         dataFetcher.getAllProductNames { productNames ->
-            val adapter =
-                ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, productNames)
+            val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, productNames)
             productname.setAdapter(adapter)
             productname.threshold = 1
         }
@@ -71,9 +76,11 @@ class SaleCreate : AppCompatActivity() {
             if (amountonly.isChecked) {
                 productname.setText("")
                 productcount.setText("")
-                totalcost.setText("")
+                totalcost.text = ""
             }
         }
+        var purchaserec: Purchase? = null
+
         // Function to update the total cost dynamically
         @SuppressLint("SetTextI18n")
         fun updateTotalCost() {
@@ -83,11 +90,13 @@ class SaleCreate : AppCompatActivity() {
                 var cost = 0
                 if (!amountonly.isChecked && selectedProduct.isNotEmpty()) {
                     try {
-                        val purchaseList = dao.getOldestPurchase(selectedProduct)
-                        val stockPrice = purchaseList.purchase.stockprice
-                        cost = stockPrice * saleCount
+                        purchaserec = dao.getOldestPurchase(selectedProduct)
+                        val stockPrice = purchaserec.stockprice
+                        cost = stockPrice.times(saleCount)
                     } catch (e: Exception) {
                         e.printStackTrace()
+                        productoutofstock()
+                        productname.setText("")
                     }
                 }
                 // Update the total cost on the screen
@@ -106,53 +115,111 @@ class SaleCreate : AppCompatActivity() {
         productname.setOnItemClickListener { _, _, _, _ -> updateTotalCost() }
 
         findViewById<Button>(R.id.Btn_SaveSale).setOnClickListener {
-            if (customername.text.isEmpty()) {
-                Toast.makeText(this, "Customer name is not Empty", Toast.LENGTH_LONG).show()
-            } else if (saledate.text.isEmpty()) {
-                Toast.makeText(this, "Sale Date is not Empty", Toast.LENGTH_LONG).show()
-            } else if (productname.text.isEmpty() && !amountonly.isChecked) {
-                Toast.makeText(this, "Product name is not Empty", Toast.LENGTH_LONG).show()
-            } else if (productcount.text.isEmpty() && !amountonly.isChecked) {
-                Toast.makeText(this, "Product count is not Empty", Toast.LENGTH_LONG).show()
-            } else if (amountgiven.text.isEmpty()) {
-                Toast.makeText(this, "Amount given is not Empty", Toast.LENGTH_LONG).show()
-            } else {
-                val selectedProduct = productname.text.toString()
-                val saleCount = productcount.text.toString().toIntOrNull() ?: 0
-                val amount = amountgiven.text.toString().toIntOrNull() ?: 0
-
-                lifecycleScope.launch {
-                    var purchaseId = 0
-                    var cost = 0
-
-                    if (!amountonly.isChecked) {
-                        try {
-                            val purchaseList = dao.getOldestPurchase(selectedProduct)
-                            purchaseId = purchaseList.purchase.puid ?: 0
-                            cost = purchaseList.purchase.stockprice * saleCount
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
-                    }
-
-                    val sale = Sale(
-                        sid = null,
-                        customername = customername.text.toString(),
-                        productname = selectedProduct,
-                        salesdate = Date(dateFormat.parse(saledate.text.toString())!!.time),
-                        purchaseid = purchaseId,
-                        saleproductcount = saleCount,
-                        costofproductsold = cost,
-                        amountgiven = amount,
-                        amountonly = amountonly.isChecked
-                    )
-
-                    dao.insertSale(sale)
-                    Log.d("INSERT", "Sale inserted: $sale")
-                    Toast.makeText(this@SaleCreate, "Sale Entry is Saved", Toast.LENGTH_LONG).show()
-                    finish()
+            lifecycleScope.launch {
+                val error = validateInputs(
+                    customername.text.toString(),
+                    saledate.text.toString(),
+                    productname.text.toString(),
+                    productcount.text.toString(),
+                    amountgiven.text.toString(),
+                    amountonly.isChecked,
+                    dataFetcher
+                )
+                if (error != null) {
+                    Toast.makeText(this@SaleCreate, error, Toast.LENGTH_LONG).show()
+                    return@launch
                 }
+
+                val selectedProduct = productname.text.toString()
+                val saleCount = productcount.text.toString().toInt()
+                val givenAmount = amountgiven.text.toString().toInt()
+
+                var purchaseId = 0
+                var cost = 0
+
+                if (!amountonly.isChecked) {
+                    try {
+                        val productRec = dao.getProductByName(selectedProduct)
+                        if ((purchaserec?.currentstockcount ?: 0) < saleCount) {
+                            productcountmissmatch(purchaserec?.currentstockcount.toString())
+                            productcount.setText("0")
+                            return@launch
+                        }
+                        purchaseId = purchaserec?.puid ?: 0
+                        cost = purchaserec?.stockprice?.times(saleCount) ?: 0
+
+                        purchaserec?.currentstockcount = purchaserec.currentstockcount.minus(saleCount)
+                        purchaserec?.let { dao.updatePurchase(it) }
+
+                        productRec?.let {
+                            it.currentstockcount -= saleCount
+                            dao.updateProduct(it)
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+
+                val sale = Sale(
+                    sid = null,
+                    customername = customername.text.toString(),
+                    productname = selectedProduct,
+                    salesdate = Date(dateFormat.parse(saledate.text.toString())!!.time),
+                    purchaseid = purchaseId,
+                    saleproductcount = saleCount,
+                    costofproductsold = cost,
+                    amountgiven = givenAmount,
+                    amountonly = amountonly.isChecked
+                )
+
+                dao.getCustomerByname(customername.text.toString())?.let {
+                    it.amountbalance += cost - givenAmount
+                    dao.updateCustomer(it)
+                }
+
+                dao.insertSale(sale)
+                Log.d("INSERT", "Sale inserted: $sale")
+                Toast.makeText(this@SaleCreate, "Sale Entry Saved", Toast.LENGTH_LONG).show()
+                finish()
             }
+        }
+    }
+
+    suspend fun validateInputs(
+        customerName: String,
+        saleDate: String,
+        productName: String,
+        productCount: String,
+        amountGiven: String,
+        amountOnly: Boolean,
+        dataFetcher: GetListOfData
+    ): String? {
+        return when {
+            !dataFetcher.doesCustomerExist(customerName) -> "Customer not found"
+            !dataFetcher.doesProductExist(productName) -> "Product not found"
+            customerName.isEmpty() -> "Customer name is required"
+            saleDate.isEmpty() -> "Sale Date is required"
+            productName.isEmpty() && !amountOnly -> "Product name is required"
+            (productCount.isEmpty() || productCount == "0") && !amountOnly -> "Product count must be more than 0"
+            amountGiven.isEmpty() -> "Amount given is required"
+            else -> null
+        }
+    }
+
+    fun productcountmissmatch(count: String?) {
+        Toast.makeText(this, "Enter product count ≤ $count", Toast.LENGTH_LONG).show()
+    }
+
+    fun productoutofstock() {
+        Toast.makeText(this, "Product Out of Stock or Not Found", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == android.R.id.home) {
+            finish()
+            true
+        } else {
+            super.onOptionsItemSelected(item)
         }
     }
 }

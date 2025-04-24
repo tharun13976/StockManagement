@@ -1,66 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    android:layout_margin="20dp"
     android:orientation="vertical"
-    android:gravity="center"
-    android:layout_margin="20dp">
+    tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:text="Mill Management"
-        android:textSize="22sp"
-        android:textStyle="bold" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp">
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Main Menu"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
 
-    <Button
-        android:id="@+id/Btn_Sales"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sales"
-        android:layout_marginTop="20dp"/>
-    <Button
-        android:id="@+id/Btn_Purchase"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Purchase"
-        android:layout_marginTop="20dp"/>
-    <Button
-        android:id="@+id/Btn_Customer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Customers"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="20dp"/>
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginTop="5dp">
 
-    <Button
-        android:id="@+id/Btn_CustomerList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Customers List"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="60dp"
+            android:text="Mill Management"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/green"/>
 
-    <Button
-        android:id="@+id/Btn_Product"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Products"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="20dp"/>
+        <Button
+            android:id="@+id/Btn_Sales"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Sales" />
 
-    <Button
-        android:id="@+id/Btn_test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="test customers"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="20dp" />
+        <Button
+            android:id="@+id/Btn_Purchase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Purchase" />
+
+        <Button
+            android:id="@+id/Btn_Customer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:text="Customers" />
+
+        <Button
+            android:id="@+id/Btn_CustomerList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:text="Customers List" />
+
+        <Button
+            android:id="@+id/Btn_Product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:text="Products" />
+
+        <Button
+            android:id="@+id/Btn_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:text="test customers" />
+    </LinearLayout>
 
 </LinearLayout>

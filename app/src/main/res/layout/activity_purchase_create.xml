@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,72 +8,87 @@
     android:layout_height="match_parent"
     tools:context=".purchases.PurchaseCreate"
     android:gravity="center"
-    android:layout_margin="20sp">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Product Stock Entry:-"
-        android:textStyle="bold"
-        android:textSize="24sp"
-        android:layout_marginBottom="20sp"/>
-    <TableRow>
+    android:layout_margin="20sp"
+    android:orientation="vertical">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp">
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Purchase Creation"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <TableRow>
 
-        <TextView
-            android:text="Product Name:"
-            android:textSize="16sp"
-            android:gravity="end"/>
+            <TextView
+                android:text="Product Name:"
+                android:textSize="16sp"
+                android:gravity="end"/>
 
-        <AutoCompleteTextView
-            android:id="@+id/AET_Product"
-            android:layout_width="wrap_content"
+            <AutoCompleteTextView
+                android:id="@+id/AET_Product"
+                android:layout_width="wrap_content"
+                android:layout_height="50sp"
+                android:hint="Enter the Product Name"
+                android:layout_marginBottom="10dp"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="Stock added Date:"
+                android:textSize="16sp"
+                android:gravity="end"/>
+            <EditText
+                android:id="@+id/ET_NewStockDate"
+                android:layout_width="wrap_content"
+                android:layout_height="50sp"
+                android:hint="DD/MM/YYYY"
+                android:inputType="date"
+                android:layout_marginBottom="10dp" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="Cost Rs."
+                android:textSize="16sp"
+                android:gravity="end"/>
+            <EditText
+                android:id="@+id/ET_NewStockCost"
+                android:layout_width="wrap_content"
+                android:layout_height="50sp"
+                android:hint="Cost of One Unit of Stock"
+                android:inputType="number"
+                android:layout_marginBottom="10dp" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="Count:"
+                android:textSize="16sp"
+                android:gravity="end"/>
+            <EditText
+                android:id="@+id/ET_StockCount"
+                android:layout_width="wrap_content"
+                android:layout_height="50sp"
+                android:hint="Enter the count stock"
+                android:layout_marginBottom="10dp"
+                android:inputType="number" />
+        </TableRow>
+        <Button
+            android:id="@+id/Btn_ProductStockSave"
+            android:layout_width="100sp"
             android:layout_height="50sp"
-            android:hint="Enter the Product Name"
-            android:layout_marginBottom="10dp"/>
-    </TableRow>
-    <TableRow>
-        <TextView
-            android:text="Stock added Date:"
-            android:textSize="16sp"
-            android:gravity="end"/>
-        <EditText
-            android:id="@+id/ET_NewStockDate"
-            android:layout_width="wrap_content"
-            android:layout_height="50sp"
-            android:hint="DD/MM/YYYY"
-            android:inputType="date"
-            android:layout_marginBottom="10dp" />
-    </TableRow>
-    <TableRow>
-        <TextView
-            android:text="Total Amount Rs."
-            android:textSize="16sp"
-            android:gravity="end"/>
-        <EditText
-            android:id="@+id/ET_NewStockCost"
-            android:layout_width="wrap_content"
-            android:layout_height="50sp"
-            android:hint="Total Cost of Stock"
-            android:inputType="number"
-            android:layout_marginBottom="10dp" />
-    </TableRow>
-    <TableRow>
-        <TextView
-            android:text="Count:"
-            android:textSize="16sp"
-            android:gravity="end"/>
-        <EditText
-            android:id="@+id/ET_StockCount"
-            android:layout_width="wrap_content"
-            android:layout_height="50sp"
-            android:hint="Enter the count stock"
-            android:layout_marginBottom="10dp"
-            android:inputType="number" />
-    </TableRow>
-    <Button
-        android:id="@+id/Btn_ProductStockSave"
-        android:layout_width="100sp"
-        android:layout_height="50sp"
-        android:text="Save"
-        android:textSize="24sp"
-        tools:ignore="VisualLintButtonSize" />
-</TableLayout>
+            android:text="Save"
+            android:textSize="24sp"
+            tools:ignore="VisualLintButtonSize" />
+    </TableLayout>
+</LinearLayout>

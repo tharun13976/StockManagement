@@ -34,11 +34,11 @@ android:foreground="?attr/selectableItemBackground">
             <TextView
                 android:id="@+id/tvBalanceAmount"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="₹0"
+                android:layout_height="match_parent"
+                android:text="Rs. 0"
+                android:textColor="@android:color/holo_red_dark"
                 android:textSize="14sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/holo_red_dark"/>
+                android:textStyle="bold" />
         </LinearLayout>
 
         <TextView
