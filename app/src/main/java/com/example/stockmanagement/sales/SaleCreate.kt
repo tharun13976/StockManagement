@@ -90,16 +90,20 @@ class SaleCreate : AppCompatActivity() {
                 var cost = 0
                 if (!amountonly.isChecked && selectedProduct.isNotEmpty()) {
                     try {
-                        purchaserec = dao.getOldestPurchase(selectedProduct)
-                        val stockPrice = purchaserec.stockprice
-                        cost = stockPrice.times(saleCount)
+                        val purchase = dao.getOldestPurchase(selectedProduct)
+                        if (purchase == null || purchase.currentstockcount <= 0) {
+                            productoutofstock()
+                            productname.setText("")
+                            return@launch
+                        }
+                        purchaserec = purchase // Save for later use
+                        cost = purchase.stockprice * saleCount
                     } catch (e: Exception) {
                         e.printStackTrace()
                         productoutofstock()
                         productname.setText("")
                     }
                 }
-                // Update the total cost on the screen
                 totalcost.text = cost.toString()
             }
         }
@@ -139,27 +143,29 @@ class SaleCreate : AppCompatActivity() {
 
                 if (!amountonly.isChecked) {
                     try {
-                        val productRec = dao.getProductByName(selectedProduct)
-                        if ((purchaserec?.currentstockcount ?: 0) < saleCount) {
-                            productcountmissmatch(purchaserec?.currentstockcount.toString())
-                            productcount.setText("0")
+                        purchaserec = dao.getOldestPurchase(selectedProduct)
+                        val purchase = purchaserec
+                        if (purchase == null || purchase.currentstockcount < saleCount) {
+                            productcountmissmatch(purchase?.currentstockcount.toString())
+                            productcount.setText("")
                             return@launch
                         }
-                        purchaseId = purchaserec?.puid ?: 0
-                        cost = purchaserec?.stockprice?.times(saleCount) ?: 0
+                        purchaseId = purchase.puid ?: 0
+                        cost = purchase.stockprice * saleCount
 
-                        purchaserec?.currentstockcount = purchaserec.currentstockcount.minus(saleCount)
-                        purchaserec?.let { dao.updatePurchase(it) }
+                        purchase.currentstockcount -= saleCount
+                        dao.updatePurchase(purchase)
 
-                        productRec?.let {
+                        dao.getProductByName(selectedProduct)?.let {
                             it.currentstockcount -= saleCount
                             dao.updateProduct(it)
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
+                        Toast.makeText(this@SaleCreate, "Unexpected error during stock update", Toast.LENGTH_LONG).show()
+                        return@launch
                     }
                 }
-
                 val sale = Sale(
                     sid = null,
                     customername = customername.text.toString(),
@@ -196,10 +202,8 @@ class SaleCreate : AppCompatActivity() {
     ): String? {
         return when {
             !dataFetcher.doesCustomerExist(customerName) -> "Customer not found"
-            !dataFetcher.doesProductExist(productName) -> "Product not found"
-            customerName.isEmpty() -> "Customer name is required"
+            !dataFetcher.doesProductExist(productName) && !amountOnly -> "Product not found"
             saleDate.isEmpty() -> "Sale Date is required"
-            productName.isEmpty() && !amountOnly -> "Product name is required"
             (productCount.isEmpty() || productCount == "0") && !amountOnly -> "Product count must be more than 0"
             amountGiven.isEmpty() -> "Amount given is required"
             else -> null

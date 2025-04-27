@@ -4,9 +4,12 @@ import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.widget.AutoCompleteTextView
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -36,11 +39,30 @@ class ProductCreate : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         var name=findViewById<EditText>(R.id.ET_ProductName)
-        var measurementtype=findViewById<AutoCompleteTextView>(R.id.AET_ProductMeasurement)
+        var measurementtype=findViewById<Spinner>(R.id.Spi_ProductMeasurement)
         var startdate=findViewById<EditText>(R.id.ET_ProductStartDate)
 
+        val measurementunits = listOf("None","Kg", "Liter", "Bag")
+        val adapter = ArrayAdapter(this,android.R.layout.simple_spinner_item, measurementunits)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        measurementtype.adapter = adapter
+
+        measurementtype.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                p1: View,
+                position: Int,
+                id: Long
+            ) {
+                val selectedItem = parent.getItemAtPosition(position).toString()
+                Toast.makeText(this@ProductCreate, "Selected: $selectedItem", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                Toast.makeText(this@ProductCreate, "Selected", Toast.LENGTH_SHORT).show()
+            }
+        }
         val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
         startdate.setText(dateFormat.format(GetListOfData(this, this).getCurrentDate()))
 
@@ -50,31 +72,44 @@ class ProductCreate : AppCompatActivity() {
         }
         val dataFetcher = GetListOfData(this, this)
         findViewById<Button>(R.id.Btn_SaveProduct).setOnClickListener {
-            if(name.text.isEmpty() || name.text.length<5){
-                Toast.makeText(this, "Product Name is not proper.", Toast.LENGTH_LONG).show()
-            }
-            else if(measurementtype.text.isEmpty()){
-                Toast.makeText(this, "Enter the Measurement Type.", Toast.LENGTH_LONG).show()
-            }
-            else if(startdate.text.isEmpty()){
-                Toast.makeText(this, "Enter the Start Date.", Toast.LENGTH_LONG).show()
-            }
-            else{
+            lifecycleScope.launch {
+                val error = validateInputs(
+                    name.text.toString(),
+                    measurementtype.selectedItem.toString(),
+                    startdate.text.toString(),
+                    dataFetcher
+                )
+                if(error !=  null){
+                    Toast.makeText(this@ProductCreate, error, Toast.LENGTH_LONG).show()
+                    return@launch
+                }
                 val product = Product(
                     pid = null,
                     productname = name.text.toString(),
-                    mesurment = measurementtype.text.toString(),
+                    mesurment = measurementtype.selectedItem.toString(),
                     productcreateddate = Date(dateFormat.parse(startdate.text.toString())!!.time),
                     LatestpriceofoneUnit = 0,
                     currentstockcount = 0
                 )
-                lifecycleScope.launch {
-                    dao.insertProduct(product)
-                    Log.d("INSERT", "Product inserted: $product")
-                }
-                Toast.makeText(this, "Product is Saved", Toast.LENGTH_LONG).show()
+                dao.insertProduct(product)
+                Log.d("INSERT", "Product inserted: $product")
+                Toast.makeText(this@ProductCreate, "Product is Saved", Toast.LENGTH_LONG).show()
                 finish()
             }
+        }
+    }
+    suspend fun validateInputs(
+        productName: String,
+        measurementType: String,
+        startDate: String,
+        dataFetcher: GetListOfData
+    ): String?{
+        return when {
+            dataFetcher.doesProductExist(productName) -> "Already we have a Product with Same Name so Change name"
+            productName.isEmpty() -> "Product name is required"
+            measurementType.equals("None") -> "Measurement unit is required.\nNot as None"
+            startDate.isEmpty() -> "Product start Date is required"
+            else -> null
         }
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

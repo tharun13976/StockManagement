@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="1"
+        android:padding="24dp"
+        android:alignmentMode="alignMargins"
+        android:useDefaultMargins="true">
+
+        <Button
+            android:id="@+id/Btn_Purchase"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#2196F3"
+            android:text="Purchase" />
+
+        <Button
+            android:id="@+id/Btn_Sales"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#4CAF50"
+            android:text="Sales" />
+
+        <Button
+            android:id="@+id/Btn_Product"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#9C27B0"
+            android:text="Product" />
+
+        <Button
+            android:id="@+id/Btn_Customer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#FF9800"
+            android:text="Customer" />
+
+    </GridLayout>
+</ScrollView>

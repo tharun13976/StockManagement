@@ -8,9 +8,9 @@ import java.util.Date
 data class Customer(
     @PrimaryKey(autoGenerate = true)
     val cid: Int?=null,
-    val customername: String,
-    val phone: String,
-    val address: String,
+    var customername: String,
+    var phone: String,
+    var address: String,
     val customercreatedDate: Date,
     var amountbalance:Int
 )

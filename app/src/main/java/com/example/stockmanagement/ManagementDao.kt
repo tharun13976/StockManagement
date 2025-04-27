@@ -10,7 +10,6 @@ import com.example.stockmanagement.entites.Customer
 import com.example.stockmanagement.entites.Product
 import com.example.stockmanagement.entites.Purchase
 import com.example.stockmanagement.entites.Sale
-import com.example.stockmanagement.relatons.PurchaseAndProduct
 
 @Dao
 interface ManagementDao {
@@ -74,7 +73,7 @@ interface ManagementDao {
     // Filter by product name
     @Transaction
     @Query("SELECT * FROM Purchase WHERE productname = :productName")
-    suspend fun getPurchaseWithProduct(productName: String): List<PurchaseAndProduct>
+    suspend fun getPurchaseWithProduct(productName: String): List<Purchase>
 
     // To Get oldest stock of the product
     @Transaction
@@ -104,4 +103,7 @@ interface ManagementDao {
 
     @Update
     suspend fun updateSale(sale: Sale)
+
+    @Query("UPDATE Sale SET customerName = :newName WHERE customerName = :oldName")
+    suspend fun updateCustomerNameInSales(oldName: String, newName: String)
 }

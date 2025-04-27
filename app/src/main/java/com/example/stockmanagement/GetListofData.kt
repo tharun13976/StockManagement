@@ -58,16 +58,12 @@ class GetListOfData(context: Context, private val lifecycleOwner: LifecycleOwner
         }
 
     }
+
     fun getCurrentDate(): Date {
         val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
         val currentDateString = dateFormat.format(System.currentTimeMillis())
         val parsedDate = Date(dateFormat.parse(currentDateString)!!.time)
         return parsedDate
-    }
-
-    fun formatIndianNumber(number: Int): String {
-        val formatter = NumberFormat.getNumberInstance(Locale("en", "IN"))
-        return formatter.format(number)
     }
 
     companion object {

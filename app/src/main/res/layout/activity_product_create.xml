@@ -49,12 +49,12 @@
                 android:textSize="16sp"
                 android:gravity="end"/>
 
-            <AutoCompleteTextView
-                android:id="@+id/AET_ProductMeasurement"
+            <Spinner
+                android:id="@+id/Spi_ProductMeasurement"
                 android:layout_width="200dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
-                android:hint="Enter Measurement Type" />
+                android:spinnerMode="dropdown" />
         </TableRow>
         <TableRow>
             <TextView

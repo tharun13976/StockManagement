@@ -56,6 +56,7 @@
                     android:layout_width="295dp"
                     android:layout_height="50sp"
                     android:hint="Enter Contact Number"
+                    android:inputType="number"
                     android:layout_marginBottom="10dp"/>
             </TableRow>
             <TableRow>

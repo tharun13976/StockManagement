@@ -74,22 +74,24 @@ class PurchaseCreate : AppCompatActivity() {
                     Toast.makeText(this@PurchaseCreate, error, Toast.LENGTH_LONG).show()
                     return@launch
                 }
-                val purchase = Purchase(
-                    puid = null,
-                    productname = productname.text.toString(),
-                    stockaddeddate = Date(dateFormat.parse(addeddate.text.toString())!!.time),
-                    stockcount = stockcount.text.toString().toIntOrNull() ?: 0,
-                    currentstockcount = stockcount.text.toString().toIntOrNull() ?: 0,
-                    stockprice = stockcost.text.toString().toIntOrNull() ?: 0
-                )
-                dao.insertPurchase(purchase)
-                Log.d("INSERT", "Purchase inserted: $purchase")
+                else{
+                    val purchase = Purchase(
+                        puid = null,
+                        productname = productname.text.toString(),
+                        stockaddeddate = Date(dateFormat.parse(addeddate.text.toString())!!.time),
+                        stockcount = stockcount.text.toString().toIntOrNull() ?: 0,
+                        currentstockcount = stockcount.text.toString().toIntOrNull() ?: 0,
+                        stockprice = stockcost.text.toString().toIntOrNull() ?: 0
+                    )
+                    dao.insertPurchase(purchase)
+                    Log.d("INSERT", "Purchase inserted: $purchase")
 
-                val productrec = dao.getProductByName(productname.text.toString())
-                if (productrec != null) {
-                    productrec.currentstockcount += stockcount.text.toString().toIntOrNull() ?: 0
-                    productrec.LatestpriceofoneUnit = stockcost.text.toString().toIntOrNull() ?: 0
-                    dao.updateProduct(productrec)
+                    val productrec = dao.getProductByName(productname.text.toString())
+                    if (productrec != null) {
+                        productrec.currentstockcount += stockcount.text.toString().toIntOrNull() ?: 0
+                        productrec.LatestpriceofoneUnit = stockcost.text.toString().toIntOrNull() ?: 0
+                        dao.updateProduct(productrec)
+                    }
                 }
                 Toast.makeText(this@PurchaseCreate, "Purchase Entry Saved", Toast.LENGTH_LONG).show()
                 finish()

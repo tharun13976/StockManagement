@@ -96,4 +96,15 @@ class CustomerList : AppCompatActivity() {
 
         builder.show()
     }
+    override fun onResume() {
+        super.onResume()
+        loadCustomerList()
+    }
+    private fun loadCustomerList() {
+        lifecycleScope.launch {
+            val dao = ManagementDatabase.getInstance(this@CustomerList).managementDao
+            val customers = dao.getAllCustomer()
+            adapter.updateData(customers.toMutableList())
+        }
+    }
 }

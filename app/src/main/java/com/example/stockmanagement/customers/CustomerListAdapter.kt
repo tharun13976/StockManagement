@@ -8,6 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stockmanagement.R
 import com.example.stockmanagement.entites.Customer
+import java.text.NumberFormat
+import java.util.Locale
 
 class CustomerListAdapter(
     private var customers: MutableList<Customer>,
@@ -25,7 +27,7 @@ class CustomerListAdapter(
             tvId.text = customer.cid.toString()
             tvName.text = customer.customername
             tvPhone.text =  customer.phone
-            tvBalance.text = "Rs. "+customer.amountbalance.toString()
+            tvBalance.text = "Rs. "+NumberFormat.getNumberInstance(Locale("en", "IN")).format(customer.amountbalance)
             itemView.setOnClickListener {
                 onItemClick(customer)
             }
