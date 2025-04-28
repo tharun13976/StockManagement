@@ -64,6 +64,10 @@ interface ManagementDao {
     @Query("SELECT productname FROM Product")
     suspend fun getProductNames():List<String>
 
+    // Get product of given ID
+    @Query("SELECT * FROM Product WHERE pid = :id")
+    suspend fun getProductById(id: Int): Product?
+
     // Purchase-related
     // Get all purchases with their sales
     @Transaction

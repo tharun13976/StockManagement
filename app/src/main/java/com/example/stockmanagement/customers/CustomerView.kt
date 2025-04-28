@@ -1,6 +1,5 @@
 package com.example.stockmanagement.customers
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -41,7 +40,7 @@ class CustomerView : AppCompatActivity() {
         val customerId = intent.getIntExtra("CUSTOMER_ID", -1)
 
         lifecycleScope.launch {
-            customer = dao.getCustomerById(id = customerId)
+            customer = dao.getCustomerById(customerId)
             val balance= NumberFormat.getNumberInstance(Locale("en", "IN")).format(customer?.amountbalance)
             customer?.let {
                 findViewById<TextView>(R.id.TV_CustomerID).text = it.cid.toString()

@@ -42,10 +42,10 @@ class ProductList : AppCompatActivity() {
         dao = ManagementDatabase.Companion.getInstance(this).managementDao
         lifecycleScope.launch {
             val products = dao.getAllProduct()
-            adapter = ProductListAdapter( products.toMutableList(), this@ProductList) { //product ->
-                //val nextScreen = Intent(this@ProductList, ProductView::class.java)
-                //nextScreen.putExtra("PRODUCT_ID", product.pid)
-                //startActivity(nextScreen)
+            adapter = ProductListAdapter( products.toMutableList(), this@ProductList) { product ->
+                val nextScreen = Intent(this@ProductList, ProductView::class.java)
+                nextScreen.putExtra("PRODUCT_ID", product.pid)
+                startActivity(nextScreen)
             }
             recyclerView.adapter = adapter
         }

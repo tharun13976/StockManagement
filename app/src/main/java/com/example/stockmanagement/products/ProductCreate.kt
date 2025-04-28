@@ -86,7 +86,7 @@ class ProductCreate : AppCompatActivity() {
                 val product = Product(
                     pid = null,
                     productname = name.text.toString(),
-                    mesurment = measurementtype.selectedItem.toString(),
+                    measurement = measurementtype.selectedItem.toString(),
                     productcreateddate = Date(dateFormat.parse(startdate.text.toString())!!.time),
                     LatestpriceofoneUnit = 0,
                     currentstockcount = 0

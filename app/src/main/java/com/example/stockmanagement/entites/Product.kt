@@ -9,7 +9,7 @@ data class Product(
     @PrimaryKey(autoGenerate = true)
     val pid:Int?=null,
     var productname:String,
-    val mesurment:String,
+    var measurement:String,
     val productcreateddate:Date,
     var LatestpriceofoneUnit:Int,
     var currentstockcount:Int

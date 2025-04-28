@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -18,10 +17,6 @@ import com.example.stockmanagement.ManagementDatabase
 import com.example.stockmanagement.R
 import com.example.stockmanagement.entites.Customer
 import kotlinx.coroutines.launch
-import java.text.NumberFormat
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 class CustomerEdit : AppCompatActivity() {
     private var customer: Customer? = null
