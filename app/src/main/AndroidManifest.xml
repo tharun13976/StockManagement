@@ -13,6 +13,18 @@
         android:theme="@style/Theme.StockManagement"
         tools:targetApi="31">
         <activity
+            android:name=".sales.SaleView"
+            android:exported="false" />
+        <activity
+            android:name=".sales.SaleList"
+            android:exported="false" />
+        <activity
+            android:name=".purchases.PurchaseView"
+            android:exported="false" />
+        <activity
+            android:name=".purchases.PurchaseList"
+            android:exported="false" />
+        <activity
             android:name=".products.ProductView"
             android:exported="false" />
         <activity

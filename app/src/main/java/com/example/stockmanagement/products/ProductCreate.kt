@@ -43,7 +43,7 @@ class ProductCreate : AppCompatActivity() {
         var measurementtype=findViewById<Spinner>(R.id.Spi_ProductMeasurement)
         var startdate=findViewById<EditText>(R.id.ET_ProductStartDate)
 
-        val measurementunits = listOf("None","Kg", "Liter", "Bag")
+        val measurementunits = listOf("None","Kg", "Liter", "Bag", "Nos.")
         val adapter = ArrayAdapter(this,android.R.layout.simple_spinner_item, measurementunits)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         measurementtype.adapter = adapter

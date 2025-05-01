@@ -74,6 +74,12 @@ interface ManagementDao {
     @Query("SELECT * FROM Purchase")
     suspend fun getAllPurchases(): List<Purchase>
 
+    @Transaction
+    @Query("SELECT * FROM Purchase WHERE puid = :purchaseId")
+    suspend fun getPurchaseById(purchaseId: Int): Purchase
+
+
+
     // Filter by product name
     @Transaction
     @Query("SELECT * FROM Purchase WHERE productname = :productName")
@@ -85,10 +91,14 @@ interface ManagementDao {
     suspend fun getOldestPurchase(productName: String): Purchase
 
     // Sale-related
-    // Sale-related
     // Get all sale
     @Query("SELECT * FROM Sale")
     suspend fun getAllSales(): List<Sale>
+
+    // Get sales of given ID
+    @Transaction
+    @Query("SELECT * FROM Sale WHERE sid = :saleid")
+    suspend fun getSalesById(saleid: Int): Sale?
 
     // Get all sales with customer
     @Transaction

@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -43,8 +44,8 @@ class ProductEdit : AppCompatActivity() {
         lifecycleScope.launch {
             product = dao.getProductById(id = productId)
             product?.let { product ->
+                findViewById<TextView>(R.id.TV_ProductName).text=product.productname.toString()
                 val measurementValue = product.measurement
-
                 val adapter = measurementtype.adapter
                 for (i in 0 until adapter.count) {
                     if (adapter.getItem(i).toString().equals(measurementValue, ignoreCase = true)) {
@@ -57,7 +58,7 @@ class ProductEdit : AppCompatActivity() {
             }
         }
 
-        val measurementunits = listOf("None","Kg", "Liter", "Bag")
+        val measurementunits = listOf("None","Kg", "Liter", "Bag", "Nos.")
         val adapter = ArrayAdapter(this,android.R.layout.simple_spinner_item, measurementunits)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         measurementtype.adapter = adapter

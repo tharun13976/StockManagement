@@ -10,6 +10,8 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.stockmanagement.customers.CustomerList
 import com.example.stockmanagement.products.ProductList
+import com.example.stockmanagement.purchases.PurchaseList
+import com.example.stockmanagement.sales.SaleList
 
 class ListRecordsFragment : Fragment() {
 
@@ -28,9 +30,13 @@ class ListRecordsFragment : Fragment() {
             startActivity(Intent(requireContext(), ProductList::class.java))
         }
 
-//        view.findViewById<Button>(R.id.Btn_test).setOnClickListener {
-//            // Example for test
-//        }
+        view.findViewById<Button>(R.id.Btn_PurchaseList).setOnClickListener {
+            startActivity(Intent(requireContext(), PurchaseList::class.java))
+        }
+
+        view.findViewById<Button>(R.id.Btn_SalesList).setOnClickListener {
+            startActivity(Intent(requireContext(), SaleList::class.java))
+        }
 
         return view
     }
