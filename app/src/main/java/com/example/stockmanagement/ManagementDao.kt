@@ -10,6 +10,7 @@ import com.example.stockmanagement.entites.Customer
 import com.example.stockmanagement.entites.Product
 import com.example.stockmanagement.entites.Purchase
 import com.example.stockmanagement.entites.Sale
+import java.sql.Date
 
 @Dao
 interface ManagementDao {
@@ -34,9 +35,13 @@ interface ManagementDao {
     @Query("SELECT * FROM Customer")
     suspend fun getAllCustomer():List<Customer>
 
-    // Get all customer short by name
-    @Query("SELECT * FROM Customer ORDER BY customername asc")
-    suspend fun getAllCustomerShortByName():List<Customer>
+    // Get all customer sort name by Ascending order
+    @Query("SELECT * FROM Customer ORDER BY customername ASC")
+    suspend fun getAllCustomerSortByNameAsc():List<Customer>
+
+    // Get all customer sort name by Descending order
+    @Query("SELECT * FROM Customer ORDER BY customername DESC")
+    suspend fun getAllCustomerSortByNameDesc():List<Customer>
 
     // Get customer of given ID
     @Query("SELECT * FROM Customer WHERE cid = :id")
@@ -49,6 +54,14 @@ interface ManagementDao {
     // Get customers name only
     @Query("SELECT customername FROM Customer")
     suspend fun getCustomersName():List<String>
+
+    // Get all customer sort by balance amount
+    @Query("SELECT * FROM Customer ORDER BY amountbalance DESC")
+    suspend fun getAllCustomersSortByBalance():List<Customer>
+
+    // Get customers of given Phone number
+    @Query("SELECT * FROM Customer WHERE phone = :phoneNo OR phone LIKE '%' || :phoneNo || '%'")
+    suspend fun getAllCustomersPhone(phoneNo: String):List<Customer>
 
 
     // Product-related
@@ -68,6 +81,22 @@ interface ManagementDao {
     @Query("SELECT * FROM Product WHERE pid = :id")
     suspend fun getProductById(id: Int): Product?
 
+    // Get all product sort by name
+    @Query("SELECT * FROM Product ORDER BY productname ASC")
+    suspend fun getAllProductSortByName():List<Product>
+
+    // Get all product sort by name
+    @Query("SELECT * FROM Product ORDER BY productname DESC")
+    suspend fun getAllProductSortByNameDesc():List<Product>
+
+    // Get all available product sort by stock count
+    @Query("SELECT * FROM  Product WHERE currentstockcount >0 ORDER BY currentstockcount DESC")
+    suspend fun getAllProductAvailableSortByCount():List<Product>
+
+    // Get all unavailable product sort by stock count
+    @Query("SELECT * FROM  Product WHERE currentstockcount =0 ")
+    suspend fun getAllProductUnavailable():List<Product>
+
     // Purchase-related
     // Get all purchases with their sales
     @Transaction
@@ -78,12 +107,24 @@ interface ManagementDao {
     @Query("SELECT * FROM Purchase WHERE puid = :purchaseId")
     suspend fun getPurchaseById(purchaseId: Int): Purchase
 
+    @Transaction
+    @Query("SELECT * FROM Purchase WHERE puid = :purchaseId")
+    suspend fun getPurchaseByID(purchaseId: Int): Purchase?
 
+    @Transaction
+    @Query("SELECT * FROM Purchase WHERE currentstockcount > 0")
+    suspend fun getAllAvailablePurchases(): List<Purchase>
+
+//    @Query("SELECT * FROM Purchase WHERE stockaddeddate BETWEEN :start AND :end")
+//    suspend fun getPurchasesByDate(start: Date, end: Date): List<Purchase>
+
+    @Query("SELECT * FROM Purchase WHERE stockaddeddate =:date")
+    suspend fun getPurchasesByDate(date: Date): List<Purchase>
 
     // Filter by product name
     @Transaction
     @Query("SELECT * FROM Purchase WHERE productname = :productName")
-    suspend fun getPurchaseWithProduct(productName: String): List<Purchase>
+    suspend fun getPurchaseforProduct(productName: String): List<Purchase>
 
     // To Get oldest stock of the product
     @Transaction
@@ -100,10 +141,36 @@ interface ManagementDao {
     @Query("SELECT * FROM Sale WHERE sid = :saleid")
     suspend fun getSalesById(saleid: Int): Sale?
 
-    // Get all sales with customer
+    // Get all sales of customer
     @Transaction
     @Query("SELECT * FROM Sale WHERE customername = :name")
     suspend fun getSalesByCustomerName(name: String): List<Sale>
+
+    // Get all sales of customer
+    @Transaction
+    @Query("SELECT * FROM Sale WHERE customername = :name AND amountonly = 1")
+    suspend fun getSalesByCustomersAmountOnly(name: String): List<Sale>
+
+    // Get all sales of product
+    @Transaction
+    @Query("SELECT * FROM Sale WHERE productname = :name")
+    suspend fun getSalesByProductName(name: String): List<Sale>
+
+    // Get all sales of product
+    @Transaction
+    @Query("SELECT * FROM Sale WHERE purchaseid = :id")
+    suspend fun getSalesByPurchaseID(id: Int): List<Sale>
+
+    // Get all sales of amount only
+    @Transaction
+    @Query("SELECT * FROM Sale WHERE amountonly = 1")
+    suspend fun getSalesByAmountOnly(): List<Sale>
+
+    @Transaction
+    @Query("SELECT * FROM Sale WHERE salesdate =:date")
+    suspend fun getSalesByDate(date: Date): List<Sale>
+
+
 
     // To update the Record
     @Update

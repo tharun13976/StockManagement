@@ -55,4 +55,11 @@ class SaleListAdapter(
     }
 
     override fun getItemCount(): Int = sales.size
+
+    fun updateData(newList: List<Sale>) {
+        sales.clear()
+        sales.addAll(newList)
+        notifyDataSetChanged()
+    }
+
 }

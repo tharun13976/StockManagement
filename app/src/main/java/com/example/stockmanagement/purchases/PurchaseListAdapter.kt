@@ -47,4 +47,10 @@ class PurchaseListAdapter(
 
     override fun getItemCount(): Int =purchases.size
 
+    fun updateData(newList: List<Purchase>) {
+        purchases.clear()
+        purchases.addAll(newList)
+        notifyDataSetChanged()
+    }
+
 }

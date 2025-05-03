@@ -57,10 +57,10 @@ android:foreground="?attr/selectableItemBackground">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Added Stock Count :"
-            android:textSize="14sp"
-            android:textColor="#444"/>
+            android:layout_height="match_parent"
+            android:text="Purchased Units :"
+            android:textColor="#444"
+            android:textSize="14sp" />
         <TextView
             android:id="@+id/tvStockCount"
             android:layout_width="wrap_content"
@@ -94,7 +94,7 @@ android:foreground="?attr/selectableItemBackground">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Available Stock Count :"/>
+            android:text="Available Units :"/>
         <TextView
             android:id="@+id/tvCurrentCount"
             android:layout_width="wrap_content"
