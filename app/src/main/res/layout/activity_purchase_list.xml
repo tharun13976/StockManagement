@@ -36,7 +36,7 @@ tools:context=".purchases.PurchaseList">
             android:textStyle="bold"/>
         <Spinner
             android:id="@+id/Spi_PurchaseFilter"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:contextClickable="true"
             android:textAlignment="center"
