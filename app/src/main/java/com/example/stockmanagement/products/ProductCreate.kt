@@ -100,7 +100,7 @@ class ProductCreate : AppCompatActivity() {
                     currentstockcount = 0
                 )
                 dao.insertProduct(product)
-                Log.d("INSERT", "Product inserted: Product Id ${product.pid}")
+                Log.d("INSERT", "Product inserted")
                 Toast.makeText(this@ProductCreate, "Product is Saved", Toast.LENGTH_LONG).show()
                 finish()
             }

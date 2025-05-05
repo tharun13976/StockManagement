@@ -10,8 +10,15 @@
         <menu>
             <item
                 android:id="@+id/action_backup"
-                android:title="Backup" />
+                android:title="Backup"
+                android:icon="@drawable/backup_icon"
+                app:showAsAction="ifRoom" />
+
+            <item
+                android:id="@+id/action_import"
+                android:title="Import"
+                android:icon="@drawable/import_icon"
+                app:showAsAction="ifRoom" />
         </menu>
     </item>
-
 </menu>

@@ -9,11 +9,11 @@ data class Sale(
     @PrimaryKey(autoGenerate = true)
     val sid: Int?=null,
     val customername:String,
-    val productname:String,
+    val productname:String?,
     val salesdate:Date,
-    val purchaseid:Int,
-    val saleproductcount:Int,
-    val costofproductsold:Int,
+    val purchaseid:Int?,
+    val saleproductcount:Int?,
+    val costofproductsold:Int?,
     val amountgiven:Int,
     val amountonly:Boolean
 )

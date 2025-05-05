@@ -91,7 +91,7 @@ class PurchaseCreate : AppCompatActivity() {
                         stockprice = stockcost.text.toString().toIntOrNull() ?: 0
                     )
                     dao.insertPurchase(purchase)
-                    Log.d("INSERT", "Purchase inserted: Purchase Id ${purchase.puid}")
+                    Log.d("INSERT", "Purchase inserted")
 
                     val productrec = dao.getProductByName(productname.text.toString())
                     if (productrec != null) {

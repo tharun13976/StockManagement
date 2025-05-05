@@ -31,18 +31,23 @@ class SaleListAdapter(
 
         fun bind(sale: Sale){
             saleId.text = sale.sid.toString()
-            productName.text = sale.productname.toString()
-            customerName.text = sale.customername.toString()
-            productcount.text = sale.saleproductcount.toString()
-            totalCost.text ="Rs. "+NumberFormat.getNumberInstance(Locale("en", "IN")).format(sale.costofproductsold)
-            amountgiven.text ="Rs. "+NumberFormat.getNumberInstance(Locale("en", "IN")).format(sale.amountgiven)
-            amountonly.text = sale.amountonly.toString()
+            productName.text = sale.productname ?: "N/A"
+            customerName.text = sale.customername
+            productcount.text = sale.saleproductcount?.toString() ?: "N/A"
+            totalCost.text = if (sale.costofproductsold != null)
+                "Rs. " + NumberFormat.getNumberInstance(Locale("en", "IN")).format(sale.costofproductsold)
+            else
+                "N/A"
+            amountgiven.text = "Rs. " + NumberFormat.getNumberInstance(Locale("en", "IN")).format(sale.amountgiven)
+            amountonly.text = if (sale.amountonly) "Yes" else "No"
             saleDate.text = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(sale.salesdate)
-            salePurchaseId.text = sale.purchaseid.toString()
+            salePurchaseId.text = sale.purchaseid?.toString() ?: "N/A"
+
             itemView.setOnClickListener {
                 onItemClick(sale)
             }
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup,  viewType: Int ): SaleListAdapter.DataViewer {

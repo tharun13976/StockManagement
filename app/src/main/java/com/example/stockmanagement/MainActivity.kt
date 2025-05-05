@@ -1,5 +1,6 @@
 package com.example.stockmanagement
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -15,14 +16,14 @@ import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
-import androidx.work.OneTimeWorkRequestBuilder
-import com.example.stockmanagement.customers.CustomerEdit
+
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -77,6 +78,11 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_backup -> {
                 val nextScreen = Intent(this, ManualBackuppage::class.java)
+                startActivity(nextScreen)
+                true
+            }
+            R.id.action_import -> {
+                val nextScreen = Intent(this, ImportActivity::class.java)
                 startActivity(nextScreen)
                 true
             }

@@ -5,6 +5,7 @@ import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
@@ -38,7 +39,7 @@ class SaleCreate : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        // Set up the toolbar
+
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -50,38 +51,50 @@ class SaleCreate : AppCompatActivity() {
         val totalcost = findViewById<TextView>(R.id.TV_TotalCost)
         val amountgiven = findViewById<EditText>(R.id.ET_SalesAmountGiven)
         val amountonly = findViewById<CheckBox>(R.id.CB_OnlyAmount)
+        val lable1 = findViewById<TextView>(R.id.Label_1)
+        val lable2 = findViewById<TextView>(R.id.Label_2)
+        val lable3 = findViewById<TextView>(R.id.Label_3)
 
 
-        val dao = ManagementDatabase.Companion.getInstance(this).managementDao
+        val dao = ManagementDatabase.getInstance(this).managementDao
+        val dataFetcher = GetListOfData(this, this)
 
         val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-        saledate.setText(dateFormat.format(GetListOfData(this, this).getCurrentDate()))
+        saledate.setText(dateFormat.format(dataFetcher.getCurrentDate()))
 
-        val dataFetcher = GetListOfData(this, this)
-        dataFetcher.getAllCustomerNames { customerNames ->
-            val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, customerNames)
-            customername.setAdapter(adapter)
-            customername.threshold = 1
-        }
-        dataFetcher.getAllProductNames { productNames ->
-            val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, productNames)
-            productname.setAdapter(adapter)
-            productname.threshold = 1
-        }
-
-        saledate.setOnClickListener {
-            GetListOfData.Companion.showDatePicker(this, saledate)
-        }
-        amountonly.setOnClickListener{
-            if (amountonly.isChecked) {
+        amountonly.setOnClickListener {
+            val isChecked = amountonly.isChecked
+            productname.visibility = if (isChecked) View.GONE else View.VISIBLE
+            productcount.visibility = if (isChecked) View.GONE else View.VISIBLE
+            totalcost.visibility = if (isChecked) View.GONE else View.VISIBLE
+            lable1.visibility = if (isChecked) View.GONE else View.VISIBLE
+            lable2.visibility = if (isChecked) View.GONE else View.VISIBLE
+            lable3.visibility = if (isChecked) View.GONE else View.VISIBLE
+            if (isChecked) {
                 productname.setText("")
                 productcount.setText("")
                 totalcost.text = ""
             }
         }
+
+        dataFetcher.getAllCustomerNames { names ->
+            val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, names)
+            customername.setAdapter(adapter)
+            customername.threshold = 1
+        }
+
+        dataFetcher.getAllProductNames { names ->
+            val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, names)
+            productname.setAdapter(adapter)
+            productname.threshold = 1
+        }
+
+        saledate.setOnClickListener {
+            GetListOfData.showDatePicker(this, saledate)
+        }
+
         var purchaserec: Purchase? = null
 
-        // Function to update the total cost dynamically
         @SuppressLint("SetTextI18n")
         fun updateTotalCost() {
             val selectedProduct = productname.text.toString()
@@ -96,7 +109,7 @@ class SaleCreate : AppCompatActivity() {
                             productname.setText("")
                             return@launch
                         }
-                        purchaserec = purchase // Save for later use
+                        purchaserec = purchase
                         cost = purchase.stockprice * saleCount
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -108,14 +121,8 @@ class SaleCreate : AppCompatActivity() {
             }
         }
 
-        // Use doOnTextChanged to update total cost dynamically
-        productcount.doOnTextChanged { text, _, _, _ ->
-            updateTotalCost() // Update the total cost when text changes
-        }
-
-        amountgiven.doOnTextChanged { text, _, _, _ ->
-            updateTotalCost() // Update the total cost when text changes
-        }
+        productcount.doOnTextChanged { _, _, _, _ -> updateTotalCost() }
+        amountgiven.doOnTextChanged { _, _, _, _ -> updateTotalCost() }
         productname.setOnItemClickListener { _, _, _, _ -> updateTotalCost() }
 
         findViewById<Button>(R.id.Btn_SaveSale).setOnClickListener {
@@ -135,13 +142,14 @@ class SaleCreate : AppCompatActivity() {
                 }
 
                 val selectedProduct = productname.text.toString()
-                val saleCount = productcount.text.toString().toInt()
+                val saleCount = productcount.text.toString().toIntOrNull() ?: 0
                 val givenAmount = amountgiven.text.toString().toInt()
+                val isAmountOnly = amountonly.isChecked
 
-                var purchaseId = 0
-                var cost = 0
+                var purchaseId: Int? = null
+                var cost: Int? = null
 
-                if (!amountonly.isChecked) {
+                if (!isAmountOnly) {
                     try {
                         purchaserec = dao.getOldestPurchase(selectedProduct)
                         val purchase = purchaserec
@@ -166,6 +174,7 @@ class SaleCreate : AppCompatActivity() {
                         return@launch
                     }
                 }
+
                 val confirmed = dataFetcher.showConfirmationDialog(
                     context = this@SaleCreate,
                     message = "Are you sure you want to save this Sales Entry?\n Note: Unable to edit or Delete the Sales record"
@@ -175,22 +184,22 @@ class SaleCreate : AppCompatActivity() {
                 val sale = Sale(
                     sid = null,
                     customername = customername.text.toString(),
-                    productname = selectedProduct,
+                    productname = if (isAmountOnly) "-" else selectedProduct,
                     salesdate = Date(dateFormat.parse(saledate.text.toString())!!.time),
-                    purchaseid = purchaseId,
-                    saleproductcount = saleCount,
-                    costofproductsold = cost,
+                    purchaseid = if (isAmountOnly) 0 else purchaseId,
+                    saleproductcount = if (isAmountOnly) 0 else saleCount,
+                    costofproductsold = if (isAmountOnly) 0 else cost,
                     amountgiven = givenAmount,
-                    amountonly = amountonly.isChecked
+                    amountonly = isAmountOnly
                 )
 
                 dao.getCustomerByname(customername.text.toString())?.let {
-                    it.amountbalance += cost - givenAmount
+                    it.amountbalance += (cost ?: 0) - givenAmount
                     dao.updateCustomer(it)
                 }
 
                 dao.insertSale(sale)
-                Log.d("INSERT", "Sale inserted: Sales Id ${sale.sid}")
+                Log.d("INSERT", "Sale inserted")
                 Toast.makeText(this@SaleCreate, "Sale Entry Saved", Toast.LENGTH_LONG).show()
                 finish()
             }
