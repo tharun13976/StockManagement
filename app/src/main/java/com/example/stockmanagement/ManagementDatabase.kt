@@ -30,7 +30,7 @@ abstract class ManagementDatabase : RoomDatabase() {
                 return INSTANCE ?: Room.databaseBuilder(
                     context.applicationContext,
                     ManagementDatabase::class.java,
-                    "school_db"
+                    "stock_manage_database_db"
                 ).build().also {
                     INSTANCE = it
                 }

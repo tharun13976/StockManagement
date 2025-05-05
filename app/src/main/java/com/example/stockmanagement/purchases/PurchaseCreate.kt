@@ -75,6 +75,13 @@ class PurchaseCreate : AppCompatActivity() {
                     return@launch
                 }
                 else{
+
+                    val confirmed = dataFetcher.showConfirmationDialog(
+                        context = this@PurchaseCreate,
+                        message = "Are you sure you want to save this Purchase Entry?\n Note: Unable to edit or Delete the Purchase record"
+                    )
+                    if (!confirmed) return@launch
+
                     val purchase = Purchase(
                         puid = null,
                         productname = productname.text.toString(),
@@ -84,7 +91,7 @@ class PurchaseCreate : AppCompatActivity() {
                         stockprice = stockcost.text.toString().toIntOrNull() ?: 0
                     )
                     dao.insertPurchase(purchase)
-                    Log.d("INSERT", "Purchase inserted: $purchase")
+                    Log.d("INSERT", "Purchase inserted: Purchase Id ${purchase.puid}")
 
                     val productrec = dao.getProductByName(productname.text.toString())
                     if (productrec != null) {

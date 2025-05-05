@@ -30,7 +30,12 @@ android:foreground="?attr/selectableItemBackground">
                 android:text="ID: 001"
                 android:textSize="14sp"
                 android:textColor="#444"/>
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Balance :"
+                android:textSize="14sp"
+                android:textColor="#444"/>
             <TextView
                 android:id="@+id/tvBalanceAmount"
                 android:layout_width="wrap_content"
@@ -59,7 +64,6 @@ android:foreground="?attr/selectableItemBackground">
             android:textSize="13sp"
             android:textColor="#555"
             android:layout_marginTop="2dp"/>
-
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

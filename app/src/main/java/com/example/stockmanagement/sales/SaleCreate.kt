@@ -166,6 +166,12 @@ class SaleCreate : AppCompatActivity() {
                         return@launch
                     }
                 }
+                val confirmed = dataFetcher.showConfirmationDialog(
+                    context = this@SaleCreate,
+                    message = "Are you sure you want to save this Sales Entry?\n Note: Unable to edit or Delete the Sales record"
+                )
+                if (!confirmed) return@launch
+
                 val sale = Sale(
                     sid = null,
                     customername = customername.text.toString(),
@@ -184,7 +190,7 @@ class SaleCreate : AppCompatActivity() {
                 }
 
                 dao.insertSale(sale)
-                Log.d("INSERT", "Sale inserted: $sale")
+                Log.d("INSERT", "Sale inserted: Sales Id ${sale.sid}")
                 Toast.makeText(this@SaleCreate, "Sale Entry Saved", Toast.LENGTH_LONG).show()
                 finish()
             }

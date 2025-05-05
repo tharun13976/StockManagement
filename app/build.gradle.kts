@@ -24,7 +24,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            isDebuggable = true
+        }
         release {
+            isDebuggable = false
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -68,6 +72,12 @@ dependencies {
     // Coroutine Lifecycle Scopes
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.2.0")
+
+    implementation("androidx.core:core-splashscreen:1.0.0")
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
+
+    implementation("com.google.code.gson:gson:2.10.1")
+
 
 
 }

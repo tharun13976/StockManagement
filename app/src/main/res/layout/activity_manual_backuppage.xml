@@ -7,10 +7,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginTop="20dp"
+    android:layout_marginTop="48dp"
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
-    tools:context=".MainActivity">
+    tools:context=".ManualBackuppage">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -18,42 +18,60 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp">
-
         <TextView
             android:id="@+id/toolbar_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="Main Menu"
+            android:text="Backup Page"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
 
     <TextView
+        android:id="@+id/TV_PasswordHint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="8dp"
-        android:text="Welcome!"
+        android:text="Enter the password to Backup:-"
         android:textColor="@color/green"
         android:textSize="22sp"
         android:textStyle="bold" />
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
+    <EditText
+        android:id="@+id/ET_Password"
         android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:inputType="textPassword"
+        android:hint="Entre Here.." />
+    <Button
+        android:id="@+id/Btn_CheckPassword"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:tabIndicatorColor="@color/green"
-        app:tabSelectedTextColor="@color/green"
-        app:tabTextColor="@android:color/black"
-        tools:ignore="SpeakableTextPresentCheck" />
+        android:text="Proceed"/>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
+    <TextView
+        android:id="@+id/TV_BackupHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="8dp"
+        android:text="Click to Backup:-"
+        android:textColor="@color/green"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+    <Button
+        android:id="@+id/Btn_Backup"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:text="Backup"
+        android:textColor="@color/white"/>
 </LinearLayout>

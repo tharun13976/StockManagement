@@ -1,132 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".sales.SaleCreate"
-    android:gravity="center"
-    android:layout_margin="20dp"
-    android:orientation="vertical">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    android:fillViewport="true"
+    android:padding="20dp"
+    tools:context=".sales.SaleCreate">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp">
-        <TextView
-            android:id="@+id/toolbar_title"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Sales Creation"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </androidx.appcompat.widget.Toolbar>
-    <TableLayout
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Sales Creation"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.Toolbar>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        >
-        <TableRow>
-            <TextView
-                android:text="Customer Name"
-                android:textSize="16sp"
-                android:gravity="end"/>
-            <AutoCompleteTextView
-                android:id="@+id/AET_CustomerName"
-                android:layout_width="wrap_content"
-                android:layout_height="50sp"
-                android:hint="Enter the Customer Name"
-                android:layout_marginBottom="10dp"/>
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:text="Date of Sales"
-                android:textSize="16sp"
-                android:gravity="end"/>
-            <EditText
-                android:id="@+id/ET_SaleDate"
-                android:layout_width="wrap_content"
-                android:layout_height="50sp"
-                android:hint="DD/MM/YYYY"
-                android:layout_marginBottom="10dp" />
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:text="Product Name"
-                android:textSize="16sp"
-                android:gravity="end"/>
-            <AutoCompleteTextView
-                android:id="@+id/AET_ProductName"
-                android:layout_width="wrap_content"
-                android:layout_height="50sp"
-                android:hint="Enter the Product Name"
-                android:layout_marginBottom="10dp"/>
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:text="Product Count"
-                android:textSize="16sp"
-                android:gravity="end"/>
-            <EditText
-                android:id="@+id/ET_ProductCount"
-                android:layout_width="wrap_content"
-                android:layout_height="50sp"
-                android:hint="Enter the Count"
-                android:inputType="number"
-                android:layout_marginBottom="10dp" />
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:text="Total Cost Rs."
-                android:textSize="16sp"
-                android:gravity="end"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical"
+        android:gravity="center">
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
 
-            <TextView
-                android:id="@+id/TV_TotalCost"
-                android:layout_width="wrap_content"
-                android:layout_height="50sp"
-                android:layout_marginBottom="10dp"
-                android:text=" 0"
-                android:textSize="16dp"
-                android:textStyle="bold"
-                android:textColor="@color/green"/>
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:text="Amount Given Rs."
-                android:textSize="16sp"
-                android:gravity="end"/>
-            <EditText
-                android:id="@+id/ET_SalesAmountGiven"
-                android:layout_width="wrap_content"
-                android:layout_height="50sp"
-                android:hint="Enter the Amount"
-                android:inputType="number"
-                android:layout_marginBottom="10dp" />
-        </TableRow>
-        <TableRow
-            android:orientation="vertical">
+            <TableRow>
+                <TextView android:text="Customer Name" android:textSize="16sp" android:gravity="end"/>
+                <AutoCompleteTextView
+                    android:id="@+id/AET_CustomerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:hint="Enter the Customer Name"
+                    android:layout_marginBottom="10dp"/>
+            </TableRow>
 
-            <TextView
-                android:text="Only Amount"
-                android:textSize="16sp"
-                android:gravity="end"/>
-            <CheckBox
-                android:id="@+id/CB_OnlyAmount"
+            <TableRow>
+                <TextView android:text="Date of Sales" android:textSize="16sp" android:gravity="end"/>
+                <EditText
+                    android:id="@+id/ET_SaleDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:hint="DD/MM/YYYY"
+                    android:layout_marginBottom="10dp"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView android:text="Product Name" android:textSize="16sp" android:gravity="end"/>
+                <AutoCompleteTextView
+                    android:id="@+id/AET_ProductName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:hint="Enter the Product Name"
+                    android:layout_marginBottom="10dp"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView android:text="Product Count" android:textSize="16sp" android:gravity="end"/>
+                <EditText
+                    android:id="@+id/ET_ProductCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:hint="Enter the Count"
+                    android:inputType="number"
+                    android:layout_marginBottom="10dp"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView android:text="Total Cost Rs." android:textSize="16sp" android:gravity="end"/>
+                <TextView
+                    android:id="@+id/TV_TotalCost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="10dp"
+                    android:text=" 0"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/green"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView android:text="Amount Given Rs." android:textSize="16sp" android:gravity="end"/>
+                <EditText
+                    android:id="@+id/ET_SalesAmountGiven"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:hint="Enter the Amount"
+                    android:inputType="number"
+                    android:layout_marginBottom="10dp"/>
+            </TableRow>
+
+            <TableRow android:orientation="vertical">
+                <TextView android:text="Only Amount" android:textSize="16sp" android:gravity="end"/>
+                <CheckBox
+                    android:id="@+id/CB_OnlyAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_gravity="left"
+                    android:layout_marginBottom="10dp"/>
+            </TableRow>
+
+            <Button
+                android:id="@+id/Btn_SaveSale"
                 android:layout_width="wrap_content"
-                android:layout_height="50sp"
-                android:layout_gravity="left"
-                android:layout_marginBottom="10dp" />
-        </TableRow>
-        <Button
-            android:id="@+id/Btn_SaveSale"
-            android:layout_width="wrap_content"
-            android:text="Save the Sales Record"
-            />
-    </TableLayout>
-</LinearLayout>
+                android:text="Save the Sales Record"/>
+        </TableLayout>
+    </LinearLayout>
+    </LinearLayout>
+</ScrollView>

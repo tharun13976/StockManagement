@@ -20,6 +20,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.stockmanagement.GetListOfData
 import com.example.stockmanagement.ManagementDatabase
 import com.example.stockmanagement.R
+import com.example.stockmanagement.customers.CustomerCreate
 import com.example.stockmanagement.entites.Product
 import kotlinx.coroutines.launch
 import java.util.Date
@@ -83,6 +84,13 @@ class ProductCreate : AppCompatActivity() {
                     Toast.makeText(this@ProductCreate, error, Toast.LENGTH_LONG).show()
                     return@launch
                 }
+
+                val confirmed = dataFetcher.showConfirmationDialog(
+                    context = this@ProductCreate,
+                    message = "Are you sure you want to save this product?"
+                )
+                if (!confirmed) return@launch
+
                 val product = Product(
                     pid = null,
                     productname = name.text.toString(),
@@ -92,7 +100,7 @@ class ProductCreate : AppCompatActivity() {
                     currentstockcount = 0
                 )
                 dao.insertProduct(product)
-                Log.d("INSERT", "Product inserted: $product")
+                Log.d("INSERT", "Product inserted: Product Id ${product.pid}")
                 Toast.makeText(this@ProductCreate, "Product is Saved", Toast.LENGTH_LONG).show()
                 finish()
             }

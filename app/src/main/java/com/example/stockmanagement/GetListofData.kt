@@ -6,11 +6,13 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import android.app.DatePickerDialog
-import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import androidx.appcompat.app.AlertDialog
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
 
 class GetListOfData(context: Context, private val lifecycleOwner: LifecycleOwner) {
     val dao = ManagementDatabase.getInstance(context).managementDao
@@ -58,6 +60,31 @@ class GetListOfData(context: Context, private val lifecycleOwner: LifecycleOwner
         }
 
     }
+
+    suspend fun showConfirmationDialog(
+        context: Context,
+        title: String = "Confirm Action",
+        message: String,
+        positiveText: String = "Save",
+        negativeText: String = "Cancel"
+    ): Boolean = suspendCancellableCoroutine { cont ->
+        AlertDialog.Builder(context)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(positiveText) { dialog, _ ->
+                cont.resume(true)
+                dialog.dismiss()
+            }
+            .setNegativeButton(negativeText) { dialog, _ ->
+                cont.resume(false)
+                dialog.dismiss()
+            }
+            .setOnCancelListener {
+                cont.resume(false)
+            }
+            .show()
+    }
+
 
     fun getCurrentDate(): Date {
         val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())

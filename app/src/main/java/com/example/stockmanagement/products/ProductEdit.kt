@@ -16,8 +16,10 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.example.stockmanagement.GetListOfData
 import com.example.stockmanagement.ManagementDatabase
 import com.example.stockmanagement.R
+import com.example.stockmanagement.customers.CustomerCreate
 import com.example.stockmanagement.entites.Product
 import kotlinx.coroutines.launch
 
@@ -79,14 +81,20 @@ class ProductEdit : AppCompatActivity() {
                 Toast.makeText(this@ProductEdit, "Selected", Toast.LENGTH_SHORT).show()
             }
         }
-
+        val dataFetcher = GetListOfData(this, this)
         findViewById<Button>(R.id.Btn_SaveProduct).setOnClickListener {
             lifecycleScope.launch {
+                val confirmed = dataFetcher.showConfirmationDialog(
+                    context = this@ProductEdit,
+                    message = "Are you sure you want to update this product?"
+                )
+                if (!confirmed) return@launch
+
                 product?.let {
                     it.measurement = measurementtype.selectedItem.toString()
 
                     dao.updateProduct(it)
-                    Log.d("UPDATE", "Product Updated: $it")
+                    Log.d("UPDATE", "Product Updated: Product Id ${it.pid}")
                     Toast.makeText(this@ProductEdit, "Product is Updated", Toast.LENGTH_LONG).show()
                     finish()
                 } ?: run {

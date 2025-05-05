@@ -7,4 +7,10 @@
     </style>
 
     <style name="Theme.StockManagement" parent="Base.Theme.StockManagement" />
+
+    <style name="Theme.Splash" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
 </resources>

@@ -15,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.stockmanagement.GetListOfData
 import com.example.stockmanagement.ManagementDatabase
 import com.example.stockmanagement.R
+import com.example.stockmanagement.customers.CustomerCreate
 import com.example.stockmanagement.entites.Customer
 import kotlinx.coroutines.launch
 
@@ -68,12 +69,19 @@ class CustomerEdit : AppCompatActivity() {
                     Toast.makeText(this@CustomerEdit, error, Toast.LENGTH_LONG).show()
                     return@launch
                 }
+
+                val confirmed = dataFetcher.showConfirmationDialog(
+                    context = this@CustomerEdit,
+                    message = "Are you sure you want to update this customer?"
+                )
+                if (!confirmed) return@launch
+
                 customer?.let {
                     it.customername = name.text.toString()
                     it.phone = phone.text.toString()
                     it.address = address.text.toString()
                     dao.updateCustomer(it)
-                    Log.d("UPDATE", "Customer updated: $it")
+                    Log.d("UPDATE", "Customer updated: Customer Id ${it.cid}")
                     if(name.text.toString() != oldname){
                         dao.updateCustomerNameInSales(oldname,name.text.toString())
                     }

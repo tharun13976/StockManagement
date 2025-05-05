@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
@@ -60,6 +61,13 @@ class CustomerCreate : AppCompatActivity() {
                     Toast.makeText(this@CustomerCreate, error, Toast.LENGTH_LONG).show()
                     return@launch
                 }
+
+                val confirmed = dataFetcher.showConfirmationDialog(
+                    context = this@CustomerCreate,
+                    message = "Are you sure you want to save this customer?"
+                )
+                if (!confirmed) return@launch
+
                 val customer = Customer(
                     cid = null,
                     customername = name.text.toString(),
@@ -69,12 +77,14 @@ class CustomerCreate : AppCompatActivity() {
                     amountbalance = 0
                 )
                 dao.insertCustomer(customer)
-                Log.d("INSERT", "Customer inserted: $customer")
+                Log.d("INSERT", "Customer inserted: Customer Id ${customer.cid}")
                 Toast.makeText(this@CustomerCreate, "Contact is Saved", Toast.LENGTH_LONG).show()
                 finish()
             }
         }
     }
+
+
     suspend fun validateInputs(
         customerName: String,
         address: String,
@@ -100,3 +110,4 @@ class CustomerCreate : AppCompatActivity() {
         }
     }
 }
+
