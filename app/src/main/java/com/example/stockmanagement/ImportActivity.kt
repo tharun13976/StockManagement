@@ -1,6 +1,7 @@
 package com.example.stockmanagement
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.OpenableColumns
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.stockmanagement.entites.Customer
 import com.example.stockmanagement.entites.Product
 import com.example.stockmanagement.entites.Purchase
@@ -32,21 +34,29 @@ class ImportActivity : AppCompatActivity() {
     private lateinit var loadingOverlay: View
 
     private val zipFileLauncher = registerForActivityResult(
-        ActivityResultContracts.GetContent()
-    ) { uri ->
-        uri?.let {
-            if (!isZipFile(it)) {
-                showAlert("Invalid File", "Please select a ZIP file.")
-                return@let
-            }
+        ActivityResultContracts.OpenDocument()
+    ) { uri: Uri? ->
+        if (uri == null) {
+            showAlert("No File Selected", "Please choose a valid ZIP file.")
+            return@registerForActivityResult
+        }
 
-            // Read into ByteArray immediately to prevent stream closure
-            val byteArray = contentResolver.openInputStream(it)?.readBytes()
+        contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
 
-            if (byteArray != null) {
-                processZipFile(byteArray.inputStream())
-            } else {
-                showAlert("Error", "Failed to read ZIP file.")
+        if (!isZipFile(uri)) {
+            showAlert("Invalid File", "Please select a ZIP file.")
+            return@registerForActivityResult
+        }
+
+        lifecycleScope.launch {
+            try {
+                contentResolver.openInputStream(uri)?.use { inputStream ->
+                    val byteArray = inputStream.readBytes()
+                    processZipFile(byteArray.inputStream())
+                } ?: showAlert("Error", "Unable to read the selected file.")
+            } catch (e: Exception) {
+                Log.e("SAF", "File read error: ${e.message}")
+                showAlert("Error", "Failed to import ZIP: ${e.localizedMessage}")
             }
         }
     }
@@ -75,7 +85,7 @@ class ImportActivity : AppCompatActivity() {
     }
 
     private fun selectZipFile() {
-        zipFileLauncher.launch("application/zip")
+        zipFileLauncher.launch(arrayOf("application/zip", "application/octet-stream"))
     }
 
     private fun isZipFile(uri: Uri): Boolean {
