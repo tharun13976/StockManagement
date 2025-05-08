@@ -3,6 +3,7 @@ package com.example.stockmanagement
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
@@ -48,8 +49,25 @@ class MainActivity : AppCompatActivity() {
             }
         }.attach()
 
-        // Backup setup
-        setupPeriodicBackup()
+        val sharedPreferences = getSharedPreferences("app_data", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val storedMillis = sharedPreferences.getLong("stored_date", 0L)
+        val currentTimeMillis = System.currentTimeMillis()
+        val fifteenDaysInMillis = 15L * 24 * 60 * 60 * 1000
+
+        if (storedMillis == 0L) {
+            // First-time setup: store current time and skip backup check
+            editor.putLong("stored_date", currentTimeMillis).apply()
+            Log.d("Backup", "Backup date initialized.")
+            return
+        }
+
+        if (currentTimeMillis - storedMillis >= fifteenDaysInMillis) {
+            // 15 days passed – schedule backup and update timestamp
+            editor.putLong("stored_date", currentTimeMillis).apply()
+            Log.d("Backup", "Backup scheduled after 15 days.")
+            setupPeriodicBackup()
+        }
     }
 
     private fun setupPeriodicBackup() {
