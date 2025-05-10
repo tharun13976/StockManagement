@@ -1,0 +1,100 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    card_view:cardCornerRadius="16dp"
+    card_view:cardElevation="6dp"
+    android:foreground="?attr/selectableItemBackground">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <!-- Product Name -->
+        <TextView
+            android:id="@+id/tvProductName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Product Name"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/green"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Row 1: Available Units -->
+        <ImageView
+            android:id="@+id/ivStockIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@android:drawable/ic_menu_info_details"
+            app:layout_constraintTop_toBottomOf="@id/tvProductName"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"
+            card_view:tint="@color/green" />
+
+        <TextView
+            android:id="@+id/tvAvailableUnitsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Available Unit(s):"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/ivStockIcon"
+            app:layout_constraintTop_toTopOf="@id/ivStockIcon"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:id="@+id/tvProductCount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textStyle="bold"
+            android:textColor="@color/green"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/tvAvailableUnitsLabel"
+            app:layout_constraintTop_toTopOf="@id/tvAvailableUnitsLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="4dp"/>
+
+        <!-- Row 2: Current Month Sales -->
+        <ImageView
+            android:id="@+id/ivSalesIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@android:drawable/ic_menu_sort_by_size"
+            app:layout_constraintTop_toBottomOf="@id/ivStockIcon"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"
+            card_view:tint="@color/green" />
+
+        <TextView
+            android:id="@+id/tvSalesLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sales This Month:"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/ivSalesIcon"
+            app:layout_constraintTop_toTopOf="@id/ivSalesIcon"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:id="@+id/tvCurrentPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textStyle="bold"
+            android:textColor="@color/green"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/tvSalesLabel"
+            app:layout_constraintTop_toTopOf="@id/tvSalesLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="4dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

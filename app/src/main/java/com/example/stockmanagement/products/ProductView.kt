@@ -13,8 +13,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.stockmanagement.ManagementDatabase
 import com.example.stockmanagement.R
-import com.example.stockmanagement.customers.CustomerEdit
-import com.example.stockmanagement.customers.CustomerView
 import com.example.stockmanagement.entites.Product
 import kotlinx.coroutines.launch
 import java.text.NumberFormat

@@ -49,7 +49,6 @@ class ProductList : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Product List"
 
         // Initialize DAO
         dao = ManagementDatabase.getInstance(this).managementDao

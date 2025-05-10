@@ -15,7 +15,6 @@ import androidx.lifecycle.lifecycleScope
 import com.example.stockmanagement.GetListOfData
 import com.example.stockmanagement.ManagementDatabase
 import com.example.stockmanagement.R
-import com.example.stockmanagement.customers.CustomerCreate
 import com.example.stockmanagement.entites.Customer
 import kotlinx.coroutines.launch
 

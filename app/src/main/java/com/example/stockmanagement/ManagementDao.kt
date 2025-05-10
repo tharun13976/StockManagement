@@ -8,6 +8,7 @@ import androidx.room.Transaction
 import androidx.room.Update
 import com.example.stockmanagement.entites.Customer
 import com.example.stockmanagement.entites.Product
+import com.example.stockmanagement.entites.ProductSalesDashboard
 import com.example.stockmanagement.entites.Purchase
 import com.example.stockmanagement.entites.Sale
 import java.sql.Date
@@ -182,6 +183,20 @@ interface ManagementDao {
     @Query("SELECT * FROM Sale WHERE salesdate =:date")
     suspend fun getSalesByDate(date: Date): List<Sale>
 
+
+    @Query("""
+    SELECT 
+        p.productName AS productName,
+        p.currentStockCount AS stock,
+        COALESCE(COUNT(s.sid), 0) AS salesCount
+    FROM Product p
+    LEFT JOIN Sale s 
+        ON p.productName = s.productname
+        AND s.salesdate BETWEEN :startDate AND :endDate
+    GROUP BY p.productName
+    ORDER BY p.productname
+""")
+    suspend fun getProductSalesDashboard(startDate: Date, endDate: Date): List<ProductSalesDashboard>
 
 
     // To update the Record

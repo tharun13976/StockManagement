@@ -6,9 +6,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -26,8 +31,20 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        val rootView = findViewById<View>(R.id.main)
+        ViewCompat.setOnApplyWindowInsetsListener(rootView) { view, insets ->
+            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            // Apply padding to avoid overlap with status and navigation bars
+            view.updatePadding(
+                top = systemBarsInsets.top,
+                bottom = systemBarsInsets.bottom
+            )
+            insets
+        }
 
         // Set up Toolbar
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
@@ -43,8 +60,9 @@ class MainActivity : AppCompatActivity() {
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = when (position) {
-                0 -> "Create Record"
-                1 -> "Record List"
+                0 -> "Product Stats"
+                1 -> "Create Record"
+                2 -> "Record List"
                 else -> ""
             }
         }.attach()

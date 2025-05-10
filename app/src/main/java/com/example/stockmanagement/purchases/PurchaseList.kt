@@ -30,7 +30,6 @@ import com.example.stockmanagement.ManagementDao
 import com.example.stockmanagement.ManagementDatabase
 import com.example.stockmanagement.R
 import kotlinx.coroutines.launch
-import java.sql.Date
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -55,7 +54,6 @@ class PurchaseList : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Purchase List"
 
         // Initialize DAO
         dao = ManagementDatabase.getInstance(this).managementDao

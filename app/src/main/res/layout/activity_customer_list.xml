@@ -6,10 +6,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="45dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
-    android:layout_marginBottom="20dp"
     android:orientation="vertical"
     tools:context=".customers.CustomerList">
     <androidx.appcompat.widget.Toolbar
@@ -17,11 +13,17 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android:title="Customer List"
-        android:titleTextColor="@android:color/white"
-        app:titleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-        app:layout_constraintTop_toTopOf="parent"/>
-
+        android:elevation="4dp">
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Customer List"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
