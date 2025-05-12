@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stockmanagement.entites.ProductSalesDashboard
-import com.example.stockmanagement.entites.Purchase
 
 class DashboardAdapter(private val productList: MutableList<ProductSalesDashboard>)
  :
