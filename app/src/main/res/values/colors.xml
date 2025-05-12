@@ -7,5 +7,6 @@
     <color name="purchaseColor">#4CAF50</color>    <!-- Green -->
     <color name="productColor">#03A9F4</color>     <!-- Light Blue -->
     <color name="customerColor">#9C27B0</color>    <!-- Purple -->
+    <color name="grey">#9B9999</color>
 
 </resources>

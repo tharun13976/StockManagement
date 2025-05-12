@@ -1,4 +1,44 @@
 <resources>
-    <string name="app_name">Stock Management</string>
-    <string name="sort_filter">Sort/Filter:</string>
+    <string name="app_name" translatable="false">Stock Management</string>
+    <string name="sort_filter">Sort/Filter</string>
+    <string name="customer_name">Name</string>
+    <string name="customer_phone_no">Phone No</string>
+    <string name="customer_address">Address</string>
+    <string name="customer_address_hint">Enter Address of Customer</string>
+    <string name="customer_phone_no_hint">Enter Contact Number</string>
+    <string name="customer_name_hint">Enter the Customer Name</string>
+    <string name="customer_creation">Customer Creation</string>
+    <string name="save_customer">Save Customer</string>
+    <string name="customer_editing">Customer Editing</string>
+    <string name="label_end"> : </string>
+    <string name="customer_details">Customer Details</string>
+    <string name="customer_id">Customer ID</string>
+    <string name="customer_balance">Balance</string>
+    <string name="created_date">Created Date</string>
+    <string name="edit_the_customer_details">Edit the Customer Details</string>
+    <string name="none">none</string>
+    <string name="zero">0</string>
+    <string name="date_dumy">00-00-0000</string>
+    <string name="clear">Clear</string>
+    <string name="customer_list">Customer List</string>
+    <string name="rs_0">Rs. 0</string>
+    <string name="import_data">Import Data</string>
+    <string name="import_data_from_zip">Import Data from ZIP</string>
+    <string name="backup_page">Backup Page</string>
+    <string name="enter_the_password_to_backup">Enter the password to Backup:-</string>
+    <string name="entre_here">Entre Here...</string>
+    <string name="proceed">Proceed</string>
+    <string name="click_to_backup">Click to Backup:-</string>
+    <string name="backup">Backup</string>
+    <string name="home_page">Home Page</string>
+    <string name="dash_product_name">Product Name</string>
+    <string name="dash_available_unit_s">Available Unit(s):</string>
+    <string name="dash_sales_this_month">Sales This Month:</string>
+    <string name="product_name">Name</string>
+    <string name="product_measurement_type">Measurement Type</string>
+    <string name="product_started_date">Started Date</string>
+    <string name="product_name_hint">Enter the Product Name</string>
+    <string name="date_format">DD-MM-YYYY</string>
+    <string name="save_product">Save Product</string>
+    <string name="product_creation">Product Creation</string>
 </resources>

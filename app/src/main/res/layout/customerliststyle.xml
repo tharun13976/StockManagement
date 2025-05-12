@@ -21,49 +21,102 @@ android:foreground="?attr/selectableItemBackground">
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="fill_vertical">
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/customer_id"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="2dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/label_end"
+                android:textSize="16sp"/>
             <TextView
                 android:id="@+id/tvCustomerId"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="ID: 001"
-                android:textSize="14sp"
-                android:textColor="#444"/>
+                android:text="@string/zero"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Balance :"
-                android:textSize="14sp"
-                android:textColor="#444"/>
+                android:layout_height="match_parent"
+                android:text="@string/customer_balance"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/label_end"
+                android:textSize="16sp"/>
             <TextView
                 android:id="@+id/tvBalanceAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Rs. 0"
+                android:text="@string/rs_0"
                 android:textColor="@android:color/holo_red_dark"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="fill_vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/customer_name"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="2dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_end"
+            android:textSize="16sp"/>
         <TextView
             android:id="@+id/tvCustomerName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="John Doe"
+            android:text="@string/customer_name"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="#222"
-            android:layout_marginTop="2dp"/>
-
-        <TextView
-            android:id="@+id/tvPhoneNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Phone: +91-9876543210"
-            android:textSize="13sp"
-            android:textColor="#555"
+            android:textColor="@color/black"
             android:layout_marginTop="2dp"/>
     </LinearLayout>
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="fill_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/customer_phone_no"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="2dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_end"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/tvPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/zero"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginTop="2dp"/>
+        </LinearLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

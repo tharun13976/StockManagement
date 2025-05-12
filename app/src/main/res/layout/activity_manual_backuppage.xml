@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -21,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="Backup Page"
+            android:text="@string/backup_page"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -34,7 +33,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="8dp"
-        android:text="Enter the password to Backup:-"
+        android:text="@string/enter_the_password_to_backup"
         android:textColor="@color/green"
         android:textSize="22sp"
         android:textStyle="bold" />
@@ -44,13 +43,15 @@
         android:layout_height="50dp"
         android:gravity="center"
         android:inputType="textPassword"
-        android:hint="Entre Here.." />
+        android:hint="@string/entre_here"
+        tools:ignore="VisualLintTextFieldSize" />
     <Button
         android:id="@+id/Btn_CheckPassword"
         android:layout_gravity="center"
+        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Proceed"/>
+        android:text="@string/proceed"/>
 
     <TextView
         android:id="@+id/TV_BackupHint"
@@ -59,17 +60,18 @@
         android:layout_gravity="center"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="8dp"
-        android:text="Click to Backup:-"
+        android:text="@string/click_to_backup"
         android:textColor="@color/green"
         android:textSize="22sp"
         android:textStyle="bold" />
+
     <Button
         android:id="@+id/Btn_Backup"
-        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:backgroundTint="@android:color/holo_red_light"
-        android:text="Backup"
-        android:textColor="@color/white"/>
+        android:text="@string/backup"
+        android:textColor="@color/white" />
 </LinearLayout>

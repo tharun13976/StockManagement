@@ -11,7 +11,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Product Creation"
+                android:text="@string/product_creation"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:orientation="vertical"
             android:gravity="center">
 
@@ -47,25 +47,32 @@
 
                 <TableRow>
                     <TextView
-                        android:text="Name:"
-                        android:textSize="16sp"
-                        android:gravity="end"/>
+                        android:text="@string/product_name"
+                        android:textSize="16sp"/>
+                    <TextView
+                        android:text="@string/label_end"
+                        android:textSize="18sp"/>
                     <EditText
                         android:id="@+id/ET_ProductName"
-                        android:layout_width="200dp"
+                        android:layout_width="220dp"
                         android:layout_height="50dp"
                         android:layout_marginBottom="10dp"
-                        android:hint="Enter the Product Name" />
+                        android:inputType="text"
+                        android:hint="@string/product_name_hint"
+                        android:textColorHint="@color/grey"/>
+
                 </TableRow>
 
                 <TableRow>
                     <TextView
-                        android:text="Measurement Type:"
-                        android:textSize="16sp"
-                        android:gravity="end"/>
+                        android:text="@string/product_measurement_type"
+                        android:textSize="16sp"/>
+                    <TextView
+                        android:text="@string/label_end"
+                        android:textSize="18sp"/>
                     <Spinner
                         android:id="@+id/Spi_ProductMeasurement"
-                        android:layout_width="200dp"
+                        android:layout_width="220dp"
                         android:layout_height="50dp"
                         android:layout_marginBottom="10dp"
                         android:spinnerMode="dropdown" />
@@ -73,22 +80,26 @@
 
                 <TableRow>
                     <TextView
-                        android:text="Started Date:"
-                        android:textSize="16sp"
-                        android:gravity="end"/>
+                        android:text="@string/product_started_date"
+                        android:textSize="16sp"/>
+                    <TextView
+                        android:text="@string/label_end"
+                        android:textSize="18sp"/>
                     <EditText
                         android:id="@+id/ET_ProductStartDate"
-                        android:layout_width="200dp"
+                        android:layout_width="220dp"
                         android:layout_height="50dp"
-                        android:hint="DD/MM/YYYY"
+                        android:hint="@string/date_format"
                         android:inputType="date"
-                        android:layout_marginBottom="10dp" />
+                        android:layout_marginBottom="10dp"
+                        android:textColorHint="@color/grey"/>
                 </TableRow>
 
                 <Button
                     android:id="@+id/Btn_SaveProduct"
                     android:layout_width="wrap_content"
-                    android:text="Save Product" />
+                    android:text="@string/save_product"
+                    tools:ignore="VisualLintButtonSize" />
             </TableLayout>
         </LinearLayout>
     </LinearLayout>
