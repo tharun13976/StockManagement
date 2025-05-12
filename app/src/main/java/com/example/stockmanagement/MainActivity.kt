@@ -38,20 +38,18 @@ class MainActivity : AppCompatActivity() {
         val rootView = findViewById<View>(R.id.main)
         ViewCompat.setOnApplyWindowInsetsListener(rootView) { view, insets ->
             val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            // Apply padding to avoid overlap with status and navigation bars
-            view.updatePadding(
-                top = systemBarsInsets.top,
-                bottom = systemBarsInsets.bottom
+            view.setPadding(
+                systemBarsInsets.left,
+                systemBarsInsets.top,
+                systemBarsInsets.right,
+                systemBarsInsets.bottom
             )
             insets
         }
 
         // Set up Toolbar
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        val toolbarTitle = findViewById<TextView>(R.id.toolbar_title)
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        toolbarTitle.text = "Main Menu"
 
         // ViewPager & Tabs
         viewPager = findViewById(R.id.viewPager)

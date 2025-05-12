@@ -76,6 +76,10 @@ interface ManagementDao {
     @Query("SELECT * FROM Customer WHERE phone = :phoneNo OR phone LIKE '%' || :phoneNo || '%'")
     suspend fun getAllCustomersPhone(phoneNo: String):List<Customer>
 
+    // To check the Customer name is already Present or Not
+    @Query("SELECT COUNT(*) FROM Customer WHERE LOWER(customername) = LOWER(:name)")
+    suspend fun countCustomerByName(name: String): Int
+
 
     // Product-related
     // Get all product
@@ -109,6 +113,10 @@ interface ManagementDao {
     // Get all unavailable product sort by stock count
     @Query("SELECT * FROM  Product WHERE currentstockcount =0 ")
     suspend fun getAllProductUnavailable():List<Product>
+
+    // To check the product name is already Present or Not
+    @Query("SELECT COUNT(*) FROM product WHERE LOWER(productname) = LOWER(:name)")
+    suspend fun countProductByName(name: String): Int
 
     // Purchase-related
     // Get all purchases with their sales

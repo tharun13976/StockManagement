@@ -59,9 +59,9 @@ class CustomerEdit : AppCompatActivity() {
             lifecycleScope.launch {
                 val error = validateInputs(
                     oldname.toString(),
-                    name.text.toString(),
-                    address.text.toString(),
-                    phone.text.toString(),
+                    name.text.toString().trim(),
+                    address.text.toString().trim(),
+                    phone.text.toString().trim(),
                     dataFetcher
                 )
                 if (error != null) {
@@ -76,9 +76,9 @@ class CustomerEdit : AppCompatActivity() {
                 if (!confirmed) return@launch
 
                 customer?.let {
-                    it.customername = name.text.toString()
-                    it.phone = phone.text.toString()
-                    it.address = address.text.toString()
+                    it.customername = name.text.toString().trim()
+                    it.phone = phone.text.toString().trim()
+                    it.address = address.text.toString().trim()
                     dao.updateCustomer(it)
                     Log.d("UPDATE", "Customer updated: Customer Id ${it.cid}")
                     if(name.text.toString() != oldname){

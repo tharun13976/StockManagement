@@ -42,8 +42,7 @@ class GetListOfData(context: Context, private val lifecycleOwner: LifecycleOwner
 
     suspend fun doesCustomerExist(name: String): Boolean {
         return try {
-            val customerNames = dao.getCustomersName()
-            customerNames.contains(name)
+            dao.countCustomerByName(name) > 0
         } catch (e: Exception) {
             e.printStackTrace()
             false
@@ -52,8 +51,7 @@ class GetListOfData(context: Context, private val lifecycleOwner: LifecycleOwner
 
     suspend fun doesProductExist(name: String): Boolean {
         return try {
-            val productNames = dao.getProductNames() // This must be suspend
-            productNames.contains(name)
+            dao.countProductByName(name) > 0
         } catch (e: Exception) {
             e.printStackTrace()
             false

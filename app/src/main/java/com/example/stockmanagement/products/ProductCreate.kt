@@ -39,6 +39,7 @@ class ProductCreate : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         var name=findViewById<EditText>(R.id.ET_ProductName)
         var measurementtype=findViewById<Spinner>(R.id.Spi_ProductMeasurement)
         var startdate=findViewById<EditText>(R.id.ET_ProductStartDate)
@@ -56,11 +57,11 @@ class ProductCreate : AppCompatActivity() {
                 id: Long
             ) {
                 val selectedItem = parent.getItemAtPosition(position).toString()
-                Toast.makeText(this@ProductCreate, "Selected: $selectedItem", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this@ProductCreate, "Selected: $selectedItem", Toast.LENGTH_SHORT).show()
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                Toast.makeText(this@ProductCreate, "Selected", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this@ProductCreate, "Selected", Toast.LENGTH_SHORT).show()
             }
         }
         val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
@@ -74,7 +75,7 @@ class ProductCreate : AppCompatActivity() {
         findViewById<Button>(R.id.Btn_SaveProduct).setOnClickListener {
             lifecycleScope.launch {
                 val error = validateInputs(
-                    name.text.toString(),
+                    name.text.toString().trim(),
                     measurementtype.selectedItem.toString(),
                     startdate.text.toString(),
                     dataFetcher
@@ -92,7 +93,7 @@ class ProductCreate : AppCompatActivity() {
 
                 val product = Product(
                     pid = null,
-                    productname = name.text.toString(),
+                    productname = name.text.toString().trim(),
                     measurement = measurementtype.selectedItem.toString(),
                     productcreateddate = Date(dateFormat.parse(startdate.text.toString())!!.time),
                     LatestpriceofoneUnit = 0,
@@ -114,7 +115,7 @@ class ProductCreate : AppCompatActivity() {
         return when {
             dataFetcher.doesProductExist(productName) -> "Already we have a Product with Same Name so Change name"
             productName.isEmpty() -> "Product name is required"
-            measurementType.equals("None") -> "Measurement unit is required.\nNot as None"
+            measurementType.equals("None") -> "Measurement unit is required."
             startDate.isEmpty() -> "Product start Date is required"
             else -> null
         }

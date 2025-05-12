@@ -72,6 +72,11 @@ class DashboardProduct : Fragment(R.layout.dashboard_product) {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        loadDashboardData()
+    }
+
     private fun loadDashboardData() {
         val calendar = Calendar.getInstance()
 

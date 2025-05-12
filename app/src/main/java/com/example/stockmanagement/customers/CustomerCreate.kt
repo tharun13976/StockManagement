@@ -51,9 +51,9 @@ class CustomerCreate : AppCompatActivity() {
         findViewById<Button>(R.id.Btn_SaveCustomer).setOnClickListener {
             lifecycleScope.launch {
                 val error = validateInputs(
-                    name.text.toString(),
-                    address.text.toString(),
-                    phone.text.toString(),
+                    name.text.toString().trim(),
+                    address.text.toString().trim(),
+                    phone.text.toString().trim(),
                     dataFetcher
                 )
                 if (error != null) {
@@ -69,9 +69,9 @@ class CustomerCreate : AppCompatActivity() {
 
                 val customer = Customer(
                     cid = null,
-                    customername = name.text.toString(),
-                    phone =phone.text.toString(),
-                    address = address.text.toString(),
+                    customername = name.text.toString().trim(),
+                    phone =phone.text.toString().trim(),
+                    address = address.text.toString().trim(),
                     customercreatedDate = parsedDate,
                     amountbalance = 0
                 )
