@@ -22,24 +22,29 @@
                 android:id="@+id/tvProductName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Product Name"
+                android:text="@string/product_name"
                 android:layout_weight="2"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#222"
-                android:layout_marginTop="2dp"/>
+                android:textColor="@color/black"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ID :"/>
+                android:text="@string/id"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_end"
+                android:textSize="16sp"/>
             <TextView
                 android:id="@+id/tvProductId"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="1"
-                android:textSize="14sp"
-                android:textColor="#444"/>
+                android:text="@string/zero"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
 
         </LinearLayout>
 
@@ -52,32 +57,41 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Stock Count :"
-                android:textSize="14sp"
-                android:textColor="#444"/>
+                android:text="@string/product_list_stock_count"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
             <TextView
-                android:id="@+id/tvProductCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/label_end"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/tvProductCount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="0000"
+                android:text="@string/zero"
                 android:textColor="@android:color/holo_blue_dark"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textStyle="bold"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Latest Stock Cost :"
-                android:textSize="14sp"
-                android:textColor="#444"/>
-
+                android:text="@string/product_list_latest_stock_cost"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_end"
+                android:textSize="16sp"/>
             <TextView
                 android:id="@+id/tvCurrentPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Rs.0"
+                android:text="@string/rs_0"
                 android:textColor="@android:color/holo_blue_dark"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
 

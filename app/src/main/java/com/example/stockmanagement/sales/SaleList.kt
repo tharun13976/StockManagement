@@ -55,6 +55,7 @@ class SaleList : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.back_icon)
 
         // DAO
         dao = ManagementDatabase.getInstance(this).managementDao

@@ -34,6 +34,7 @@ class CustomerView : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.back_icon)
 
         val dao = ManagementDatabase.Companion.getInstance(this).managementDao
 

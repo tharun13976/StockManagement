@@ -32,6 +32,8 @@ class PurchaseView : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.back_icon)
+
         val purchaseId = intent.getIntExtra("PURCHASE_ID", -1)
 
         val dao = ManagementDatabase.Companion.getInstance(this).managementDao

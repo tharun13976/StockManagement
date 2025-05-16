@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -19,7 +20,8 @@
             android:layout_marginTop="12dp"
             android:layout_columnWeight="1"
             android:backgroundTint="#2196F3"
-            android:text="Purchase" />
+            android:text="@string/purchase"
+            tools:ignore="VisualLintButtonSize" />
 
         <Button
             android:id="@+id/Btn_Sales"
@@ -28,7 +30,8 @@
             android:layout_marginTop="12dp"
             android:layout_columnWeight="1"
             android:backgroundTint="#4CAF50"
-            android:text="Sales" />
+            android:text="@string/sale"
+            tools:ignore="VisualLintButtonSize" />
 
         <Button
             android:id="@+id/Btn_Product"
@@ -37,7 +40,8 @@
             android:layout_marginTop="12dp"
             android:layout_columnWeight="1"
             android:backgroundTint="#9C27B0"
-            android:text="Product" />
+            android:text="@string/product"
+            tools:ignore="VisualLintButtonSize" />
 
         <Button
             android:id="@+id/Btn_Customer"
@@ -46,7 +50,8 @@
             android:layout_marginTop="12dp"
             android:layout_columnWeight="1"
             android:backgroundTint="#FF9800"
-            android:text="Customer" />
+            android:text="@string/customer"
+            tools:ignore="VisualLintButtonSize" />
 
     </GridLayout>
 </ScrollView>

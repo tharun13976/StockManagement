@@ -5,18 +5,18 @@
     <item
         android:id="@+id/action_menu"
         android:icon="@drawable/menu_icon"
-        android:title="Menu"
+        android:title="@string/menu"
         app:showAsAction="always">
         <menu>
             <item
                 android:id="@+id/action_backup"
-                android:title="Backup"
+                android:title="@string/backup"
                 android:icon="@drawable/backup_icon"
                 app:showAsAction="ifRoom" />
 
             <item
                 android:id="@+id/action_import"
-                android:title="Import"
+                android:title="@string/imports"
                 android:icon="@drawable/import_icon"
                 app:showAsAction="ifRoom" />
         </menu>

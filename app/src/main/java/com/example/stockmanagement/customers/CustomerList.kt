@@ -55,6 +55,7 @@ class CustomerList : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.back_icon)
 
         // Initialize RecyclerView and adapter with an empty list
         recyclerView = findViewById(R.id.RV_CustomerList)

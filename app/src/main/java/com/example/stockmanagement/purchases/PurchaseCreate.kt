@@ -38,6 +38,7 @@ class PurchaseCreate : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.back_icon)
 
         // Views
         val productname = findViewById<AutoCompleteTextView>(R.id.AET_Product)

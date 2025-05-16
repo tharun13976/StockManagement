@@ -22,29 +22,43 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ID :"/>
+                android:text="@string/id"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/label_end"
+                android:textSize="16sp"/>
             <TextView
                 android:id="@+id/tvSaleId"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="1"
-                android:textSize="14sp"
-                android:textColor="#444"
-                android:layout_marginRight="2dp"/>
+                android:text="@string/zero"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginEnd="2dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sale Date :"/>
+                android:text="@string/sale_date"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/label_end"
+                android:textSize="16sp"/>
             <TextView
                 android:id="@+id/tvSaleDate"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="00-00-0000"
-                android:textSize="14sp"
-                android:textColor="#444"
-                android:layout_marginRight="2dp"/>
+                android:text="@string/date_sample"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginEnd="2dp"/>
 
         </LinearLayout>
         <LinearLayout
@@ -55,16 +69,22 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Product Name: "
-                android:textSize="14sp"/>
+                android:text="@string/product_name"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/label_end"
+                android:textSize="16sp"/>
             <TextView
                 android:id="@+id/tvSaleProductName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Product Name"
+                android:text="@string/product_name"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#222"
+                android:textColor="@color/black"
                 android:layout_marginTop="2dp"/>
         </LinearLayout>
         <LinearLayout
@@ -75,16 +95,22 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Customer Name: "
-                android:textSize="14sp"/>
+                android:text="@string/customer_name"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/label_end"
+                android:textSize="16sp"/>
             <TextView
                 android:id="@+id/tvSaleCustomerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Customer Name"
+                android:text="@string/customer_name"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#222"
+                android:textColor="@color/black"
                 android:layout_marginTop="2dp"/>
         </LinearLayout>
         <LinearLayout
@@ -95,13 +121,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Purchase Id : "
-                android:textSize="14sp"/>
+                android:text="@string/purchase_id"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/label_end"
+                android:textSize="16sp"/>
             <TextView
                 android:id="@+id/tvSalePurchaseId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
+                android:text="@string/zero"
                 android:textSize="16sp"
                 android:textColor="#222"
                 android:layout_marginTop="2dp"/>
@@ -115,30 +147,40 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Unit Count :"
-                android:textColor="#444"
-                android:textSize="14sp" />
+                android:text="@string/sale_product_count"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/label_end"
+                android:textSize="16sp"/>
             <TextView
                 android:id="@+id/tvSaleProductCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="0000"
+                android:text="@string/zero"
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Amount Only :"
-                android:textSize="14sp"
-                android:textColor="#444"/>
+                android:text="@string/sale_amount_only"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/label_end"
+                android:textSize="16sp"/>
             <TextView
                 android:id="@+id/tvSaleAmountOnly"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="false"
+                android:text="@string/sale_amount_only_status"
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
@@ -151,14 +193,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Amount Given:"
-                android:textSize="14sp"
-                android:textColor="#444"/>
+                android:text="@string/sale_amount_given"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/label_end"
+                android:textSize="16sp"/>
             <TextView
                 android:id="@+id/tvsaleAmountGiven"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Rs.0"
+                android:text="@string/rs_0"
                 android:layout_weight="1"
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="16sp"
@@ -166,14 +213,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total Cost:"
-                android:textSize="14sp"
-                android:textColor="#444"/>
+                android:text="@string/sale_total_cost"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/label_end"
+                android:textSize="16sp"/>
             <TextView
                 android:id="@+id/tvsaleTotalPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Rs.0"
+                android:text="@string/rs_0"
                 android:layout_weight="1"
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="16sp"

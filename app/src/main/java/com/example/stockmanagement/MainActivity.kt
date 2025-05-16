@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars = true
         WindowCompat.setDecorFitsSystemWindows(window, false)
         val rootView = findViewById<View>(R.id.main)
         ViewCompat.setOnApplyWindowInsetsListener(rootView) { view, insets ->
@@ -48,6 +49,9 @@ class MainActivity : AppCompatActivity() {
         // Set up Toolbar
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.exit_icon)
+
 
         // ViewPager & Tabs
         viewPager = findViewById(R.id.viewPager)
@@ -108,6 +112,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
             R.id.action_backup -> {
                 val nextScreen = Intent(this, ManualBackuppage::class.java)
                 startActivity(nextScreen)
@@ -121,5 +129,4 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
 }

@@ -39,6 +39,7 @@ class ProductCreate : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.back_icon)
 
         var name=findViewById<EditText>(R.id.ET_ProductName)
         var measurementtype=findViewById<Spinner>(R.id.Spi_ProductMeasurement)

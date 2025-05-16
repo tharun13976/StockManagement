@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -9,139 +8,151 @@
     android:fillViewport="true"
     android:padding="10dp"
     tools:context=".sales.SaleCreate">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             android:elevation="4dp">
-
             <TextView
                 android:id="@+id/toolbar_title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Sales Creation"
+                android:text="@string/sale_creation"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </androidx.appcompat.widget.Toolbar>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="10dp"
-        android:orientation="vertical"
-        android:gravity="center">
-        <TableLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="10dp"
+            android:orientation="vertical"
             android:gravity="center">
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <TableRow>
+                    <TextView
+                        android:text="@string/customer_name"
+                        android:textSize="16sp"/>
+                    <TextView
+                        android:text="@string/label_end"
+                        android:textSize="18sp"/>
+                    <AutoCompleteTextView
+                        android:id="@+id/AET_CustomerName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:hint="@string/customer_name_hint"
+                        android:layout_marginBottom="10dp"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:text="@string/sale_date_of_sale"
+                        android:textSize="16sp"/>
+                    <TextView
+                        android:text="@string/label_end"
+                        android:textSize="18sp"/>
+                    <EditText
+                        android:id="@+id/ET_SaleDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:hint="@string/date_format"
+                        android:layout_marginBottom="10dp"/>
+                </TableRow>
 
-            <TableRow>
-                <TextView
-                    android:text="Customer Name"
-                    android:textSize="16sp"
-                    android:gravity="end"/>
-                <AutoCompleteTextView
-                    android:id="@+id/AET_CustomerName"
+                <TableRow>
+                    <TextView
+                        android:id="@+id/Label_1"
+                        android:text="@string/product_name"
+                        android:textSize="16sp"/>
+                    <TextView
+                        android:text="@string/label_end"
+                        android:textSize="18sp"/>
+                    <AutoCompleteTextView
+                        android:id="@+id/AET_ProductName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:hint="@string/product_name_hint"
+                        android:layout_marginBottom="10dp"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/Label_2"
+                        android:text="@string/sale_product_count"
+                        android:textSize="16sp"/>
+                    <TextView
+                        android:text="@string/label_end"
+                        android:textSize="18sp"/>
+                    <EditText
+                        android:id="@+id/ET_ProductCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:hint="@string/sale_enter_the_count_hint"
+                        android:inputType="number"
+                        android:layout_marginBottom="10dp"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/Label_3"
+                        android:text="@string/sale_total_cost_rs"
+                        android:textSize="16sp"/>
+                    <TextView
+                        android:text="@string/label_end"
+                        android:textSize="18sp"/>
+                    <TextView
+                        android:id="@+id/TV_TotalCost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/zero"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/green"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:text="@string/sale_amount_given_rs"
+                        android:textSize="16sp"/>
+                    <TextView
+                        android:text="@string/label_end"
+                        android:textSize="18sp"/>
+                    <EditText
+                        android:id="@+id/ET_SalesAmountGiven"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:hint="@string/sale_enter_the_amount_hint"
+                        android:inputType="number"
+                        android:layout_marginBottom="10dp"/>
+                </TableRow>
+                <TableRow android:orientation="vertical">
+                    <TextView
+                        android:text="@string/sale_amount_only"
+                        android:textSize="16sp"/>
+                    <TextView
+                        android:text="@string/label_end"
+                        android:textSize="18sp"/>
+                    <CheckBox
+                        android:id="@+id/CB_OnlyAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_gravity="start"
+                        android:layout_marginBottom="10dp"/>
+                </TableRow>
+
+                <Button
+                    android:id="@+id/Btn_SaveSale"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:hint="Enter the Customer Name"
-                    android:layout_marginBottom="10dp"/>
-            </TableRow>
-
-            <TableRow>
-                <TextView
-                    android:text="Date of Sales"
-                    android:textSize="16sp"
-                    android:gravity="end"/>
-                <EditText
-                    android:id="@+id/ET_SaleDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:hint="DD/MM/YYYY"
-                    android:layout_marginBottom="10dp"/>
-            </TableRow>
-
-            <TableRow>
-                <TextView
-                    android:id="@+id/Label_1"
-                    android:text="Product Name"
-                    android:textSize="16sp"
-                    android:gravity="end"/>
-                <AutoCompleteTextView
-                    android:id="@+id/AET_ProductName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:hint="Enter the Product Name"
-                    android:layout_marginBottom="10dp"/>
-            </TableRow>
-
-            <TableRow>
-                <TextView
-                    android:id="@+id/Label_2"
-                    android:text="Product Count"
-                    android:textSize="16sp"
-                    android:gravity="end"/>
-                <EditText
-                    android:id="@+id/ET_ProductCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:hint="Enter the Count"
-                    android:inputType="number"
-                    android:layout_marginBottom="10dp"/>
-            </TableRow>
-
-            <TableRow>
-                <TextView
-                    android:id="@+id/Label_3"
-                    android:text="Total Cost Rs."
-                    android:textSize="16sp"
-                    android:gravity="end"/>
-                <TextView
-                    android:id="@+id/TV_TotalCost"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="10dp"
-                    android:text=" 0"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/green"/>
-            </TableRow>
-
-            <TableRow>
-                <TextView android:text="Amount Given Rs." android:textSize="16sp" android:gravity="end"/>
-                <EditText
-                    android:id="@+id/ET_SalesAmountGiven"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:hint="Enter the Amount"
-                    android:inputType="number"
-                    android:layout_marginBottom="10dp"/>
-            </TableRow>
-
-            <TableRow android:orientation="vertical">
-                <TextView android:text="Only Amount" android:textSize="16sp" android:gravity="end"/>
-                <CheckBox
-                    android:id="@+id/CB_OnlyAmount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_gravity="left"
-                    android:layout_marginBottom="10dp"/>
-            </TableRow>
-
-            <Button
-                android:id="@+id/Btn_SaveSale"
-                android:layout_width="wrap_content"
-                android:text="Save the Sales Record"/>
-        </TableLayout>
-    </LinearLayout>
+                    android:text="@string/save_the_sales_record"
+                    tools:ignore="VisualLintButtonSize" />
+            </TableLayout>
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

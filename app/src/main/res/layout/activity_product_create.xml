@@ -47,7 +47,7 @@
 
                 <TableRow>
                     <TextView
-                        android:text="@string/product_name"
+                        android:text="@string/name"
                         android:textSize="16sp"/>
                     <TextView
                         android:text="@string/label_end"
@@ -65,7 +65,7 @@
 
                 <TableRow>
                     <TextView
-                        android:text="@string/product_measurement_type"
+                        android:text="@string/product_measurement_unit"
                         android:textSize="16sp"/>
                     <TextView
                         android:text="@string/label_end"

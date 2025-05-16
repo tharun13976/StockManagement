@@ -23,29 +23,42 @@ android:foreground="?attr/selectableItemBackground">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ID :"/>
-
+            android:text="@string/id"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/label_end"
+            android:textSize="16sp"/>
         <TextView
             android:id="@+id/tvPurchaseId"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="1"
-            android:textSize="14sp"
-            android:textColor="#444"
-            android:layout_marginRight="2dp"/>
+            android:text="@string/zero"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginEnd="2dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Product Name: "/>
+            android:text="@string/product_name"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/label_end"
+            android:textSize="16sp"/>
         <TextView
             android:id="@+id/tvPurchaseProductName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Product Name"
+            android:text="@string/product_name"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="#222"
+            android:textColor="@color/black"
             android:layout_marginTop="2dp"/>
 
     </LinearLayout>
@@ -58,33 +71,42 @@ android:foreground="?attr/selectableItemBackground">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Purchased Units :"
-            android:textColor="#444"
-            android:textSize="14sp" />
+            android:text="@string/purchased_count"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/label_end"
+            android:textSize="16sp"/>
         <TextView
             android:id="@+id/tvStockCount"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="0000"
+            android:text="@string/zero"
             android:textColor="@android:color/holo_blue_dark"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cost Per Unit:"
-            android:textSize="14sp"
-            android:textColor="#444"/>
-
+            android:text="@string/purchase_cost_per_unit"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/label_end"
+            android:textSize="16sp"/>
         <TextView
             android:id="@+id/tvStockUnitPrice"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Rs.0"
+            android:text="@string/rs_0"
             android:textColor="@android:color/holo_blue_dark"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textSize="16sp"
+            android:textStyle="bold"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -94,15 +116,22 @@ android:foreground="?attr/selectableItemBackground">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Available Units :"/>
+            android:text="@string/purchase_available_count"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/label_end"
+            android:textSize="16sp"/>
         <TextView
             android:id="@+id/tvCurrentCount"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="0000"
+            android:text="@string/zero"
             android:textColor="@android:color/holo_blue_dark"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold"/>
 
     </LinearLayout>

@@ -43,6 +43,7 @@ class SaleCreate : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.back_icon)
 
         val customername = findViewById<AutoCompleteTextView>(R.id.AET_CustomerName)
         val saledate = findViewById<EditText>(R.id.ET_SaleDate)

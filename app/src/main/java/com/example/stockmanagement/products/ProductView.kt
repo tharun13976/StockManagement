@@ -33,6 +33,7 @@ class ProductView : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.back_icon)
 
         val dao = ManagementDatabase.Companion.getInstance(this).managementDao
         val productId = intent.getIntExtra("PRODUCT_ID", -1)
@@ -71,7 +72,7 @@ class ProductView : AppCompatActivity() {
     }
     private fun loadProductData() {
         lifecycleScope.launch {
-            val productId = intent.getIntExtra("Product_ID", -1)
+            val productId = intent.getIntExtra("PRODUCT_ID", -1)
             val dao = ManagementDatabase.getInstance(this@ProductView).managementDao
             val product = dao.getProductById(productId)
             product?.let {

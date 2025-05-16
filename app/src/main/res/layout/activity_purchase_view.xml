@@ -1,130 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:id="@+id/main"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".purchases.PurchaseView"
-android:orientation="vertical"
-    android:padding="10dp"
-android:layout_margin="20dp">
-<androidx.appcompat.widget.Toolbar
-    android:id="@+id/toolbar"
-    android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:background="?attr/colorPrimary"
-    android:elevation="4dp">
-    <TextView
-        android:id="@+id/toolbar_title"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Purchase Details"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-</androidx.appcompat.widget.Toolbar>
-<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".purchases.PurchaseView"
     android:orientation="vertical"
-    android:gravity="center">
-    <TableLayout
-        android:layout_height="wrap_content"
+    android:padding="10dp">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:gravity="center" >
-        <TableRow>
-            <TextView
-                android:text="Purchase ID:"
-                android:textSize="16sp"
-                android:gravity="end"/>
-            <TextView
-                android:id="@+id/TV_PurchaseID"
-                android:layout_height="50sp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp">
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/purchase_details"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginStart="10dp"
+        android:gravity="center">
+        <TableLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center" >
+            <TableRow>
+                <TextView
+                    android:text="@string/purchase_id"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:text="@string/label_end"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:id="@+id/TV_PurchaseID"
+                    android:layout_height="50sp"
+                    android:layout_width="wrap_content"
+                    android:text="@string/zero"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:text="@string/product_name"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:text="@string/label_end"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:id="@+id/TV_ProductName"
+                    android:layout_height="50sp"
+                    android:layout_width="wrap_content"
+                    android:text="@string/none"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:text="@string/purchased_count"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:text="@string/label_end"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:id="@+id/TV_StockCount"
+                    android:layout_height="50sp"
+                    android:layout_width="wrap_content"
+                    android:text="@string/zero"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:layout_marginBottom="10dp"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:text="@string/purchase_available_count"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:text="@string/label_end"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:id="@+id/TV_AvailableCount"
+                    android:layout_height="50sp"
+                    android:layout_width="wrap_content"
+                    android:text="@string/zero"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:layout_marginBottom="10dp"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:text="@string/purchase_cost_per_unit"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:text="@string/label_end"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:id="@+id/TV_StockPrice"
+                    android:layout_height="50sp"
+                    android:layout_width="wrap_content"
+                    android:text="@string/rs_0"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:layout_marginBottom="10dp"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:text="@string/created_date"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:text="@string/label_end"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:id="@+id/TV_PurchaseCreDate"
+                    android:layout_height="50sp"
+                    android:layout_width="wrap_content"
+                    android:text="@string/date_sample"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"/>
+            </TableRow>
+            <Button
+                android:id="@+id/Btn_Back"
                 android:layout_width="wrap_content"
-                android:text="0"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp"/>
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:text="Product Name:"
-                android:textSize="16sp"
-                android:gravity="end"/>
-            <TextView
-                android:id="@+id/TV_ProductName"
-                android:layout_height="50sp"
-                android:layout_width="wrap_content"
-                android:text="none"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp"/>
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:text="Added Stock Count:"
-                android:textSize="16sp"
-                android:gravity="end"/>
-            <TextView
-                android:id="@+id/TV_StockCount"
-                android:layout_height="50sp"
-                android:layout_width="wrap_content"
-                android:text="0"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/holo_blue_dark"
-                android:layout_marginBottom="10dp"/>
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:text="Available Count:"
-                android:textSize="16sp"
-                android:gravity="end"/>
-            <TextView
-                android:id="@+id/TV_AvailableCount"
-                android:layout_height="50sp"
-                android:layout_width="wrap_content"
-                android:text="0"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/holo_blue_dark"
-                android:layout_marginBottom="10dp"/>
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:text="Cost Per Unit:"
-                android:textSize="16sp"
-                android:gravity="end"/>
-            <TextView
-                android:id="@+id/TV_StockPrice"
-                android:layout_height="50sp"
-                android:layout_width="wrap_content"
-                android:text="Rs. 0"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/holo_blue_dark"
-                android:layout_marginBottom="10dp"/>
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:text="Created Date:"
-                android:textSize="16sp"
-                android:gravity="end"/>
-            <TextView
-                android:id="@+id/TV_PurchaseCreDate"
-                android:layout_height="50sp"
-                android:layout_width="wrap_content"
-                android:text="00-00-0000"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp"/>
-        </TableRow>
-        <Button
-            android:id="@+id/Btn_Back"
-            android:layout_width="wrap_content"
-            android:text="Back"/>
-    </TableLayout>
-</LinearLayout>
+                android:text="@string/back"
+                tools:ignore="VisualLintButtonSize" />
+        </TableLayout>
+    </LinearLayout>
 </LinearLayout>

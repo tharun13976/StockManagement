@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:id="@+id/main"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".sales.SaleView"
-android:orientation="vertical"
-    android:padding="10dp"
-android:layout_margin="20dp">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".sales.SaleView"
+    android:orientation="vertical"
+    android:padding="10dp">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -21,7 +19,7 @@ android:layout_margin="20dp">
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="Sale Details"
+            android:text="@string/sale_details"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -30,6 +28,7 @@ android:layout_margin="20dp">
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_marginStart="10dp"
         android:gravity="center">
         <TableLayout
             android:layout_height="wrap_content"
@@ -37,70 +36,80 @@ android:layout_margin="20dp">
             android:gravity="center" >
             <TableRow>
                 <TextView
-                    android:text="Sale ID:"
-                    android:textSize="16sp"
-                    android:gravity="end"/>
+                    android:text="@string/sale_id"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:text="@string/label_end"
+                    android:textSize="18sp"/>
                 <TextView
                     android:id="@+id/TV_SaleID"
                     android:layout_height="50sp"
                     android:layout_width="wrap_content"
-                    android:text="0"
+                    android:text="@string/zero"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp"/>
             </TableRow>
             <TableRow>
                 <TextView
-                    android:text="Product Name:"
-                    android:textSize="16sp"
-                    android:gravity="end"/>
+                    android:text="@string/product_name"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:text="@string/label_end"
+                    android:textSize="18sp"/>
                 <TextView
                     android:id="@+id/TV_ProductName"
                     android:layout_height="50sp"
                     android:layout_width="wrap_content"
-                    android:text="none"
+                    android:text="@string/none"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp"/>
             </TableRow>
             <TableRow>
                 <TextView
-                    android:text="Customer Name:"
-                    android:textSize="16sp"
-                    android:gravity="end"/>
+                    android:text="@string/customer_name"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:text="@string/label_end"
+                    android:textSize="18sp"/>
                 <TextView
                     android:id="@+id/TV_CustomerName"
                     android:layout_height="50sp"
                     android:layout_width="wrap_content"
-                    android:text="none"
+                    android:text="@string/none"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp"/>
             </TableRow>
             <TableRow>
                 <TextView
-                    android:text="Purchase ID:"
-                    android:textSize="16sp"
-                    android:gravity="end"/>
+                    android:text="@string/purchase_id"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:text="@string/label_end"
+                    android:textSize="18sp"/>
                 <TextView
                     android:id="@+id/TV_PurchaseID"
                     android:layout_height="50sp"
                     android:layout_width="wrap_content"
-                    android:text="0"
+                    android:text="@string/zero"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp"/>
             </TableRow>
             <TableRow>
                 <TextView
-                    android:text="Product Count:"
-                    android:textSize="16sp"
-                    android:gravity="end"/>
+                    android:text="@string/sale_product_count"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:text="@string/label_end"
+                    android:textSize="18sp"/>
                 <TextView
                     android:id="@+id/TV_ProductCount"
                     android:layout_height="50sp"
                     android:layout_width="wrap_content"
-                    android:text="0"
+                    android:text="@string/zero"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@android:color/holo_blue_dark"
@@ -108,14 +117,16 @@ android:layout_margin="20dp">
             </TableRow>
             <TableRow>
                 <TextView
-                    android:text="Total Cost:"
-                    android:textSize="16sp"
-                    android:gravity="end"/>
+                    android:text="@string/sale_total_cost"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:text="@string/label_end"
+                    android:textSize="18sp"/>
                 <TextView
                     android:id="@+id/TV_TotalPrice"
                     android:layout_height="50sp"
                     android:layout_width="wrap_content"
-                    android:text="Rs. 0"
+                    android:text="@string/rs_0"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@android:color/holo_blue_dark"
@@ -123,14 +134,16 @@ android:layout_margin="20dp">
             </TableRow>
             <TableRow>
                 <TextView
-                    android:text="Amount Given:"
-                    android:textSize="16sp"
-                    android:gravity="end"/>
+                    android:text="@string/sale_amount_given"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:text="@string/label_end"
+                    android:textSize="18sp"/>
                 <TextView
                     android:id="@+id/TV_AmountGiven"
                     android:layout_height="50sp"
                     android:layout_width="wrap_content"
-                    android:text="Rs. 0"
+                    android:text="@string/rs_0"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@android:color/holo_blue_dark"
@@ -138,28 +151,32 @@ android:layout_margin="20dp">
             </TableRow>
             <TableRow>
                 <TextView
-                    android:text="Amount Only:"
-                    android:textSize="16sp"
-                    android:gravity="end"/>
+                    android:text="@string/sale_amount_only"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:text="@string/label_end"
+                    android:textSize="18sp"/>
                 <TextView
                     android:id="@+id/TV_AmountOnly"
                     android:layout_height="50sp"
                     android:layout_width="wrap_content"
-                    android:text="false"
+                    android:text="@string/sale_amount_only_status"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp"/>
             </TableRow>
             <TableRow>
                 <TextView
-                    android:text="Created Date:"
-                    android:textSize="16sp"
-                    android:gravity="end"/>
+                    android:text="@string/created_date"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:text="@string/label_end"
+                    android:textSize="18sp"/>
                 <TextView
                     android:id="@+id/TV_SaleCreDate"
                     android:layout_height="50sp"
                     android:layout_width="wrap_content"
-                    android:text="00-00-0000"
+                    android:text="@string/date_sample"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp"/>
@@ -167,7 +184,8 @@ android:layout_margin="20dp">
             <Button
                 android:id="@+id/Btn_Back"
                 android:layout_width="wrap_content"
-                android:text="Back"/>
+                android:text="@string/back"
+                tools:ignore="VisualLintButtonSize" />
         </TableLayout>
     </LinearLayout>
 </LinearLayout>
