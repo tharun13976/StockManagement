@@ -1,31 +1,42 @@
 package com.example.stockmanagement
 
 import android.content.Context
+import android.net.Uri
 import android.util.Log
 import com.google.gson.Gson
 import java.io.File
-import java.text.SimpleDateFormat
-import java.util.*
 import java.io.FileInputStream
 import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
 object BackupUtils {
+
     suspend fun backupDatabaseTablesToJson(context: Context, backupDir: File): Boolean {
         return try {
+            // Ensure backup directory exists
+            if (!backupDir.exists()) {
+                val created = backupDir.mkdirs()
+                if (!created) {
+                    Log.e("BackupUtils", "Failed to create backup directory: ${backupDir.absolutePath}")
+                    return false
+                }
+            }
+
             val dao = ManagementDatabase.getInstance(context).managementDao
             val gson = Gson()
-            val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date()) // Updated date format
-            val zipFile = File(backupDir, "backup_$date.zip")  // Directly create the zip file with the date in the filename
+            val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+            val zipFile = File(backupDir, "backup_$date.zip")
 
-            // Prepare the database tables to be backed up
+            // Convert database entries to JSON
             val customerJson = gson.toJson(dao.getAllCustomer())
             val productJson = gson.toJson(dao.getAllProduct())
             val purchaseJson = gson.toJson(dao.getAllPurchases())
             val salesJson = gson.toJson(dao.getAllSales())
 
-            // Create temporary files for each table's data
+            // Create temporary JSON files
             val customerFile = File(backupDir, "customers.json")
             val productFile = File(backupDir, "products.json")
             val purchaseFile = File(backupDir, "purchases.json")
@@ -39,13 +50,13 @@ object BackupUtils {
             // Zip the files
             zipFiles(listOf(customerFile, productFile, purchaseFile, salesFile), zipFile)
 
-            // Delete the temporary JSON files
+            // Delete temporary files
             customerFile.delete()
             productFile.delete()
             purchaseFile.delete()
             salesFile.delete()
 
-            Log.d("BackupUtils", "Database tables successfully backed up and zipped.")
+            Log.d("BackupUtils", "Backup completed: ${zipFile.absolutePath}")
             true
         } catch (e: Exception) {
             Log.e("BackupUtils", "Error during database backup: ${e.message}", e)
@@ -53,20 +64,60 @@ object BackupUtils {
         }
     }
 
-    // Zip the files into the specified zipFile
     private fun zipFiles(files: List<File>, zipFile: File) {
         ZipOutputStream(FileOutputStream(zipFile)).use { zos ->
             files.forEach { file ->
                 FileInputStream(file).use { fis ->
-                    val entry = ZipEntry(file.name)
-                    zos.putNextEntry(entry)
+                    zos.putNextEntry(ZipEntry(file.name))
                     val buffer = ByteArray(1024)
                     var length: Int
                     while (fis.read(buffer).also { length = it } > 0) {
                         zos.write(buffer, 0, length)
                     }
+                    zos.closeEntry()
                 }
             }
         }
     }
+
+    suspend fun backupDatabaseToUri(context: Context, backupUri: Uri): Boolean {
+        return try {
+            val dao = ManagementDatabase.getInstance(context).managementDao
+            val gson = Gson()
+
+            val customerJson = gson.toJson(dao.getAllCustomer())
+            val productJson = gson.toJson(dao.getAllProduct())
+            val purchaseJson = gson.toJson(dao.getAllPurchases())
+            val salesJson = gson.toJson(dao.getAllSales())
+
+            val tempZipFile = File.createTempFile("temp_backup", ".zip", context.cacheDir)
+            zipFiles(
+                listOf(
+                    writeTempFile("customers.json", customerJson, context),
+                    writeTempFile("products.json", productJson, context),
+                    writeTempFile("purchases.json", purchaseJson, context),
+                    writeTempFile("sales.json", salesJson, context)
+                ),
+                tempZipFile
+            )
+
+            context.contentResolver.openOutputStream(backupUri)?.use { outputStream ->
+                tempZipFile.inputStream().use { it.copyTo(outputStream) }
+            }
+
+            tempZipFile.delete()
+            Log.d("BackupUtils", "Backup saved to SAF location.")
+            true
+        } catch (e: Exception) {
+            Log.e("BackupUtils", "Error backing up to SAF URI", e)
+            false
+        }
+    }
+
+    private fun writeTempFile(fileName: String, content: String, context: Context): File {
+        val file = File(context.cacheDir, fileName)
+        file.writeText(content)
+        return file
+    }
+
 }

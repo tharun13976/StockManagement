@@ -10,6 +10,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import java.util.Date
+import java.util.Locale
+import android.app.Activity
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +22,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 
 class ManualBackuppage : AppCompatActivity() {
 
@@ -94,21 +98,42 @@ class ManualBackuppage : AppCompatActivity() {
         }
     }
 
+    private val folderPickerLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.data?.let { uri ->
+                StorageAccessHelper.savePickedUri(this, uri)
+                triggerManualBackup()
+            }
+        }
+    }
+
     private fun triggerManualBackup() {
         lifecycleScope.launch {
-            val success = BackupHelper.performBackup(
-                context = this@ManualBackuppage,
-                activity = this@ManualBackuppage,
-                checkNotificationPermission = false
-            )
+            val backupSuccess = if (StorageAccessHelper.shouldUseSAF()) {
+                val dir = StorageAccessHelper.getBackupDocumentFileDir(this@ManualBackuppage)
+                if (dir == null) {
+                    StorageAccessHelper.launchFolderPicker(this@ManualBackuppage, folderPickerLauncher)
+                    return@launch
+                }
+                val filename = "backup_${SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())}.zip"
+                val backupFile = StorageAccessHelper.createBackupFileInSAFDir(this@ManualBackuppage, dir, filename)
+                backupFile?.uri?.let {
+                    BackupUtils.backupDatabaseToUri(this@ManualBackuppage, it)
+                } ?: false
+            } else {
+                val legacyDir = StorageAccessHelper.getLegacyBackupDir()
+                BackupUtils.backupDatabaseTablesToJson(this@ManualBackuppage, legacyDir)
+            }
+
             Toast.makeText(
                 this@ManualBackuppage,
-                if (success) "Manual backup successful!" else "Manual backup failed!",
+                if (backupSuccess) "Manual backup successful!" else "Manual backup failed!",
                 Toast.LENGTH_SHORT
             ).show()
             finish()
         }
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == android.R.id.home) {

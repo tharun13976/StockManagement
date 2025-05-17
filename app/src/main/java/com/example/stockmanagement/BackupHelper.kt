@@ -7,10 +7,12 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
+import android.os.Environment
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
+import java.io.File
 
 object BackupHelper {
     suspend fun performBackup(
@@ -18,9 +20,15 @@ object BackupHelper {
         activity: Activity? = null,
         checkNotificationPermission: Boolean
     ): Boolean {
-        val backupDir = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOCUMENTS)
-            .let { dir -> java.io.File(dir, "StockManagementBackups") }
-        if (!backupDir.exists()) backupDir.mkdirs()
+        val backupDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).let { File(it, "StockManagementBackups") }
+
+        if (!backupDir.exists()) {
+            val created = backupDir.mkdirs()
+            if (!created) {
+                Log.e("BackupUtils", "Failed to create backup directory: ${backupDir.absolutePath}")
+                // Handle error
+            }
+        }
 
         return try {
             val success = BackupUtils.backupDatabaseTablesToJson(context, backupDir)
