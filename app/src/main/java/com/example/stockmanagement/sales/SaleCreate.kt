@@ -12,6 +12,7 @@ import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -54,9 +55,7 @@ class SaleCreate : AppCompatActivity() {
         val totalcost = findViewById<TextView>(R.id.TV_TotalCost)
         val amountgiven = findViewById<EditText>(R.id.ET_SalesAmountGiven)
         val amountonly = findViewById<CheckBox>(R.id.CB_OnlyAmount)
-        val lable1 = findViewById<TextView>(R.id.Label_1)
-        val lable2 = findViewById<TextView>(R.id.Label_2)
-        val lable3 = findViewById<TextView>(R.id.Label_3)
+        val amountonlylayotchanges = findViewById<LinearLayout>(R.id.LL_amountOnly)
 
         saledate.inputType = InputType.TYPE_NULL
         saledate.isFocusable = false
@@ -70,12 +69,7 @@ class SaleCreate : AppCompatActivity() {
 
         amountonly.setOnClickListener {
             val isChecked = amountonly.isChecked
-            productname.visibility = if (isChecked) View.GONE else View.VISIBLE
-            productcount.visibility = if (isChecked) View.GONE else View.VISIBLE
-            totalcost.visibility = if (isChecked) View.GONE else View.VISIBLE
-            lable1.visibility = if (isChecked) View.GONE else View.VISIBLE
-            lable2.visibility = if (isChecked) View.GONE else View.VISIBLE
-            lable3.visibility = if (isChecked) View.GONE else View.VISIBLE
+            amountonlylayotchanges.visibility = if (isChecked) View.GONE else View.VISIBLE
             if (isChecked) {
                 productname.setText("")
                 productcount.setText("")

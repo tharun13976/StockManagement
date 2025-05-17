@@ -18,7 +18,8 @@
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
         app:title="@string/product_creation"
-        app:titleCentered="true" />
+        app:titleCentered="true"
+        app:titleTextAppearance="@style/ToolbarTitleBold"/>
 
     <!-- Scrollable content -->
     <ScrollView
@@ -104,7 +105,7 @@
                 android:layout_marginTop="4dp"
                 android:hint="@string/date_format">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
                     android:id="@+id/ET_ProductStartDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

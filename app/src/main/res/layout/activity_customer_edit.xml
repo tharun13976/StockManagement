@@ -17,7 +17,8 @@
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
         app:title="@string/customer_editing"
-        app:titleCentered="true" />
+        app:titleCentered="true"
+        app:titleTextAppearance="@style/ToolbarTitleBold"/>
 
     <!-- Scrollable content -->
     <ScrollView

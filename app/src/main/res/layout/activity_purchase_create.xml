@@ -18,7 +18,8 @@
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
         app:title="@string/purchase_creation"
-        app:titleCentered="true" />
+        app:titleCentered="true"
+        app:titleTextAppearance="@style/ToolbarTitleBold"/>
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -56,30 +57,14 @@
                 <AutoCompleteTextView
                     android:id="@+id/AET_Product"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    tools:ignore="VisualLintTextFieldSize" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Purchase Date -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/purchase_stock_added_date"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp"/>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/date_format"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-                <EditText
-                    android:id="@+id/ET_NewStockDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:inputType="date"
-                    tools:ignore="LabelFor,VisualLintTextFieldSize" />
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:textSize="16sp"
+                    android:maxLength="60" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Cost per Unit -->
@@ -124,6 +109,27 @@
                     android:layout_height="48dp"
                     android:inputType="number"
                     tools:ignore="LabelFor,VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Purchase Date -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/purchase_stock_added_date"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/date_format"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <EditText
+                    android:id="@+id/ET_NewStockDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    tools:ignore="VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Save Button -->

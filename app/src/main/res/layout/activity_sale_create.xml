@@ -18,7 +18,8 @@
         android:background="?attr/colorPrimary"
         app:title="@string/sale_creation"
         app:titleCentered="true"
-        app:titleTextColor="@android:color/white" />
+        app:titleTextColor="@android:color/white"
+        app:titleTextAppearance="@style/ToolbarTitleBold"/>
 
     <!-- Form Fields -->
     <ScrollView
@@ -56,99 +57,114 @@
                 <AutoCompleteTextView
                     android:id="@+id/AET_CustomerName"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    tools:ignore="VisualLintTextFieldSize" />
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:textSize="16sp"
+                    android:maxLength="60" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Sale Date -->
-            <TextView
+            <!-- Only Amount Checkbox -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/sale_date_of_sale"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp"/>
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical">
 
-            <com.google.android.material.textfield.TextInputLayout
+                <TextView
+                    android:text="@string/sale_amount_only"
+                    android:layout_marginStart="8dp"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <CheckBox
+                    android:id="@+id/CB_OnlyAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LL_amountOnly"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/date_format"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-                <EditText
-                    android:id="@+id/ET_SaleDate"
+                android:orientation="vertical">
+                <!-- Product Name -->
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    tools:ignore="LabelFor,VisualLintTextFieldSize" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:text="@string/product_name"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp" />
 
-            <!-- Product Name -->
-            <TextView
-                android:id="@+id/Label_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/product_name"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/product_name_hint"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                <AutoCompleteTextView
-                    android:id="@+id/AET_ProductName"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    tools:ignore="VisualLintTextFieldSize" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:hint="@string/product_name_hint"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <!-- Product Count -->
-            <TextView
-                android:id="@+id/Label_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/sale_product_count"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                    <AutoCompleteTextView
+                        android:id="@+id/AET_ProductName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:textSize="16sp"
+                        android:maxLength="60" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/sale_enter_the_count_hint"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-                <EditText
-                    android:id="@+id/ET_ProductCount"
+                <!-- Product Count -->
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:inputType="number"
-                    tools:ignore="VisualLintTextFieldSize" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:text="@string/sale_product_count"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp" />
 
-            <!-- Total Cost (Read Only) -->
-            <TextView
-                android:id="@+id/Label_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/sale_total_cost_rs"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/sale_enter_the_count_hint"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    <EditText
+                        android:id="@+id/ET_ProductCount"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:inputType="number"
+                        tools:ignore="VisualLintTextFieldSize" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/TV_TotalCost"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:background="@android:color/darker_gray"
-                android:padding="12dp"
-                android:text="@string/zero"
-                android:textColor="@color/green"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                tools:ignore="TextContrastCheck" />
+                <!-- Total Cost (Read Only) -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sale_total_cost_rs"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp" />
+
+                <TextView
+                    android:id="@+id/TV_TotalCost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:background="@android:color/darker_gray"
+                    android:padding="12dp"
+                    android:text="@string/zero"
+                    android:textColor="@color/green"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:ignore="TextContrastCheck" />
+            </LinearLayout>
 
             <!-- Amount Given -->
             <TextView
@@ -172,26 +188,28 @@
                     tools:ignore="LabelFor,VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Only Amount Checkbox -->
-            <LinearLayout
+
+
+            <!-- Sale Date -->
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="16dp"
-                android:gravity="center_vertical">
+                android:text="@string/sale_date_of_sale"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"/>
 
-                <CheckBox
-                    android:id="@+id/CB_OnlyAmount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:text="@string/sale_amount_only"
-                    android:layout_marginStart="8dp"
-                    android:textSize="16sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/date_format"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <EditText
+                    android:id="@+id/ET_SaleDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    tools:ignore="LabelFor,VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Save Button -->
             <com.google.android.material.button.MaterialButton
