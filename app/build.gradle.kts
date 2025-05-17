@@ -18,7 +18,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments.put("room.schemaLocation", "$projectDir/schemas")
+                arguments["room.schemaLocation"] = "$projectDir/schemas"
             }
         }
     }
@@ -37,6 +37,7 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -44,7 +45,6 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-
 }
 
 dependencies {
@@ -53,30 +53,33 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    //Room
-    val room_version = "2.7.0"
-    implementation("androidx.room:room-runtime:$room_version")
-    ksp("androidx.room:room-compiler:$room_version")
-
-    // Kotlin Extensions and Coroutines support for Room
-    implementation("androidx.room:room-ktx:$room_version")
+    // Room
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
 
     // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
 
-    // Coroutine Lifecycle Scopes
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.2.0")
+    // Lifecycle
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
 
-    implementation("androidx.core:core-splashscreen:1.0.0")
-    implementation("androidx.work:work-runtime-ktx:2.9.0")
+    // Splash Screen
+    implementation(libs.androidx.core.splashscreen)
 
-    implementation("com.google.code.gson:gson:2.10.1")
+    // WorkManager
+    implementation(libs.androidx.work.runtime.ktx)
 
+    // Gson
+    implementation(libs.gson)
+
+    // Shimmer
     implementation("com.facebook.shimmer:shimmer:0.5.0")
 }
