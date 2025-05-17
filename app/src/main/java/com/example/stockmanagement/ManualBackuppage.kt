@@ -37,6 +37,7 @@ class ManualBackuppage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_manual_backuppage)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -53,16 +54,17 @@ class ManualBackuppage : AppCompatActivity() {
         val proceedBut = findViewById<Button>(R.id.Btn_CheckPassword)
         val backupBut = findViewById<Button>(R.id.Btn_Backup)
 
+        // Initial state
         backupHint.visibility = View.GONE
         backupBut.visibility = View.GONE
 
         proceedBut.setOnClickListener {
             if (pass.text.toString() == "1q2w3e4r@") {
-                backupHint.visibility = View.VISIBLE
-                backupBut.visibility = View.VISIBLE
                 passHint.visibility = View.GONE
                 pass.visibility = View.GONE
                 proceedBut.visibility = View.GONE
+                backupHint.visibility = View.VISIBLE
+                backupBut.visibility = View.VISIBLE
             } else {
                 Toast.makeText(this, "Enter Correct Password", Toast.LENGTH_LONG).show()
             }
@@ -85,9 +87,7 @@ class ManualBackuppage : AppCompatActivity() {
             permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
 
-        if (permissions.all {
-                ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
-            }) {
+        if (permissions.all { ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED }) {
             triggerManualBackup()
         } else {
             requestPermissionsLauncher.launch(permissions.toTypedArray())
@@ -98,6 +98,7 @@ class ManualBackuppage : AppCompatActivity() {
         lifecycleScope.launch {
             val success = BackupHelper.performBackup(
                 context = this@ManualBackuppage,
+                activity = this@ManualBackuppage,
                 checkNotificationPermission = false
             )
             Toast.makeText(

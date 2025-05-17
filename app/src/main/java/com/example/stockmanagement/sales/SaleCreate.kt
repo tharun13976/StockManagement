@@ -20,6 +20,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
+import com.example.stockmanagement.CustomFilterArrayAdapter
 import com.example.stockmanagement.GetListOfData
 import com.example.stockmanagement.ManagementDatabase
 import com.example.stockmanagement.R
@@ -55,6 +56,9 @@ class SaleCreate : AppCompatActivity() {
         val lable1 = findViewById<TextView>(R.id.Label_1)
         val lable2 = findViewById<TextView>(R.id.Label_2)
         val lable3 = findViewById<TextView>(R.id.Label_3)
+        val lablec1 = findViewById<TextView>(R.id.Labelc_1)
+        val lablec2 = findViewById<TextView>(R.id.Labelc_2)
+        val lablec3 = findViewById<TextView>(R.id.Labelc_3)
 
 
         val dao = ManagementDatabase.getInstance(this).managementDao
@@ -71,6 +75,9 @@ class SaleCreate : AppCompatActivity() {
             lable1.visibility = if (isChecked) View.GONE else View.VISIBLE
             lable2.visibility = if (isChecked) View.GONE else View.VISIBLE
             lable3.visibility = if (isChecked) View.GONE else View.VISIBLE
+            lablec1.visibility = if (isChecked) View.GONE else View.VISIBLE
+            lablec2.visibility = if (isChecked) View.GONE else View.VISIBLE
+            lablec3.visibility = if (isChecked) View.GONE else View.VISIBLE
             if (isChecked) {
                 productname.setText("")
                 productcount.setText("")
@@ -79,13 +86,13 @@ class SaleCreate : AppCompatActivity() {
         }
 
         dataFetcher.getAllCustomerNames { names ->
-            val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, names)
+            val adapter = CustomFilterArrayAdapter(this, names)
             customername.setAdapter(adapter)
             customername.threshold = 1
         }
 
         dataFetcher.getAllProductNames { names ->
-            val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, names)
+            val adapter = CustomFilterArrayAdapter(this, names)
             productname.setAdapter(adapter)
             productname.threshold = 1
         }

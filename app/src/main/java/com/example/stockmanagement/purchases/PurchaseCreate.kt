@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.example.stockmanagement.CustomFilterArrayAdapter
 import com.example.stockmanagement.GetListOfData
 import com.example.stockmanagement.ManagementDatabase
 import com.example.stockmanagement.R
@@ -52,8 +53,7 @@ class PurchaseCreate : AppCompatActivity() {
 
         val dataFetcher = GetListOfData(this, this)
         dataFetcher.getAllProductNames { productNames ->
-            val adapter =
-                ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, productNames)
+            val adapter = CustomFilterArrayAdapter(this, productNames)
             productname.setAdapter(adapter)
             productname.threshold = 1
         }

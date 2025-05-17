@@ -1,24 +1,25 @@
 package com.example.stockmanagement
 
+import android.app.Activity
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
-import android.os.Environment
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
-import java.io.File
 
 object BackupHelper {
-    suspend fun performBackup(context: Context, checkNotificationPermission: Boolean): Boolean {
-        val backupDir = File(
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
-            "StockManagementBackups"
-        )
+    suspend fun performBackup(
+        context: Context,
+        activity: Activity? = null,
+        checkNotificationPermission: Boolean
+    ): Boolean {
+        val backupDir = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOCUMENTS)
+            .let { dir -> java.io.File(dir, "StockManagementBackups") }
         if (!backupDir.exists()) backupDir.mkdirs()
 
         return try {
@@ -29,7 +30,7 @@ object BackupHelper {
                 if (!checkNotificationPermission) {
                     NotificationManagerCompat.from(context).notify(101, notification)
                 } else {
-                    sendNotificationSafely(context, notification)
+                    sendNotificationSafely(activity, context, notification)
                 }
 
                 Log.d("BackupHelper", "Backup successful.")
@@ -64,18 +65,19 @@ object BackupHelper {
             .build()
     }
 
-    private fun sendNotificationSafely(context: Context, notification: Notification) {
+    private fun sendNotificationSafely(activity: Activity?, context: Context, notification: Notification) {
         val notificationId = 101
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            val hasPermission = ContextCompat.checkSelfPermission(
-                context,
-                android.Manifest.permission.POST_NOTIFICATIONS
-            ) == PackageManager.PERMISSION_GRANTED
+            val hasPermission = if (activity != null) {
+                ContextCompat.checkSelfPermission(activity, android.Manifest.permission.POST_NOTIFICATIONS)
+            } else {
+                ContextCompat.checkSelfPermission(context, android.Manifest.permission.POST_NOTIFICATIONS)
+            } == PackageManager.PERMISSION_GRANTED
 
             if (hasPermission) {
                 NotificationManagerCompat.from(context).notify(notificationId, notification)
             } else {
-                Log.w("BackupHelper", "POST_NOTIFICATIONS permission not granted.")
+                Log.w("BackupHelper", "POST_NOTIFICATIONS permission not granted or activity was null.")
             }
         } else {
             NotificationManagerCompat.from(context).notify(notificationId, notification)

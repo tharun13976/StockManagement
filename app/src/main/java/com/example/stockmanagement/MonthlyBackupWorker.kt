@@ -19,7 +19,7 @@ class MonthlyBackupWorker(
 
         return if (dayOfMonth == 1 || dayOfMonth == 15) {
             val success = BackupHelper.performBackup(
-                applicationContext,
+                context = applicationContext,
                 checkNotificationPermission = true
             )
             if (success) {

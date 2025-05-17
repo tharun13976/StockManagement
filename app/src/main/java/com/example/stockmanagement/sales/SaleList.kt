@@ -111,7 +111,7 @@ class SaleList : AppCompatActivity() {
                             showCustomerAmountOnlyDialog()
                         }
                         "Created Date" -> {
-
+                            showDateFilterDialog()
                         }
                     }
                 } else {
@@ -133,6 +133,7 @@ class SaleList : AppCompatActivity() {
             }
         }
     }
+
     @SuppressLint("SetTextI18n")
     private fun showCustomerNameFilterDialog() {
         val input = AutoCompleteTextView(this).apply {
