@@ -2,6 +2,7 @@ package com.example.stockmanagement.products
 
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -44,6 +45,10 @@ class ProductCreate : AppCompatActivity() {
         var name=findViewById<EditText>(R.id.ET_ProductName)
         var measurementtype=findViewById<Spinner>(R.id.Spi_ProductMeasurement)
         var startdate=findViewById<EditText>(R.id.ET_ProductStartDate)
+
+        startdate.inputType = InputType.TYPE_NULL
+        startdate.isFocusable = false
+
 
         val measurementunits = listOf("None","Kg", "Liter", "Bag", "Nos.")
         val adapter = ArrayAdapter(this,android.R.layout.simple_spinner_item, measurementunits)

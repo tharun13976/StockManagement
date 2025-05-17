@@ -2,6 +2,7 @@ package com.example.stockmanagement.purchases
 
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.MenuItem
 import android.widget.ArrayAdapter
@@ -46,6 +47,9 @@ class PurchaseCreate : AppCompatActivity() {
         val addeddate = findViewById<EditText>(R.id.ET_NewStockDate)
         val stockcost = findViewById<EditText>(R.id.ET_NewStockCost)
         val stockcount = findViewById<EditText>(R.id.ET_StockCount)
+
+        addeddate.inputType = InputType.TYPE_NULL
+        addeddate.isFocusable = false
 
         val dao = ManagementDatabase.getInstance(this).managementDao
         val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())

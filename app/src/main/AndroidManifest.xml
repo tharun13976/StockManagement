@@ -83,7 +83,6 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".customers.CustomerCreate"
-            android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".MainActivity"

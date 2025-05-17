@@ -1,110 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:padding="10dp"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".customers.CustomerCreate">
 
-    <LinearLayout
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+        app:title="@string/customer_creation"
+        app:titleCentered="true" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:elevation="4dp">
-
-            <TextView
-                android:id="@+id/toolbar_title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/customer_creation"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </androidx.appcompat.widget.Toolbar>
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="20dp"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
+        android:scrollbarStyle="insideOverlay"
+        android:verticalScrollbarPosition="right"
+        android:scrollbarAlwaysDrawVerticalTrack="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginStart="10dp"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
 
-            <TableLayout
+            <!-- Name Field -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="4dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center">
+                app:boxStrokeColor="@color/green"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-                <TableRow>
-                    <TextView
-                        android:text="@string/name"
-                        android:textSize="16sp"/>
-                    <TextView
-                        android:text="@string/label_end"
-                        android:textSize="18sp"/>
-                    <EditText
-                        android:id="@+id/ET_CustomerName"
-                        android:layout_width="295dp"
-                        android:layout_height="50sp"
-                        android:hint="@string/customer_name_hint"
-                        android:maxLength="60"
-                        android:inputType="text"
-                        android:layout_marginBottom="10dp"
-                        android:textColorHint="@color/grey"/>
-                </TableRow>
-
-                <TableRow>
-                    <TextView
-                        android:text="@string/customer_phone_no"
-                        android:textSize="16sp"/>
-                    <TextView
-                        android:text="@string/label_end"
-                        android:textSize="18sp"/>
-                    <EditText
-                        android:id="@+id/ET_CustomerNo"
-                        android:layout_width="295dp"
-                        android:layout_height="50sp"
-                        android:layout_marginBottom="10dp"
-                        android:hint="@string/customer_phone_no_hint"
-                        android:inputType="phone"
-                        android:maxLength="10"
-                        android:textColorHint="@color/grey" />
-                </TableRow>
-
-                <TableRow>
-                    <TextView
-                        android:text="@string/customer_address"
-                        android:textSize="16sp"/>
-                    <TextView
-                        android:text="@string/label_end"
-                        android:textSize="18sp"/>
-                    <EditText
-                        android:id="@+id/ET_CustomerAddress"
-                        android:layout_width="295dp"
-                        android:layout_height="50sp"
-                        android:inputType="text"
-                        android:hint="@string/customer_address_hint"
-                        android:layout_marginBottom="10dp"
-                        android:textColorHint="@color/grey"/>
-                </TableRow>
-
-                <Button
-                    android:id="@+id/Btn_SaveCustomer"
-                    android:layout_width="wrap_content"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ET_CustomerName"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/save_customer"
-                    tools:ignore="VisualLintButtonSize" />
-            </TableLayout>
+                    android:inputType="textPersonName"
+                    android:hint="@string/customer_name_hint"
+                    android:maxLength="60"
+                    tools:ignore="VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Phone Number Field -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/customer_phone_no"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ET_CustomerNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:hint="@string/customer_phone_no_hint"
+                    android:maxLength="10"
+                    tools:ignore="VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Address Field -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/customer_address"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ET_CustomerAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPostalAddress"
+                    android:hint="@string/customer_address_hint"
+                    tools:ignore="VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Save Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/Btn_SaveCustomer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/save_customer"
+                app:cornerRadius="12dp"
+                android:elevation="2dp"
+                tools:ignore="VisualLintButtonSize" />
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

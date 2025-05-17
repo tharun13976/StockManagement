@@ -1,118 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:padding="10dp"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".purchases.PurchaseCreate">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:elevation="4dp">
-            <TextView
-                android:id="@+id/toolbar_title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/purchase_creation"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </androidx.appcompat.widget.Toolbar>
+    <!-- Material Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+        app:title="@string/purchase_creation"
+        app:titleCentered="true" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="20dp"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
+        android:scrollbarStyle="insideOverlay"
+        android:verticalScrollbarPosition="right"
+        android:scrollbarAlwaysDrawVerticalTrack="true">
+
+        <!-- Form Fields -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginStart="10dp"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center_horizontal">
 
-            <TableLayout
+            <!-- Product Name -->
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center">
+                android:text="@string/product_name"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"/>
 
-                <TableRow>
-                    <TextView
-                        android:text="@string/product_name"
-                        android:textSize="16sp"/>
-                    <TextView
-                        android:text="@string/label_end"
-                        android:textSize="18sp"/>
-                    <AutoCompleteTextView
-                        android:id="@+id/AET_Product"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50sp"
-                        android:hint="@string/enter_the_product_name"
-                        android:layout_marginBottom="10dp"/>
-                </TableRow>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_the_product_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <AutoCompleteTextView
+                    android:id="@+id/AET_Product"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    tools:ignore="VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <TableRow>
-                    <TextView
-                        android:text="@string/purchase_stock_added_date"
-                        android:textSize="16sp"/>
-                    <TextView
-                        android:text="@string/label_end"
-                        android:textSize="18sp"/>
-                    <EditText
-                        android:id="@+id/ET_NewStockDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50sp"
-                        android:hint="@string/date_format"
-                        android:inputType="date"
-                        android:layout_marginBottom="10dp" />
-                </TableRow>
+            <!-- Purchase Date -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/purchase_stock_added_date"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"/>
 
-                <TableRow>
-                    <TextView
-                        android:text="@string/purchase_cost_per_unit_rs"
-                        android:textSize="16sp"/>
-                    <TextView
-                        android:text="@string/label_end"
-                        android:textSize="18sp"/>
-                    <EditText
-                        android:id="@+id/ET_NewStockCost"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50sp"
-                        android:hint="@string/purchase_cost_per_unit_hint"
-                        android:inputType="number"
-                        android:layout_marginBottom="10dp" />
-                </TableRow>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/date_format"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <EditText
+                    android:id="@+id/ET_NewStockDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:inputType="date"
+                    tools:ignore="LabelFor,VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <TableRow>
-                    <TextView
-                        android:text="@string/purchase_unit_count"
-                        android:textSize="16sp"/>
-                    <TextView
-                        android:text="@string/label_end"
-                        android:textSize="18sp"/>
-                    <EditText
-                        android:id="@+id/ET_StockCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50sp"
-                        android:hint="@string/purchase_unit_count_hint"
-                        android:layout_marginBottom="10dp"
-                        android:inputType="number" />
-                </TableRow>
+            <!-- Cost per Unit -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/purchase_cost_per_unit_rs"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"/>
 
-                <Button
-                    android:id="@+id/Btn_ProductStockSave"
-                    android:layout_width="100sp"
-                    android:layout_height="50sp"
-                    android:text="@string/save_purchase"
-                    android:textSize="24sp"
-                    tools:ignore="VisualLintButtonSize" />
-            </TableLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/purchase_cost_per_unit_hint"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <EditText
+                    android:id="@+id/ET_NewStockCost"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:inputType="numberDecimal"
+                    tools:ignore="LabelFor,VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Unit Count -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/purchase_unit_count"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/purchase_unit_count_hint"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <EditText
+                    android:id="@+id/ET_StockCount"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:inputType="number"
+                    tools:ignore="LabelFor,VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Save Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/Btn_ProductStockSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/save_purchase"
+                android:layout_marginTop="32dp"
+                app:cornerRadius="12dp"
+                style="@style/Widget.MaterialComponents.Button"
+                tools:ignore="VisualLintButtonSize" />
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

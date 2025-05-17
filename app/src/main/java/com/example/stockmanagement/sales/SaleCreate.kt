@@ -3,6 +3,7 @@ package com.example.stockmanagement.sales
 import android.annotation.SuppressLint
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -56,9 +57,9 @@ class SaleCreate : AppCompatActivity() {
         val lable1 = findViewById<TextView>(R.id.Label_1)
         val lable2 = findViewById<TextView>(R.id.Label_2)
         val lable3 = findViewById<TextView>(R.id.Label_3)
-        val lablec1 = findViewById<TextView>(R.id.Labelc_1)
-        val lablec2 = findViewById<TextView>(R.id.Labelc_2)
-        val lablec3 = findViewById<TextView>(R.id.Labelc_3)
+
+        saledate.inputType = InputType.TYPE_NULL
+        saledate.isFocusable = false
 
 
         val dao = ManagementDatabase.getInstance(this).managementDao
@@ -75,9 +76,6 @@ class SaleCreate : AppCompatActivity() {
             lable1.visibility = if (isChecked) View.GONE else View.VISIBLE
             lable2.visibility = if (isChecked) View.GONE else View.VISIBLE
             lable3.visibility = if (isChecked) View.GONE else View.VISIBLE
-            lablec1.visibility = if (isChecked) View.GONE else View.VISIBLE
-            lablec2.visibility = if (isChecked) View.GONE else View.VISIBLE
-            lablec3.visibility = if (isChecked) View.GONE else View.VISIBLE
             if (isChecked) {
                 productname.setText("")
                 productcount.setText("")

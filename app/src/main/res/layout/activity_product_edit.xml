@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:padding="10dp"
+    android:padding="16dp"
     tools:context=".products.ProductEdit">
 
     <LinearLayout
@@ -15,78 +15,59 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            android:elevation="4dp">
-            <TextView
-                android:id="@+id/toolbar_title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/product_editing"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </androidx.appcompat.widget.Toolbar>
+            android:elevation="4dp"
+            app:title="@string/product_editing"
+            app:titleCentered="true"
+            app:titleTextColor="@android:color/white" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/TV_ProductName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginStart="10dp"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:text="@string/sample_product_name"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/green"
+            android:gravity="center"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp" />
 
-            <TableLayout
+        <!-- Measurement Unit Label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/product_measurement_unit"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            android:layout_marginBottom="24dp">
+
+            <Spinner
+                android:id="@+id/Spi_ProductMeasurement"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center">
+                android:layout_height="50dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+        </com.google.android.material.card.MaterialCardView>
 
-                <TextView
-                    android:id="@+id/TV_ProductName"
-                    android:layout_width="295dp"
-                    android:layout_height="50dp"
-                    android:text="@string/sample_product_name"
-                    android:layout_marginBottom="30dp"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:textColor="@color/green" />
-
-                <TableRow>
-                    <TextView
-                        android:text="@string/product_measurement_unit"
-                        android:textSize="16sp"
-                        android:layout_gravity="center"
-                        android:gravity="end" />
-                    <TextView
-                        android:text="@string/label_end"
-                        android:layout_gravity="center"
-                        android:textSize="18sp"/>
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="225dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        app:cardCornerRadius="8dp"
-                        app:cardElevation="4dp">
-
-                        <Spinner
-                            android:id="@+id/Spi_ProductMeasurement"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:padding="8dp"/>
-                    </com.google.android.material.card.MaterialCardView>
-                </TableRow>
-
-                <Button
-                    android:id="@+id/Btn_SaveProduct"
-                    android:layout_width="wrap_content"
-                    android:text="@string/save_product"
-                    tools:ignore="VisualLintButtonSize" />
-            </TableLayout>
-        </LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Btn_SaveProduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/save_product"
+            android:layout_marginTop="16dp"
+            app:cornerRadius="12dp"
+            android:elevation="4dp" />
     </LinearLayout>
 </ScrollView>
