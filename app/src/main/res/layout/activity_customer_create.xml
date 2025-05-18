@@ -55,8 +55,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ET_CustomerName"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:layout_height="50dp"
+                    android:inputType="textCapWords"
                     android:hint="@string/customer_name_hint"
                     android:maxLength="60"
                     tools:ignore="VisualLintTextFieldSize" />
@@ -80,7 +80,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ET_CustomerNo"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:inputType="phone"
                     android:hint="@string/customer_phone_no_hint"
                     android:maxLength="10"
@@ -105,8 +105,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ET_CustomerAddress"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPostalAddress"
+                    android:layout_height="50dp"
+                    android:inputType="textCapWords"
                     android:hint="@string/customer_address_hint"
                     tools:ignore="VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>

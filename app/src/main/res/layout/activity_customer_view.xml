@@ -42,9 +42,8 @@
                 android:inputType="text"
                 android:enabled="false"
                 android:focusable="false"
+                android:textAppearance="@style/TextValueStyle"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="16sp"
                 android:text="@string/zero"
                 android:gravity="center"
                 tools:ignore="VisualLintTextFieldSize" />
@@ -67,9 +66,8 @@
                 android:enabled="false"
                 android:focusable="false"
                 android:text="@string/none"
+                android:textAppearance="@style/TextValueStyle"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="16sp"
                 android:gravity="center"
                 tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -91,9 +89,8 @@
                 android:enabled="false"
                 android:focusable="false"
                 android:text="@string/none"
+                android:textAppearance="@style/TextValueStyle"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="16sp"
                 android:gravity="center"
                 tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -115,9 +112,8 @@
                 android:enabled="false"
                 android:focusable="false"
                 android:text="@string/none"
+                android:textAppearance="@style/TextValueStyle"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="16sp"
                 android:gravity="center"
                 tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -139,9 +135,8 @@
                 android:enabled="false"
                 android:focusable="false"
                 android:text="@string/zero"
-                android:textColor="@android:color/holo_red_dark"
-                android:textStyle="bold"
-                android:textSize="16sp"
+                android:textAppearance="@style/TextValueStyle"
+                android:textColor="@color/red"
                 android:gravity="center"
                 tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -163,9 +158,8 @@
                 android:enabled="false"
                 android:focusable="false"
                 android:text="@string/date_sample"
+                android:textAppearance="@style/TextValueStyle"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="16sp"
                 android:gravity="center"
                 tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>

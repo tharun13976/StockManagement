@@ -57,14 +57,15 @@
                 <AutoCompleteTextView
                     android:id="@+id/AET_Product"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:inputType="text"
                     android:paddingTop="16dp"
                     android:paddingBottom="16dp"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
                     android:textSize="16sp"
-                    android:maxLength="60" />
+                    android:maxLength="60"
+                    tools:ignore="VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Cost per Unit -->
@@ -84,7 +85,7 @@
                 <EditText
                     android:id="@+id/ET_NewStockCost"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="50dp"
                     android:inputType="numberDecimal"
                     tools:ignore="LabelFor,VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -106,7 +107,7 @@
                 <EditText
                     android:id="@+id/ET_StockCount"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="50dp"
                     android:inputType="number"
                     tools:ignore="LabelFor,VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -129,7 +130,7 @@
                     android:id="@+id/ET_NewStockDate"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    tools:ignore="VisualLintTextFieldSize" />
+                    tools:ignore="VisualLintTextFieldSize"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Save Button -->

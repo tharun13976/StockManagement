@@ -3,6 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="green">#298407</color>
+    <color name="red">#DD0A0A</color>
     <color name="saleColor">#FF5722</color>        <!-- Deep Orange -->
     <color name="purchaseColor">#4CAF50</color>    <!-- Green -->
     <color name="productColor">#03A9F4</color>     <!-- Light Blue -->
