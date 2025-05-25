@@ -59,6 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:inputType="text"
+                    android:imeOptions="actionNext"
                     android:paddingTop="16dp"
                     android:paddingBottom="16dp"
                     android:paddingStart="12dp"
@@ -85,6 +86,7 @@
                 <EditText
                     android:id="@+id/ET_NewStockCost"
                     android:layout_width="match_parent"
+                    android:imeOptions="actionNext"
                     android:layout_height="50dp"
                     android:inputType="numberDecimal"
                     tools:ignore="LabelFor,VisualLintTextFieldSize" />
@@ -109,6 +111,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:inputType="number"
+                    android:imeOptions="actionNext"
                     tools:ignore="LabelFor,VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -130,6 +133,7 @@
                     android:id="@+id/ET_NewStockDate"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:imeOptions="actionNext"
                     tools:ignore="VisualLintTextFieldSize"/>
             </com.google.android.material.textfield.TextInputLayout>
 

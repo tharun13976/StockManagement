@@ -1,6 +1,7 @@
 package com.example.stockmanagement
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -21,6 +22,7 @@ import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import java.util.Locale
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
-
+        loadLocale() // Load saved language before UI setup
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars = true
@@ -126,10 +128,50 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.action_language -> {
-
+                showLanguageSelectionDialog()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+    private fun showLanguageSelectionDialog() {
+        val languages = arrayOf("English", "Tamil")
+        AlertDialog.Builder(this)
+            .setTitle("Select Language")
+            .setItems(languages) { _, which ->
+                when (which) {
+                    0 -> setLocale("en") // English
+                    1 -> setLocale("ta") // Tamil
+                }
+            }
+            .create()
+            .show()
+    }
+
+    private fun setLocale(languageCode: String) {
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+        val config = resources.configuration
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+
+        val prefs = getSharedPreferences("app_prefs", MODE_PRIVATE)
+        prefs.edit().putString("app_language", languageCode).apply()
+
+        // Restart the activity
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish()
+    }
+
+    private fun loadLocale() {
+        val prefs = getSharedPreferences("app_prefs", MODE_PRIVATE)
+        val language = prefs.getString("app_language", "en") ?: "en"
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        val config = resources.configuration
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
     }
 }

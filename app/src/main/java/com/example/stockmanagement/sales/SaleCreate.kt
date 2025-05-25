@@ -94,15 +94,19 @@ class SaleCreate : AppCompatActivity() {
         }
 
         dataFetcher.getAllCustomerNames { names ->
-            val adapter = CustomFilterArrayAdapter(this, names)
-            customername.setAdapter(adapter)
-            customername.threshold = 1
+            runOnUiThread {
+                val adapter = CustomFilterArrayAdapter(this, names)
+                customername.setAdapter(adapter)
+                customername.threshold = 1
+            }
         }
 
         dataFetcher.getAllProductNames { names ->
-            val adapter = CustomFilterArrayAdapter(this, names)
-            productname.setAdapter(adapter)
-            productname.threshold = 1
+            runOnUiThread {
+                val adapter = CustomFilterArrayAdapter(this, names)
+                productname.setAdapter(adapter)
+                productname.threshold = 1
+            }
         }
 
         saledate.setOnClickListener {

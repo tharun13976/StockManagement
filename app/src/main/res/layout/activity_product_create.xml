@@ -61,6 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:inputType="textCapWords"
+                    android:imeOptions="actionNext"
                     tools:ignore="VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,6 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="4dp"
+                    android:imeOptions="actionNext"
                     android:minHeight="48dp"
                     android:spinnerMode="dropdown" />
             </com.google.android.material.card.MaterialCardView>
@@ -109,6 +111,7 @@
                     android:id="@+id/ET_ProductStartDate"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:imeOptions="actionNext"
                     tools:ignore="VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>
 
