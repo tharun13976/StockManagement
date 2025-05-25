@@ -19,6 +19,13 @@
                 android:title="@string/imports"
                 android:icon="@drawable/import_icon"
                 app:showAsAction="ifRoom" />
+
+            <item
+                android:id="@+id/action_language"
+                android:title="@string/language"
+                android:icon="@drawable/import_icon"
+                app:showAsAction="ifRoom" />
+
         </menu>
     </item>
 </menu>

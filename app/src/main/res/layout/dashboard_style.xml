@@ -1,100 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    card_view:cardCornerRadius="16dp"
+    card_view:cardCornerRadius="12dp"
     card_view:cardElevation="6dp"
     android:foreground="?attr/selectableItemBackground">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:padding="12dp"
+        android:background="@android:color/white"
+        android:stretchColumns="0,1,2">
 
-        <!-- Product Name -->
-        <TextView
-            android:id="@+id/tvProductName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/dash_product_name"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/green"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+        <TableRow>
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
-        <!-- Row 1: Available Units -->
-        <ImageView
-            android:id="@+id/ivStockIcon"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@android:drawable/ic_menu_info_details"
-            app:layout_constraintTop_toBottomOf="@id/tvProductName"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp"
-            card_view:tint="@color/green" />
+                <TextView
+                    android:id="@+id/tvProductName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dash_product_name"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:textColor="@color/green"
+                    android:gravity="center"/>
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvAvailableUnitsLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/dash_available_unit_s"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@id/ivStockIcon"
-            app:layout_constraintTop_toTopOf="@id/ivStockIcon"
-            android:layout_marginStart="8dp"/>
+            <!-- Available Units -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal">
+                <ImageView
+                    android:id="@+id/ivStockIcon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@android:drawable/ic_menu_info_details"
+                    android:layout_marginEnd="4dp"
+                    card_view:tint="@color/green" />
 
-        <TextView
-            android:id="@+id/tvProductCount"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/zero"
-            android:textStyle="bold"
-            android:textColor="@color/green"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@id/tvAvailableUnitsLabel"
-            app:layout_constraintTop_toTopOf="@id/tvAvailableUnitsLabel"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="4dp"/>
+                <TextView
+                    android:id="@+id/tvAvailableUnitsLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dash_available_unit_s"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:gravity="center"/>
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/tvProductCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/zero"
+                    android:textStyle="bold"
+                    android:textColor="@color/green"
+                    android:textSize="18sp"
+                    android:gravity="center"/>
+            </LinearLayout>
 
-        <!-- Row 2: Current Month Sales -->
-        <ImageView
-            android:id="@+id/ivSalesIcon"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@android:drawable/ic_menu_sort_by_size"
-            app:layout_constraintTop_toBottomOf="@id/ivStockIcon"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp"
-            card_view:tint="@color/green" />
+            <!-- Sales This Month -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <ImageView
+                    android:id="@+id/ivSalesIcon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@android:drawable/ic_menu_sort_by_size"
+                    android:layout_marginEnd="4dp"
+                    card_view:tint="@color/green" />
 
-        <TextView
-            android:id="@+id/tvSalesLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/dash_sales_this_month"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@id/ivSalesIcon"
-            app:layout_constraintTop_toTopOf="@id/ivSalesIcon"
-            android:layout_marginStart="8dp"/>
+                <TextView
+                    android:id="@+id/tvSalesLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dash_sales_this_month"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:gravity="center"/>
+            </LinearLayout>
+                <TextView
+                    android:id="@+id/tvCurrentPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/zero"
+                    android:textStyle="bold"
+                    android:textColor="@color/green"
+                    android:textSize="18sp"
+                    android:gravity="center"/>
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvCurrentPrice"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/zero"
-            android:textStyle="bold"
-            android:textColor="@color/green"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@id/tvSalesLabel"
-            app:layout_constraintTop_toTopOf="@id/tvSalesLabel"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="4dp"/>
+        </TableRow>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </TableLayout>
 </androidx.cardview.widget.CardView>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    Application Name-->
+    <string name="app_name">பொருள் மேலாண்மை</string>
+
+    <!--    Common for all Module-->
+    <string name="home_page">முகப்பு</string>
+    <string name="sort_filter">வரிசை/வடிகட்டி</string>
+    <string name="name">பெயர்</string>
+    <string name="label_end"> :</string>
+    <string name="created_date">உருவாக்கிய தேதி</string>
+    <string name="none">எதுவும் இல்லை</string>
+    <string name="zero">0</string>
+    <string name="date_sample">00–00–0000</string>
+    <string name="clear">தெளிவு</string>
+    <string name="rs_0">ரூ. 0</string>
+    <string name="purchase">கொள்முதல்</string>
+    <string name="sale">விற்பனை</string>
+    <string name="product">பொருள்</string>
+    <string name="customer">வாடிக்கையாளர்</string>
+    <string name="menu">மெனு</string>
+    <string name="back">பின்னால்</string>
+    <string name="id">அடையாளம்</string>
+    <string name="date_format">நாள்-மாதம்-வருடம்</string>
+
+    <!--    Import and Backup-->
+    <string name="import_data">தரவை இறக்குமதி செய்க</string>
+    <string name="import_data_from_zip">ZIP இலிருந்து தரவை இறக்குமதி செய்க</string>
+    <string name="backup_page">முகப்பு காப்பு</string>
+    <string name="enter_the_password_to_backup">காப்புப் பதிவுக்கு கடவுச்சொல்லை உள்ளிடுக:-</string>
+    <string name="entre_here">இங்கே உள்ளிடவும்…</string>
+    <string name="proceed">தொடர்க</string>
+    <string name="click_to_backup">காப்பு எடுக்க கிளிக் செய்க:-</string>
+    <string name="backup">காப்பு</string>
+    <string name="imports">இறக்குமதி</string>
+
+    <!--    Dashboard-->
+    <string name="dash_product_name">பொருளின் பெயர்</string>
+    <string name="dash_available_unit_s">இருக்கும் அலகுகள்</string>
+    <string name="dash_sales_this_month">இந்த மாத விற்பனை</string>
+
+    <!--    Customer Module-->
+    <string name="customer_phone_no">தொலைபேசி எண்</string>
+    <string name="customer_address">முகவரி</string>
+    <string name="customer_address_hint">வாடிக்கையாளர் முகவரியை உள்ளிடவும்</string>
+    <string name="customer_phone_no_hint">வாடிக்கையாளர் தொடர்பு எண்ணை உள்ளிடவும்</string>
+    <string name="customer_name_hint">வாடிக்கையாளர் பெயரை உள்ளிடவும்</string>
+    <string name="customer_creation">வாடிக்கையாளர் உருவாக்கம்</string>
+    <string name="save_customer">வாடிக்கையாளரை சேமிக்கவும்</string>
+    <string name="customer_editing">வாடிக்கையாளர் திருத்தம்</string>
+    <string name="customer_details">வாடிக்கையாளர் விவரங்கள்</string>
+    <string name="customer_id">வாடிக்கையாளர் ID</string>
+    <string name="customer_balance">மீதம்</string>
+    <string name="edit_the_customer_details">வாடிக்கையாளர் விவரங்களைத் திருத்துக</string>
+    <string name="customer_list">வாடிக்கையாளர் பட்டியல்</string>
+
+    <!--    Product Module-->
+    <string name="product_measurement_unit">அளவீட்டு அலகு</string>
+    <string name="product_started_date">தொடங்கிய தேதி</string>
+    <string name="product_name_hint">பொருள் பெயரை உள்ளிடவும்</string>
+    <string name="save_product">பொருளை சேமிக்கவும்</string>
+    <string name="product_creation">பொருள் உருவாக்கம்</string>
+    <string name="product_editing">பொருள் திருத்தம்</string>
+    <string name="sample_product_name">பொருள் பெயர்</string>
+    <string name="product_list">பொருள் பட்டியல்</string>
+    <string name="product_details">பொருள் விவரங்கள்</string>
+    <string name="product_id">பொருள் ID</string>
+    <string name="product_stock_count">பொருள் அலகுகள்</string>
+    <string name="product_latest_price">சமீபத்திய விலை</string>
+    <string name="edit_the_product_details">பொருள் விவரங்களைத் திருத்துக</string>
+
+    <!--    Purchase Module-->
+    <string name="purchase_creation">கொள்முதல் உருவாக்கம்</string>
+    <string name="product_name">பொருள் பெயர்</string>
+    <string name="enter_the_product_name">பொருள் பெயரை உள்ளிடவும்</string>
+    <string name="purchase_stock_added_date">பங்கு சேர்க்கப்பட்ட தேதி</string>
+    <string name="purchase_cost_per_unit_rs">ஒவ்வொரு அலகுக்கும் செலவு (ரூ.)</string>
+    <string name="purchase_cost_per_unit_hint">ஒவ்வொரு அலகிற்கும் செலவை உள்ளிடவும்</string>
+    <string name="purchase_unit_count">அலகுகளின் எண்ணிக்கை</string>
+    <string name="purchase_unit_count_hint">கொள்முதல் செய்த அலகுகளின் எண்ணிக்கையை உள்ளிடவும்</string>
+    <string name="save_purchase">கொள்முதலை சேமிக்கவும்</string>
+    <string name="purchase_details">கொள்முதல் விவரங்கள்</string>
+    <string name="purchase_id">கொள்முதல் ID</string>
+    <string name="purchase_list">கொள்முதல் பட்டியல்</string>
+    <string name="purchase_cost_per_unit">ஒவ்வொரு அலகுக்கும் செலவு</string>
+    <string name="purchased_count">கொள்முதல் செய்யப்பட்ட அலகுகள்</string>
+    <string name="purchase_available_count">இருக்கும் அலகுகள்</string>
+
+    <!--    Sale Module-->
+    <string name="sale_creation">விற்பனை உருவாக்கம்</string>
+    <string name="customer_name">வாடிக்கையாளர் பெயர்</string>
+    <string name="sale_date_of_sale">விற்பனை தேதி</string>
+    <string name="sale_product_count">பொருள் அலகுகள்</string>
+    <string name="sale_enter_the_count_hint">அலகுகளின் எண்ணிக்கையை உள்ளிடவும்</string>
+    <string name="sale_amount_given_rs">கொடுக்கப்பட்ட தொகை (ரூ.)</string>
+    <string name="save_the_sales_record">விற்பனை பதிவை சேமிக்கவும்</string>
+    <string name="sale_enter_the_amount_hint">தொகையை உள்ளிடவும்</string>
+    <string name="sale_amount_only">தொகை மட்டும்</string>
+    <string name="sale_total_cost_rs">மொத்த செலவு (ரூ.)</string>
+    <string name="sale_details">விற்பனை விவரங்கள்</string>
+    <string name="sale_id">விற்பனை ID</string>
+    <string name="sale_total_cost">மொத்த செலவு</string>
+    <string name="sale_amount_given">கொடுக்கப்பட்ட தொகை</string>
+    <string name="sale_amount_only_status">false</string>
+    <string name="sales_list">விற்பனை பட்டியல்</string>
+    <string name="product_list_latest_stock_cost">சமீபத்திய பங்கு விலை</string>
+    <string name="product_list_stock_count">பங்கு அலகுகள்</string>
+    <string name="sale_date">விற்பனை தேதி</string>
+    <string name="language">மொழி</string>
+</resources>

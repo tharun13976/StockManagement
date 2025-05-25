@@ -8,75 +8,91 @@
     card_view:cardCornerRadius="12dp"
     card_view:cardElevation="6dp"
     android:foreground="?attr/selectableItemBackground">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@android:color/white"
         android:padding="12dp">
 
-        <LinearLayout
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="fill_vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/id"
-                android:textSize="16sp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/label_end"
-                android:textSize="16sp"/>
-            <TextView
-                android:id="@+id/tvSaleId"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="@string/zero"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:layout_marginEnd="2dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sale_date"
-                android:textSize="16sp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/label_end"
-                android:textSize="16sp"/>
-            <TextView
-                android:id="@+id/tvSaleDate"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="@string/date_sample"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:layout_marginEnd="2dp"/>
+            android:background="@android:color/white"
+            android:stretchColumns="1,3"
+            android:shrinkColumns="1,3">
+            <!-- Row 1 -->
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/id"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    card_view:drawableEndCompat="@drawable/ic_colon"/>
+                <TextView
+                    android:id="@+id/tvSaleId"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/zero"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_marginEnd="2dp"/>
 
-        </LinearLayout>
-        <LinearLayout
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sale_date"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    card_view:drawableEndCompat="@drawable/ic_colon"/>
+                <TextView
+                    android:id="@+id/tvSaleDate"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/date_sample"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_marginEnd="2dp"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/purchase_id"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    card_view:drawableEndCompat="@drawable/ic_colon"/>
+                <TextView
+                    android:id="@+id/tvSalePurchaseId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/zero"
+                    android:textSize="16sp"
+                    android:textColor="#222"
+                    android:layout_marginTop="2dp"/>
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="fill_vertical">
+            android:background="@android:color/white"
+            android:stretchColumns="1,3"
+            android:shrinkColumns="1,3">
+            <!-- Row 2 -->
+            <TableRow
+                android:layout_marginTop="5dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/product_name"
                 android:textSize="16sp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/label_end"
-                android:textSize="16sp"/>
+                android:textColor="@color/black"
+                card_view:drawableEndCompat="@drawable/ic_colon"/>
             <TextView
                 android:id="@+id/tvSaleProductName"
                 android:layout_width="wrap_content"
@@ -86,23 +102,14 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_marginTop="2dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="fill_vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/customer_name"
                 android:textSize="16sp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/label_end"
-                android:textSize="16sp"/>
+                android:textColor="@color/black"
+                card_view:drawableEndCompat="@drawable/ic_colon"/>
             <TextView
                 android:id="@+id/tvSaleCustomerName"
                 android:layout_width="wrap_content"
@@ -112,49 +119,17 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_marginTop="2dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="fill_vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/purchase_id"
-                android:textSize="16sp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/label_end"
-                android:textSize="16sp"/>
-            <TextView
-                android:id="@+id/tvSalePurchaseId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/zero"
-                android:textSize="16sp"
-                android:textColor="#222"
-                android:layout_marginTop="2dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="fill_vertical">
-
+            </TableRow>
+            <!-- Row 3 -->
+            <TableRow
+                android:layout_marginTop="5dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="@string/sale_product_count"
                 android:textSize="16sp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/label_end"
-                android:textSize="16sp"/>
+                android:textColor="@color/black"
+                card_view:drawableEndCompat="@drawable/ic_colon"/>
             <TextView
                 android:id="@+id/tvSaleProductCount"
                 android:layout_width="wrap_content"
@@ -169,12 +144,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/sale_amount_only"
                 android:textSize="16sp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/label_end"
-                android:textSize="16sp"/>
+                android:textColor="@color/black"
+                card_view:drawableEndCompat="@drawable/ic_colon"/>
             <TextView
                 android:id="@+id/tvSaleAmountOnly"
                 android:layout_width="wrap_content"
@@ -184,52 +155,43 @@
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="fill_vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sale_amount_given"
-                android:textSize="16sp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/label_end"
-                android:textSize="16sp"/>
-            <TextView
-                android:id="@+id/tvsaleAmountGiven"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/rs_0"
-                android:layout_weight="1"
-                android:textColor="@android:color/holo_blue_dark"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sale_total_cost"
-                android:textSize="16sp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/label_end"
-                android:textSize="16sp"/>
-            <TextView
-                android:id="@+id/tvsaleTotalPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/rs_0"
-                android:layout_weight="1"
-                android:textColor="@android:color/holo_blue_dark"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+            </TableRow>
+            <!-- Row 4 -->
+            <TableRow
+                android:layout_marginTop="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sale_amount_given"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    card_view:drawableEndCompat="@drawable/ic_colon"/>
+                <TextView
+                    android:id="@+id/tvsaleAmountGiven"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/rs_0"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sale_total_cost"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    card_view:drawableEndCompat="@drawable/ic_colon"/>
+                <TextView
+                    android:id="@+id/tvsaleTotalPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/rs_0"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </TableRow>
+        </TableLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

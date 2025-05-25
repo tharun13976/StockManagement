@@ -11,22 +11,16 @@
 
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android:elevation="4dp">
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/home_page"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </androidx.appcompat.widget.Toolbar>
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+        app:popupTheme="@style/OverflowMenuLight"
+        app:title="@string/home_page"
+        app:titleCentered="true"
+        app:titleTextAppearance="@style/ToolbarTitleBold"/>
 
 
     <com.google.android.material.tabs.TabLayout
@@ -36,6 +30,7 @@
         app:tabIndicatorColor="@color/green"
         app:tabSelectedTextColor="@color/green"
         app:tabTextColor="@android:color/black"
+        app:tabTextAppearance="@style/TextTabStyle"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.viewpager2.widget.ViewPager2

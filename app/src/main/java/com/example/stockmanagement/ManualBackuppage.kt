@@ -5,10 +5,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import java.util.Date
 import java.util.Locale
@@ -41,7 +38,6 @@ class ManualBackuppage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_manual_backuppage)
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -52,27 +48,7 @@ class ManualBackuppage : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val passHint = findViewById<TextView>(R.id.TV_PasswordHint)
-        val backupHint = findViewById<TextView>(R.id.TV_BackupHint)
-        val pass = findViewById<EditText>(R.id.ET_Password)
-        val proceedBut = findViewById<Button>(R.id.Btn_CheckPassword)
         val backupBut = findViewById<Button>(R.id.Btn_Backup)
-
-        // Initial state
-        backupHint.visibility = View.GONE
-        backupBut.visibility = View.GONE
-
-        proceedBut.setOnClickListener {
-            if (pass.text.toString() == "1q2w3e4r@") {
-                passHint.visibility = View.GONE
-                pass.visibility = View.GONE
-                proceedBut.visibility = View.GONE
-                backupHint.visibility = View.VISIBLE
-                backupBut.visibility = View.VISIBLE
-            } else {
-                Toast.makeText(this, "Enter Correct Password", Toast.LENGTH_LONG).show()
-            }
-        }
 
         backupBut.setOnClickListener {
             requestRequiredPermissions()

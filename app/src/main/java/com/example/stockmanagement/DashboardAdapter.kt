@@ -1,5 +1,6 @@
 package com.example.stockmanagement
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,9 +33,9 @@ class DashboardAdapter(private val productList: MutableList<ProductSalesDashboar
 
         // 🔵 Set color dynamically based on stock
         val context = holder.itemView.context
-        val stockColor = when {
-            product.stock == 0 -> ContextCompat.getColor(context, R.color.saleColor)
-            product.stock in 1..5 -> ContextCompat.getColor(context, R.color.productColor)
+        val stockColor = when (product.stock) {
+            0 -> ContextCompat.getColor(context, R.color.saleColor)
+            in 1..5 -> ContextCompat.getColor(context, R.color.productColor)
             else -> ContextCompat.getColor(context, R.color.green)
         }
         holder.tvProductCount.setTextColor(stockColor)
@@ -43,6 +44,7 @@ class DashboardAdapter(private val productList: MutableList<ProductSalesDashboar
         val size = productList.size
         return size
     }
+    @SuppressLint("NotifyDataSetChanged")
     fun updateData(newList: List<ProductSalesDashboard>) {
         productList.clear()
         productList.addAll(newList)

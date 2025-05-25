@@ -8,93 +8,93 @@
     card_view:cardCornerRadius="12dp"
     card_view:cardElevation="6dp"
     android:foreground="?attr/selectableItemBackground">
-    <LinearLayout
+
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="12dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="fill_vertical">
+        android:padding="12dp"
+        android:background="@android:color/white"
+        android:stretchColumns="1,3"
+        android:shrinkColumns="1,3">
+
+        <!-- Row 1: Product Name | ID -->
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/product_name"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:drawablePadding="2dp"
+                card_view:drawableEndCompat="@drawable/ic_colon" />
+
             <TextView
                 android:id="@+id/tvProductName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/product_name"
-                android:layout_weight="2"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/id"
-                android:textSize="16sp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_end"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:drawablePadding="2dp"
+                card_view:drawableEndCompat="@drawable/ic_colon" />
+
             <TextView
                 android:id="@+id/tvProductId"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/zero"
+                android:textStyle="bold"
                 android:textSize="16sp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
+        </TableRow>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="fill_vertical">
-
+        <!-- Row 2: Stock Count | Latest Stock Cost -->
+        <TableRow
+            android:layout_marginTop="5dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/product_list_stock_count"
                 android:textSize="16sp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_end"
-                android:textSize="16sp"/>
+                android:textColor="@color/black"
+                android:drawablePadding="2dp"
+
+                card_view:drawableEndCompat="@drawable/ic_colon" />
+
             <TextView
                 android:id="@+id/tvProductCount"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="@string/zero"
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/product_list_latest_stock_cost"
                 android:textSize="16sp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_end"
-                android:textSize="16sp"/>
+                android:textColor="@color/black"
+                android:drawablePadding="2dp"
+                card_view:drawableEndCompat="@drawable/ic_colon" />
+
             <TextView
                 android:id="@+id/tvCurrentPrice"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/rs_0"
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="16sp"
                 android:textStyle="bold" />
-        </LinearLayout>
+        </TableRow>
 
-    </LinearLayout>
-
+    </TableLayout>
 </androidx.cardview.widget.CardView>

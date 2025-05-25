@@ -16,41 +16,49 @@
         <Button
             android:id="@+id/Btn_PurchaseList"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginTop="12dp"
             android:layout_columnWeight="1"
             android:backgroundTint="#2196F3"
             android:text="@string/purchase_list"
+            android:textSize="18sp"
+            android:textStyle="bold"
             tools:ignore="VisualLintButtonSize" />
 
         <Button
             android:id="@+id/Btn_SalesList"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginTop="12dp"
             android:layout_columnWeight="1"
             android:backgroundTint="#4CAF50"
             android:text="@string/sales_list"
+            android:textSize="18sp"
+            android:textStyle="bold"
             tools:ignore="VisualLintButtonSize" />
 
         <Button
             android:id="@+id/Btn_ProductList"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginTop="12dp"
             android:layout_columnWeight="1"
             android:backgroundTint="#9C27B0"
             android:text="@string/product_list"
+            android:textSize="18sp"
+            android:textStyle="bold"
             tools:ignore="VisualLintButtonSize" />
 
         <Button
             android:id="@+id/Btn_CustomerList"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginTop="12dp"
             android:layout_columnWeight="1"
             android:backgroundTint="#FF9800"
             android:text="@string/customer_list"
+            android:textSize="18sp"
+            android:textStyle="bold"
             tools:ignore="VisualLintButtonSize" />
 
     </GridLayout>

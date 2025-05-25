@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity=""
     android:padding="10dp"
     tools:context=".ManualBackuppage">
 
@@ -25,33 +26,6 @@
             android:textSize="20sp"
             android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
-
-    <TextView
-        android:id="@+id/TV_PasswordHint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/enter_the_password_to_backup"
-        android:textColor="@color/green"
-        android:textSize="22sp"
-        android:textStyle="bold" />
-    <EditText
-        android:id="@+id/ET_Password"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:inputType="textPassword"
-        android:hint="@string/entre_here"
-        tools:ignore="VisualLintTextFieldSize" />
-    <Button
-        android:id="@+id/Btn_CheckPassword"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/proceed"/>
 
     <TextView
         android:id="@+id/TV_BackupHint"

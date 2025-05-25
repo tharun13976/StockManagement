@@ -62,7 +62,7 @@
         <activity
             android:name=".customers.CustomerEdit"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity
             android:name=".customers.CustomerView"
             android:exported="false" />
@@ -72,18 +72,19 @@
         <activity
             android:name=".purchases.PurchaseCreate"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity
             android:name=".sales.SaleCreate"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".products.ProductCreate"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity
             android:name=".customers.CustomerCreate"
-            android:windowSoftInputMode="adjustResize" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity
             android:name=".MainActivity"
             android:exported="true" />

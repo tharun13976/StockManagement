@@ -16,41 +16,49 @@
         <Button
             android:id="@+id/Btn_Purchase"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginTop="12dp"
             android:layout_columnWeight="1"
             android:backgroundTint="#2196F3"
             android:text="@string/purchase"
+            android:textSize="18sp"
+            android:textStyle="bold"
             tools:ignore="VisualLintButtonSize" />
 
         <Button
             android:id="@+id/Btn_Sales"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginTop="12dp"
             android:layout_columnWeight="1"
             android:backgroundTint="#4CAF50"
             android:text="@string/sale"
+            android:textSize="18sp"
+            android:textStyle="bold"
             tools:ignore="VisualLintButtonSize" />
 
         <Button
             android:id="@+id/Btn_Product"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginTop="12dp"
             android:layout_columnWeight="1"
             android:backgroundTint="#9C27B0"
             android:text="@string/product"
+            android:textSize="18sp"
+            android:textStyle="bold"
             tools:ignore="VisualLintButtonSize" />
 
         <Button
             android:id="@+id/Btn_Customer"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginTop="12dp"
             android:layout_columnWeight="1"
             android:backgroundTint="#FF9800"
             android:text="@string/customer"
+            android:textSize="18sp"
+            android:textStyle="bold"
             tools:ignore="VisualLintButtonSize" />
 
     </GridLayout>

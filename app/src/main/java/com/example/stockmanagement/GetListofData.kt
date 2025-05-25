@@ -11,7 +11,10 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.coroutines.suspendCancellableCoroutine
+import java.text.ParseException
 import kotlin.coroutines.resume
 
 class GetListOfData(context: Context, private val lifecycleOwner: LifecycleOwner) {
@@ -91,27 +94,54 @@ class GetListOfData(context: Context, private val lifecycleOwner: LifecycleOwner
         return parsedDate
     }
 
+//    companion object {
+//        fun showDatePicker(context: Context, editText: EditText, format: String = "dd-MM-yyyy") {
+//            val calendar = Calendar.getInstance()
+//            val dateFormat = SimpleDateFormat(format, Locale.getDefault())
+//            editText.text.toString().takeIf { it.isNotEmpty() }?.let {
+//                try {
+//                    calendar.time = dateFormat.parse(it) ?: calendar.time
+//                } catch (e: Exception) {
+//                    e.printStackTrace()
+//                }
+//            }
+//            DatePickerDialog(
+//                context,
+//                { _, year, month, dayOfMonth ->
+//                    calendar.set(year, month, dayOfMonth)
+//                    editText.setText(dateFormat.format(calendar.time))
+//                },
+//                calendar.get(Calendar.YEAR),
+//                calendar.get(Calendar.MONTH),
+//                calendar.get(Calendar.DAY_OF_MONTH)
+//            ).show()
+//        }
+//    }
+
+
     companion object {
         fun showDatePicker(context: Context, editText: EditText, format: String = "dd-MM-yyyy") {
-            val calendar = Calendar.getInstance()
             val dateFormat = SimpleDateFormat(format, Locale.getDefault())
-            editText.text.toString().takeIf { it.isNotEmpty() }?.let {
-                try {
-                    calendar.time = dateFormat.parse(it) ?: calendar.time
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
+
+            // Pre-select the date if available
+            val currentDate = try {
+                dateFormat.parse(editText.text.toString())?.time ?: MaterialDatePicker.todayInUtcMilliseconds()
+            } catch (e: Exception) {
+                MaterialDatePicker.todayInUtcMilliseconds()
             }
-            DatePickerDialog(
-                context,
-                { _, year, month, dayOfMonth ->
-                    calendar.set(year, month, dayOfMonth)
-                    editText.setText(dateFormat.format(calendar.time))
-                },
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-            ).show()
+
+            val picker = MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Select Date")
+                .setSelection(currentDate)
+                .build()
+
+            picker.addOnPositiveButtonClickListener { selectedDateInMillis ->
+                val calendar = Calendar.getInstance()
+                calendar.timeInMillis = selectedDateInMillis
+                editText.setText(dateFormat.format(calendar.time))
+            }
+
+            picker.show((context as AppCompatActivity).supportFragmentManager, "MATERIAL_DATE_PICKER")
         }
     }
 }

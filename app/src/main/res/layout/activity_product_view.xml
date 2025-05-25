@@ -20,160 +20,174 @@
         app:titleCentered="true"
         app:titleTextAppearance="@style/ToolbarTitleBold"/>
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="20dp">
-        <!-- PRODUCT ID -->
-        <com.google.android.material.textfield.TextInputLayout
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="20dp"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
+        android:scrollbarStyle="insideOverlay"
+        android:verticalScrollbarPosition="right"
+        android:scrollbarAlwaysDrawVerticalTrack="true">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/product_id"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:boxStrokeColor="@color/green"
-            app:hintTextAppearance="@style/CustomHintAppearance"
-            android:layout_marginBottom="12dp">
+            android:orientation="vertical"
+            android:gravity="center">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/TV_ProductID"
+            <!-- PRODUCT ID -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:enabled="false"
-                android:focusable="false"
-                android:text="@string/zero"
-                android:textAppearance="@style/TextValueStyle"
-                android:textColor="@color/black"
-                android:gravity="center"
-                android:backgroundTint="@android:color/transparent"
-                tools:ignore="VisualLintTextFieldSize" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:hint="@string/product_id"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeColor="@color/green"
+                app:hintTextAppearance="@style/CustomHintAppearance"
+                android:layout_marginBottom="12dp">
 
-        <!-- NAME -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/name"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:boxStrokeColor="@color/green"
-            android:layout_marginBottom="12dp"
-            app:hintTextAppearance="@style/CustomHintAppearance">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/TV_ProductID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:text="@string/zero"
+                    android:textAppearance="@style/TextValueStyle"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:backgroundTint="@android:color/transparent"
+                    tools:ignore="VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/TV_ProductName"
+            <!-- NAME -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:enabled="false"
-                android:focusable="false"
-                android:text="@string/none"
-                android:textAppearance="@style/TextValueStyle"
-                android:textColor="@color/black"
-                android:gravity="center"
-                tools:ignore="VisualLintTextFieldSize" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:hint="@string/name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeColor="@color/green"
+                android:layout_marginBottom="12dp"
+                app:hintTextAppearance="@style/CustomHintAppearance">
 
-        <!-- UNIT -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/product_measurement_unit"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:boxStrokeColor="@color/green"
-            android:layout_marginBottom="12dp"
-            app:hintTextAppearance="@style/CustomHintAppearance">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/TV_ProductName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:text="@string/none"
+                    android:textAppearance="@style/TextValueStyle"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    tools:ignore="VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/TV_ProductMeasureunit"
+            <!-- UNIT -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:enabled="false"
-                android:focusable="false"
-                android:text="@string/none"
-                android:textAppearance="@style/TextValueStyle"
-                android:textColor="@color/black"
-                android:gravity="center"
-                tools:ignore="VisualLintTextFieldSize" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:hint="@string/product_measurement_unit"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeColor="@color/green"
+                android:layout_marginBottom="12dp"
+                app:hintTextAppearance="@style/CustomHintAppearance">
 
-        <!-- STOCK COUNT -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/product_stock_count"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:boxStrokeColor="@color/green"
-            android:layout_marginBottom="12dp"
-            app:hintTextAppearance="@style/CustomHintAppearance">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/TV_ProductMeasureunit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:text="@string/none"
+                    android:textAppearance="@style/TextValueStyle"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    tools:ignore="VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/TV_ProductCount"
+            <!-- STOCK COUNT -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:enabled="false"
-                android:focusable="false"
-                android:text="@string/zero"
-                android:textAppearance="@style/TextValueStyle"
-                android:textColor="@color/red"
-                android:gravity="center"
-                tools:ignore="VisualLintTextFieldSize" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:hint="@string/product_stock_count"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeColor="@color/green"
+                android:layout_marginBottom="12dp"
+                app:hintTextAppearance="@style/CustomHintAppearance">
 
-        <!-- PRICE -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/product_latest_price"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:boxStrokeColor="@color/green"
-            android:layout_marginBottom="12dp"
-            app:hintTextAppearance="@style/CustomHintAppearance">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/TV_ProductCount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:text="@string/zero"
+                    android:textAppearance="@style/TextValueStyle"
+                    android:textColor="@color/red"
+                    android:gravity="center"
+                    tools:ignore="VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/TV_ProductPrice"
+            <!-- PRICE -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:enabled="false"
-                android:focusable="false"
-                android:text="@string/rs_0"
-                android:textAppearance="@style/TextValueStyle"
-                android:textColor="@color/red"
-                android:gravity="center"
-                tools:ignore="VisualLintTextFieldSize" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:hint="@string/product_latest_price"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeColor="@color/green"
+                android:layout_marginBottom="12dp"
+                app:hintTextAppearance="@style/CustomHintAppearance">
 
-        <!-- CREATED DATE -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/created_date"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:boxStrokeColor="@color/green"
-            android:layout_marginBottom="12dp"
-            app:hintTextAppearance="@style/CustomHintAppearance">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/TV_ProductPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:text="@string/rs_0"
+                    android:textAppearance="@style/TextValueStyle"
+                    android:textColor="@color/red"
+                    android:gravity="center"
+                    tools:ignore="VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/TV_ProductCreDate"
+            <!-- CREATED DATE -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:enabled="false"
-                android:focusable="false"
-                android:text="@string/date_sample"
-                android:textAppearance="@style/TextValueStyle"
-                android:textColor="@color/black"
-                android:gravity="center"
-                tools:ignore="VisualLintTextFieldSize" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:hint="@string/created_date"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeColor="@color/green"
+                android:layout_marginBottom="12dp"
+                app:hintTextAppearance="@style/CustomHintAppearance">
 
-        <!-- Save Button -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/Btn_EditProduct"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/edit_the_product_details"
-            app:cornerRadius="12dp"
-            android:elevation="2dp"
-            tools:ignore="VisualLintButtonSize" />
-    </LinearLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/TV_ProductCreDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:text="@string/date_sample"
+                    android:textAppearance="@style/TextValueStyle"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    tools:ignore="VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Save Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/Btn_EditProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/edit_the_product_details"
+                app:cornerRadius="12dp"
+                android:elevation="2dp"
+                tools:ignore="VisualLintButtonSize" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

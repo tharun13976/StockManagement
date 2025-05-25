@@ -10,6 +10,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ScrollView
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -32,8 +33,14 @@ class ProductCreate : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_product_create)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+            v.setPadding(
+                systemBarsInsets.left,
+                systemBarsInsets.top,
+                systemBarsInsets.right,
+                imeInsets.bottom
+            )
             insets
         }
         // Set up the toolbar
@@ -48,6 +55,12 @@ class ProductCreate : AppCompatActivity() {
 
         startdate.inputType = InputType.TYPE_NULL
         startdate.isFocusable = false
+
+        // Scroll to view on focus
+        val focusScrollListener = View.OnFocusChangeListener { v, hasFocus ->
+            if (hasFocus && v is EditText) scrollToView(v)
+        }
+        name.onFocusChangeListener = focusScrollListener
 
 
         val measurementunits = listOf("None","Kg", "Liter", "Bag", "Nos.")
@@ -112,6 +125,13 @@ class ProductCreate : AppCompatActivity() {
             }
         }
     }
+    private fun scrollToView(view: View) {
+        val scrollView = findViewById<ScrollView>(R.id.scrollView)
+        scrollView.post {
+            scrollView.smoothScrollTo(0, view.top - 20)
+        }
+    }
+
     suspend fun validateInputs(
         productName: String,
         measurementType: String,

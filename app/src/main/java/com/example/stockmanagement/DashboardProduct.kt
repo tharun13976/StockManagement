@@ -1,6 +1,7 @@
 package com.example.stockmanagement
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
@@ -39,8 +40,7 @@ class DashboardProduct : Fragment(R.layout.dashboard_product) {
 
     private fun loadDashboardData() {
         val shimmerLayout = view?.findViewById<ShimmerFrameLayout>(R.id.shimmer_layout)
-        shimmerLayout?.startShimmer()
-
+        shimmerLayout?.stopShimmer()
 
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.DAY_OF_MONTH, 1)
@@ -62,6 +62,7 @@ class DashboardProduct : Fragment(R.layout.dashboard_product) {
                 val productData = withContext(Dispatchers.IO) {
                     dao.getProductSalesDashboard(startOfMonth, endOfMonth)
                 }
+                Log.d("Dashboard", "Product count from DAO: ${productData.size}")
                 adapter.updateData(productData.toMutableList())
                 shimmerLayout?.stopShimmer()
                 shimmerLayout?.visibility = View.GONE

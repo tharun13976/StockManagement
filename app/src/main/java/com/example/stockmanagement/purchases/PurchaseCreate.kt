@@ -5,10 +5,11 @@ import android.os.Bundle
 import android.text.InputType
 import android.util.Log
 import android.view.MenuItem
-import android.widget.ArrayAdapter
+import android.view.View
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ScrollView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -30,10 +31,15 @@ class PurchaseCreate : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_purchase_create)
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+            v.setPadding(
+                systemBarsInsets.left,
+                systemBarsInsets.top,
+                systemBarsInsets.right,
+                imeInsets.bottom
+            )
             insets
         }
 
@@ -50,6 +56,13 @@ class PurchaseCreate : AppCompatActivity() {
 
         addeddate.inputType = InputType.TYPE_NULL
         addeddate.isFocusable = false
+        // Scroll to view on focus
+        val focusScrollListener = View.OnFocusChangeListener { v, hasFocus ->
+            if (hasFocus && v is EditText) scrollToView(v)
+        }
+        productname.onFocusChangeListener = focusScrollListener
+        stockcount.onFocusChangeListener = focusScrollListener
+        stockcost.onFocusChangeListener = focusScrollListener
 
         val dao = ManagementDatabase.getInstance(this).managementDao
         val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
@@ -110,6 +123,13 @@ class PurchaseCreate : AppCompatActivity() {
             }
         }
     }
+    private fun scrollToView(view: View) {
+        val scrollView = findViewById<ScrollView>(R.id.scrollView)
+        scrollView.post {
+            scrollView.smoothScrollTo(0, view.top - 20)
+        }
+    }
+
     suspend fun validateInputs(
         productName: String,
         stockaddeddate: String,

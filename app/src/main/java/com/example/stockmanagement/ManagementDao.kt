@@ -193,19 +193,18 @@ interface ManagementDao {
 
 
     @Query("""
-    SELECT 
+    SELECT
         p.productName AS productName,
         p.currentStockCount AS stock,
         COALESCE(COUNT(s.sid), 0) AS salesCount
     FROM Product p
-    LEFT JOIN Sale s 
+    LEFT JOIN Sale s
         ON p.productName = s.productname
         AND s.salesdate BETWEEN :startDate AND :endDate
     GROUP BY p.productName
     ORDER BY p.productname
 """)
     suspend fun getProductSalesDashboard(startDate: Date, endDate: Date): List<ProductSalesDashboard>
-
 
     // To update the Record
     @Update

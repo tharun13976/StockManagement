@@ -1,27 +1,28 @@
 <resources>
-    <string name="app_name" translatable="false">Stock Management</string>
+<!--    Application Name-->
+    <string name="app_name">Stock Management</string>
+
+<!--    Common for all Module-->
+    <string name="home_page">Home</string>
     <string name="sort_filter">Sort/Filter</string>
     <string name="name">Name</string>
-    <string name="customer_phone_no">Phone No</string>
-    <string name="customer_address">Address</string>
-    <string name="customer_address_hint">Enter Address of Customer</string>
-    <string name="customer_phone_no_hint">Enter Contact Number</string>
-    <string name="customer_name_hint">Enter the Customer Name</string>
-    <string name="customer_creation">Customer Creation</string>
-    <string name="save_customer">Save Customer</string>
-    <string name="customer_editing">Customer Editing</string>
     <string name="label_end"> : </string>
-    <string name="customer_details">Customer Details</string>
-    <string name="customer_id">Customer ID</string>
-    <string name="customer_balance">Balance</string>
     <string name="created_date">Created Date</string>
-    <string name="edit_the_customer_details">Edit the Customer Details</string>
     <string name="none">None</string>
     <string name="zero">0</string>
     <string name="date_sample">00–00–0000</string>
     <string name="clear">Clear</string>
-    <string name="customer_list">Customer List</string>
     <string name="rs_0">Rs. 0</string>
+    <string name="purchase">Purchase</string>
+    <string name="sale">Sale</string>
+    <string name="product">Product</string>
+    <string name="customer">Customer</string>
+    <string name="menu">Menu</string>
+    <string name="back">Back</string>
+    <string name="id">ID</string>
+    <string name="date_format">DD-MM-YYYY</string>
+
+<!--    Import and Backup-->
     <string name="import_data">Import Data</string>
     <string name="import_data_from_zip">Import Data from ZIP</string>
     <string name="backup_page">Backup Page</string>
@@ -30,47 +31,62 @@
     <string name="proceed">Proceed</string>
     <string name="click_to_backup">Click to Backup:-</string>
     <string name="backup">Backup</string>
-    <string name="home_page">Home</string>
+    <string name="imports">Import</string>
+
+<!--    Dashboard-->
     <string name="dash_product_name">Product Name</string>
-    <string name="dash_available_unit_s">Available Unit(s):</string>
-    <string name="dash_sales_this_month">Sales This Month:</string>
+    <string name="dash_available_unit_s">Available Unit(s)</string>
+    <string name="dash_sales_this_month">Sales This Month</string>
+
+<!--    Customer Module-->
+    <string name="customer_phone_no">Phone No</string>
+    <string name="customer_address">Address</string>
+    <string name="customer_address_hint">Enter Address of Customer</string>
+    <string name="customer_phone_no_hint">Enter Customer Contact Number</string>
+    <string name="customer_name_hint">Enter the Customer Name</string>
+    <string name="customer_creation">Customer Creation</string>
+    <string name="save_customer">Save Customer</string>
+    <string name="customer_editing">Customer Editing</string>
+    <string name="customer_details">Customer Details</string>
+    <string name="customer_id">Customer ID</string>
+    <string name="customer_balance">Balance</string>
+    <string name="edit_the_customer_details">Edit the Customer Details</string>
+    <string name="customer_list">Customer List</string>
+
+
+<!--    Product Module-->
     <string name="product_measurement_unit">Measurement Unit</string>
     <string name="product_started_date">Started Date</string>
     <string name="product_name_hint">Enter the Product Name</string>
-    <string name="date_format">DD-MM-YYYY</string>
     <string name="save_product">Save Product</string>
     <string name="product_creation">Product Creation</string>
     <string name="product_editing">Product Editing</string>
     <string name="sample_product_name">Product Name</string>
     <string name="product_list">Product List</string>
-    <string name="purchase_list">Purchase List</string>
-    <string name="sales_list">Sales List</string>
-    <string name="purchase">Purchase</string>
-    <string name="sale">Sale</string>
-    <string name="product">Product</string>
-    <string name="customer">Customer</string>
-    <string name="menu">Menu</string>
-    <string name="imports">Import</string>
     <string name="product_details">Product Details</string>
     <string name="product_id">Product ID</string>
     <string name="product_stock_count">Stock Unit(s)</string>
     <string name="product_latest_price">Latest Price</string>
     <string name="edit_the_product_details">Edit the Product Details</string>
+
+<!--    Purchase Module-->
     <string name="purchase_creation">Purchase Creation</string>
     <string name="product_name">Product Name</string>
     <string name="enter_the_product_name">Enter the Product Name</string>
     <string name="purchase_stock_added_date">Stock added Date</string>
-    <string name="purchase_cost_per_unit_rs">Cost per Unit Rs.</string>
-    <string name="purchase_cost_per_unit_hint">Cost of One Unit of Stock</string>
-    <string name="purchase_unit_count">Unit Count</string>
-    <string name="purchase_unit_count_hint">Enter the Unit count</string>
+    <string name="purchase_cost_per_unit_rs">Cost/Unit in Rs.</string>
+    <string name="purchase_cost_per_unit_hint">Enter the Cost per Unit of product</string>
+    <string name="purchase_unit_count">Unit(s) Count</string>
+    <string name="purchase_unit_count_hint">Enter the number of Unit(s) purchased</string>
     <string name="save_purchase">Save Purchase</string>
     <string name="purchase_details">Purchase Details</string>
     <string name="purchase_id">Purchase ID</string>
-    <string name="back">Back</string>
+    <string name="purchase_list">Purchase List</string>
     <string name="purchase_cost_per_unit">Cost Per Unit</string>
     <string name="purchased_count">Purchased Unit(s)</string>
     <string name="purchase_available_count">Available Unit(s)</string>
+
+<!--    Sale Module-->
     <string name="sale_creation">Sale Creation</string>
     <string name="customer_name">Customer Name</string>
     <string name="sale_date_of_sale">Date of Sale</string>
@@ -86,8 +102,9 @@
     <string name="sale_total_cost">Total Cost</string>
     <string name="sale_amount_given">Amount Given</string>
     <string name="sale_amount_only_status">false</string>
-    <string name="id">ID</string>
+    <string name="sales_list">Sales List</string>
     <string name="product_list_latest_stock_cost">Latest Stock Cost</string>
     <string name="product_list_stock_count">Stock Unit(s)</string>
     <string name="sale_date">Sale Date</string>
+    <string name="language">Language</string>
 </resources>

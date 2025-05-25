@@ -2,6 +2,7 @@ package com.example.stockmanagement
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -33,15 +34,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars = true
+        window.statusBarColor = Color.WHITE
         WindowCompat.setDecorFitsSystemWindows(window, false)
         val rootView = findViewById<View>(R.id.main)
         ViewCompat.setOnApplyWindowInsetsListener(rootView) { view, insets ->
             val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             view.setPadding(
-                systemBarsInsets.left,
-                systemBarsInsets.top,
-                systemBarsInsets.right,
-                systemBarsInsets.bottom
+                systemBarsInsets.left,systemBarsInsets.top, systemBarsInsets.right, systemBarsInsets.bottom
             )
             insets
         }
@@ -124,6 +123,10 @@ class MainActivity : AppCompatActivity() {
             R.id.action_import -> {
                 val nextScreen = Intent(this, ImportActivity::class.java)
                 startActivity(nextScreen)
+                true
+            }
+            R.id.action_language -> {
+
                 true
             }
             else -> super.onOptionsItemSelected(item)

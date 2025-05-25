@@ -7,12 +7,12 @@ import android.text.InputType
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -38,8 +38,14 @@ class SaleCreate : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_sale_create)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+            v.setPadding(
+                systemBarsInsets.left,
+                systemBarsInsets.top,
+                systemBarsInsets.right,
+                imeInsets.bottom
+            )
             insets
         }
 
@@ -59,6 +65,16 @@ class SaleCreate : AppCompatActivity() {
 
         saledate.inputType = InputType.TYPE_NULL
         saledate.isFocusable = false
+
+        // Scroll to view on focus
+        val focusScrollListener = View.OnFocusChangeListener { v, hasFocus ->
+            if (hasFocus && v is EditText) scrollToView(v)
+        }
+        customername.onFocusChangeListener = focusScrollListener
+        productname.onFocusChangeListener = focusScrollListener
+        productcount.onFocusChangeListener = focusScrollListener
+        amountgiven.onFocusChangeListener = focusScrollListener
+        amountonly.onFocusChangeListener = focusScrollListener
 
 
         val dao = ManagementDatabase.getInstance(this).managementDao
@@ -203,6 +219,12 @@ class SaleCreate : AppCompatActivity() {
                 Toast.makeText(this@SaleCreate, "Sale Entry Saved", Toast.LENGTH_LONG).show()
                 finish()
             }
+        }
+    }
+    private fun scrollToView(view: View) {
+        val scrollView = findViewById<ScrollView>(R.id.scrollView)
+        scrollView.post {
+            scrollView.smoothScrollTo(0, view.top - 20)
         }
     }
 
