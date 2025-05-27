@@ -22,6 +22,9 @@
     <string name="back">பின்னால்</string>
     <string name="id">அடையாளம்</string>
     <string name="date_format">நாள்-மாதம்-வருடம்</string>
+    <string name="popup_save">சேமிக்கவும்</string>
+    <string name="popup_cancel">ரத்துசெய்</string>
+    <string name="popup_title">செயலை உறுதிப்படுத்து</string>
 
     <!--    Import and Backup-->
     <string name="import_data">தரவை இறக்குமதி செய்க</string>
@@ -53,6 +56,24 @@
     <string name="customer_balance">மீதம்</string>
     <string name="edit_the_customer_details">வாடிக்கையாளர் விவரங்களைத் திருத்துக</string>
     <string name="customer_list">வாடிக்கையாளர் பட்டியல்</string>
+    <string name="customer_same_name_alert">ஏற்கனவே அதே பெயரில் ஒரு வாடிக்கையாளர் இருக்கிறார், எனவே பெயரை மாற்றவும்</string>
+    <string name="customer_name_required">வாடிக்கையாளர் பெயர் அவசியம்</string>
+    <string name="customer_name_length">வாடிக்கையாளர் பெயர் 4 எழுத்துக்களுக்கு மேல் இருக்க வேண்டும்</string>
+    <string name="customer_address_required">முகவரி அவசியம்</string>
+    <string name="customer_phone_required">தொலைபேசி எண் தேவை</string>
+    <string name="customer_phone_length">தொலைபேசி எண் சரியாக இல்லை</string>
+    <string name="customer_saved">வாடிக்கையாளர் பதிவு சேமிக்கப்பட்டது</string>
+    <string name="customer_save_conformation">இந்த வாடிக்கையாளர் விவரங்களைச் சேமிக்க விரும்புகிறீர்களா?</string>
+    <string name="customer_not_found">பதிவுகளில் வாடிக்கையாளர் பெயர் காணப்படவில்லை</string>
+    <string name="customer_updated">வாடிக்கையாளர் பதிவு புதுப்பிக்கப்பட்டது</string>
+
+
+    <string name="filter_none">எதுவுமில்லை</string>
+    <string name="filter_balance">சமநிலை</string>
+    <string name="filter_name_asc">பெயர் ஏறுவரிசை</string>
+    <string name="filter_name_desc">பெயர் இறங்குவரிசை</string>
+    <string name="filter_customer_name">வாடிக்கையாளர் பெயர்</string>
+    <string name="filter_phone_number">தொலைபேசி எண்</string>
 
     <!--    Product Module-->
     <string name="product_measurement_unit">அளவீட்டு அலகு</string>

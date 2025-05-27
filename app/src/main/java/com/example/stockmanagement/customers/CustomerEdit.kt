@@ -51,7 +51,7 @@ class CustomerEdit : AppCompatActivity() {
                 address.setText(it.address)
                 oldname=it.customername.toString()
             } ?: run {
-                Toast.makeText(this@CustomerEdit, "Contact Not Found", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@CustomerEdit, getString(R.string.customer_not_found), Toast.LENGTH_LONG).show()
             }
         }
 
@@ -72,7 +72,7 @@ class CustomerEdit : AppCompatActivity() {
 
                 val confirmed = dataFetcher.showConfirmationDialog(
                     context = this@CustomerEdit,
-                    message = "Are you sure you want to update this customer?"
+                    message = getString(R.string.customer_save_conformation)
                 )
                 if (!confirmed) return@launch
 
@@ -85,10 +85,10 @@ class CustomerEdit : AppCompatActivity() {
                     if(name.text.toString() != oldname){
                         dao.updateCustomerNameInSales(oldname,name.text.toString())
                     }
-                    Toast.makeText(this@CustomerEdit, "Contact Updated", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@CustomerEdit, getString(R.string.customer_updated), Toast.LENGTH_LONG).show()
                     finish()
                 } ?: run {
-                    Toast.makeText(this@CustomerEdit, "Customer not found", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@CustomerEdit, getString(R.string.customer_not_found), Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -101,12 +101,12 @@ class CustomerEdit : AppCompatActivity() {
         dataFetcher: GetListOfData
     ): String? {
         return when {
-            customerName.isEmpty() -> "Customer name is required"
-            customerName.length<5 -> "Customer name should be more than 4 letters"
-            !customerName.equals(oldName)&& dataFetcher.doesCustomerExist(customerName) -> "Already we have a Customer with Same Name so Change name"
-            address.isEmpty() -> "Address is required"
-            phone.isEmpty() -> "Phone number is required"
-            phone.length!=10 -> "Phone number is not proper"
+            customerName.isEmpty() -> getString(R.string.customer_name_required)
+            customerName.length<5 -> getString(R.string.customer_name_length)
+            !customerName.equals(oldName)&& dataFetcher.doesCustomerExist(customerName) -> getString(R.string.customer_same_name_alert)
+            address.isEmpty() -> getString(R.string.customer_address_required)
+            phone.isEmpty() -> getString(R.string.customer_phone_required)
+            phone.length != 10 -> getString(R.string.customer_phone_length)
             else -> null
         }
     }

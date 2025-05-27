@@ -21,6 +21,9 @@
     <string name="back">Back</string>
     <string name="id">ID</string>
     <string name="date_format">DD-MM-YYYY</string>
+    <string name="popup_save">Save</string>
+    <string name="popup_cancel">Cancel</string>
+    <string name="popup_title">Confirm Action</string>
 
 <!--    Import and Backup-->
     <string name="import_data">Import Data</string>
@@ -52,6 +55,25 @@
     <string name="customer_balance">Balance</string>
     <string name="edit_the_customer_details">Edit the Customer Details</string>
     <string name="customer_list">Customer List</string>
+    <string name="customer_same_name_alert">Already we have a Customer with Same Name so Change
+        Customer name</string>
+    <string name="customer_name_required">Customer name is required</string>
+    <string name="customer_name_length">Customer name should be more than 4 letters</string>
+    <string name="customer_address_required">Address is required</string>
+    <string name="customer_phone_required">Phone number is required</string>
+    <string name="customer_phone_length">Phone number is not proper</string>
+    <string name="customer_saved">Customer record Saved</string>
+    <string name="customer_save_conformation">Are you sure you want to save this customer details?</string>
+    <string name="customer_not_found">Customer name not Found in Records</string>
+    <string name="customer_updated">Customer record updated</string>
+
+
+    <string name="filter_none">None</string>
+    <string name="filter_balance">Balance</string>
+    <string name="filter_name_asc">Name ASC</string>
+    <string name="filter_name_desc">Name DESC</string>
+    <string name="filter_customer_name">Customer Name</string>
+    <string name="filter_phone_number">Phone Number</string>
 
 
 <!--    Product Module-->
@@ -107,4 +129,5 @@
     <string name="product_list_stock_count">Stock Unit(s)</string>
     <string name="sale_date">Sale Date</string>
     <string name="language">Language</string>
+
 </resources>

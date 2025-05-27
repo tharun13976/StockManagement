@@ -5,7 +5,6 @@ import android.widget.EditText
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
-import android.app.DatePickerDialog
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -14,7 +13,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.coroutines.suspendCancellableCoroutine
-import java.text.ParseException
 import kotlin.coroutines.resume
 
 class GetListOfData(context: Context, private val lifecycleOwner: LifecycleOwner) {
@@ -64,10 +62,10 @@ class GetListOfData(context: Context, private val lifecycleOwner: LifecycleOwner
 
     suspend fun showConfirmationDialog(
         context: Context,
-        title: String = "Confirm Action",
+        title: String = context.getString(R.string.popup_title),
         message: String,
-        positiveText: String = "Save",
-        negativeText: String = "Cancel"
+        positiveText: String = context.getString(R.string.popup_save),
+        negativeText: String = context.getString(R.string.popup_cancel)
     ): Boolean = suspendCancellableCoroutine { cont ->
         AlertDialog.Builder(context)
             .setTitle(title)

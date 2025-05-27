@@ -23,9 +23,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updatePadding
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -41,6 +39,9 @@ class CustomerList : AppCompatActivity() {
     private lateinit var adapter: CustomerListAdapter
     private lateinit var dao: ManagementDao
 
+    enum class FilterType {
+        NONE, BALANCE, NAME_ASC, NAME_DESC, CUSTOMER_NAME, PHONE_NUMBER
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -76,63 +77,74 @@ class CustomerList : AppCompatActivity() {
         val filterDropdown = findViewById<Spinner>(R.id.Spi_PurchaseFilter)
         val clearButton = findViewById<Button>(R.id.Btn_FilterClear)
         val defaultColor = clearButton.backgroundTintList
-        findViewById<TextView>(R.id.TV_SelectedText).visibility = View.GONE
+        val selectedTextView = findViewById<TextView>(R.id.TV_SelectedText)
+        selectedTextView.visibility = View.GONE
 
-        val filterList = listOf("None","Balance","Name ASC","Name DESC","Customer Name","Phone Number")
-        val spinneradapter = ArrayAdapter(this,android.R.layout.simple_spinner_item, filterList)
-        spinneradapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        filterDropdown.adapter = spinneradapter
-        var selectedFilter = "None"
+        val filterMap = mapOf(
+            getString(R.string.filter_none) to FilterType.NONE,
+            getString(R.string.filter_balance) to FilterType.BALANCE,
+            getString(R.string.filter_name_asc) to FilterType.NAME_ASC,
+            getString(R.string.filter_name_desc) to FilterType.NAME_DESC,
+            getString(R.string.filter_customer_name) to FilterType.CUSTOMER_NAME,
+            getString(R.string.filter_phone_number) to FilterType.PHONE_NUMBER
+        )
+
+        val filterList = filterMap.keys.toList()
+        val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, filterList)
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        filterDropdown.adapter = spinnerAdapter
 
         filterDropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, p1: View, position: Int, id: Long) {
-                selectedFilter = parent.getItemAtPosition(position).toString()
-                if (selectedFilter != "None") {
+            override fun onItemSelected(parent: AdapterView<*>, p1: View?, position: Int, id: Long) {
+                val selectedLabel = parent.getItemAtPosition(position).toString()
+                val selectedFilter = filterMap[selectedLabel] ?: FilterType.NONE
+
+                if (selectedFilter != FilterType.NONE) {
                     clearButton.visibility = View.VISIBLE
-                    clearButton.backgroundTintList=ColorStateList.valueOf(Color.RED)
+                    clearButton.backgroundTintList = ColorStateList.valueOf(Color.RED)
+
                     when (selectedFilter) {
-                        "Balance" -> {
+                        FilterType.BALANCE -> {
                             lifecycleScope.launch {
-                                val customer = dao.getAllCustomersSortByBalance()
-                                adapter.updateData(customer)
+                                val customers = dao.getAllCustomersSortByBalance()
+                                adapter.updateData(customers)
                             }
                         }
-                        "Name ASC" -> {
+                        FilterType.NAME_ASC -> {
                             lifecycleScope.launch {
-                                val customer = dao.getAllCustomerSortByNameAsc()
-                                adapter.updateData(customer)
+                                val customers = dao.getAllCustomerSortByNameAsc()
+                                adapter.updateData(customers)
                             }
                         }
-                        "Name DESC" -> {
+                        FilterType.NAME_DESC -> {
                             lifecycleScope.launch {
-                                val customer = dao.getAllCustomerSortByNameDesc()
-                                adapter.updateData(customer)
+                                val customers = dao.getAllCustomerSortByNameDesc()
+                                adapter.updateData(customers)
                             }
                         }
-                        "Customer Name" -> {
+                        FilterType.CUSTOMER_NAME -> {
                             showCustomerNameFilterDialog()
                         }
-                        "Phone Number" -> {
+                        FilterType.PHONE_NUMBER -> {
                             showCustomerPhoneNoDialog()
                         }
+                        else -> {}
                     }
                 } else {
                     clearButton.visibility = View.GONE
                 }
             }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                selectedFilter = "None"
-                clearButton.visibility = View.GONE
-            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
+
         clearButton.setOnClickListener {
-            clearButton.backgroundTintList=defaultColor
-            filterDropdown.setSelection(0) // Reset to "None"
-            findViewById<TextView>(R.id.TV_SelectedText).visibility = View.GONE
+            clearButton.backgroundTintList = defaultColor
+            filterDropdown.setSelection(0)
+            selectedTextView.visibility = View.GONE
             lifecycleScope.launch {
-                val allData = dao.getAllCustomer()
-                adapter.updateData(allData)
+                val allCustomers = dao.getAllCustomer()
+                adapter.updateData(allCustomers)
             }
         }
     }

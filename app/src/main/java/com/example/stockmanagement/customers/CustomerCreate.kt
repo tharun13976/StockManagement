@@ -86,7 +86,7 @@ class CustomerCreate : AppCompatActivity() {
 
                 val confirmed = dataFetcher.showConfirmationDialog(
                     context = this@CustomerCreate,
-                    message = "Are you sure you want to save this customer?"
+                    message = getString(R.string.customer_save_conformation)
                 )
                 if (!confirmed) return@launch
 
@@ -100,7 +100,7 @@ class CustomerCreate : AppCompatActivity() {
                 )
                 dao.insertCustomer(customer)
                 Log.d("INSERT", "Customer inserted")
-                Toast.makeText(this@CustomerCreate, "Contact is Saved", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@CustomerCreate, getString(R.string.customer_saved), Toast.LENGTH_LONG).show()
                 finish()
             }
         }
@@ -120,12 +120,12 @@ class CustomerCreate : AppCompatActivity() {
         dataFetcher: GetListOfData
     ): String? {
         return when {
-            dataFetcher.doesCustomerExist(customerName) -> "Already we have a Customer with Same Name so Change name"
-            customerName.isEmpty() -> "Customer name is required"
-            customerName.length < 5 -> "Customer name should be more than 4 letters"
-            address.isEmpty() -> "Address is required"
-            phone.isEmpty() -> "Phone number is required"
-            phone.length != 10 -> "Phone number is not proper"
+            dataFetcher.doesCustomerExist(customerName) -> getString(R.string.customer_same_name_alert)
+            customerName.isEmpty() -> getString(R.string.customer_name_required)
+            customerName.length < 5 -> getString(R.string.customer_name_length)
+            address.isEmpty() -> getString(R.string.customer_address_required)
+            phone.isEmpty() -> getString(R.string.customer_phone_required)
+            phone.length != 10 -> getString(R.string.customer_phone_length)
             else -> null
         }
     }
