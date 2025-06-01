@@ -1,7 +1,6 @@
 package com.example.stockmanagement.purchases
 
 import android.annotation.SuppressLint
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -23,7 +22,6 @@ import com.example.stockmanagement.GetListOfData
 import com.example.stockmanagement.ManagementDao
 import com.example.stockmanagement.ManagementDatabase
 import com.example.stockmanagement.R
-import com.example.stockmanagement.products.ProductList
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -143,32 +141,27 @@ class PurchaseList : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun showDateFilterDialog() {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        GetListOfData.showDatePicker1(this, onDateSelected = { selectedDate ->
+            val startOfDay = java.sql.Date(selectedDate.time)
 
-        val dateSetListener = DatePickerDialog.OnDateSetListener { _, selectedYear, selectedMonth, selectedDay ->
-            val selectedCalendar = Calendar.getInstance().apply {
-                set(selectedYear, selectedMonth, selectedDay, 0, 0, 0)
-                set(Calendar.MILLISECOND, 0)
-            }
-            val startOfDay = java.sql.Date(selectedCalendar.timeInMillis)
-            selectedCalendar.add(Calendar.DAY_OF_MONTH, 1)
+            val selectedText = findViewById<TextView>(R.id.TV_SelectedText)
+            selectedText.text = "${getString(R.string.filter_sale_popup_entered_date)}: ${
+                SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(startOfDay)
+            }"
+            selectedText.visibility = View.VISIBLE
 
             lifecycleScope.launch {
                 showClearButton()
                 val purchases = dao.getPurchasesByDate(startOfDay)
+                adapter.updateData(purchases.reversed())
                 if (purchases.isNotEmpty()) {
-                    adapter.updateData(purchases.reversed())
                     selectedTextView.text = "${getString(R.string.filter_purchase_popup_entered_date)}: ${SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(startOfDay)}"
                 } else {
                     selectedTextView.text = "${getString(R.string.filter_purchase_popup_result_date)} ${SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(startOfDay)}"
                 }
                 selectedTextView.visibility = View.VISIBLE
             }
-        }
-        DatePickerDialog(this, dateSetListener, year, month, day).show()
+        })
     }
 
     @SuppressLint("SetTextI18n")
@@ -188,6 +181,7 @@ class PurchaseList : AppCompatActivity() {
                         adapter.updateData(listOf(result))
                         selectedTextView.text = "${getString(R.string.filter_purchase_popup_entered_id)}: $enteredId"
                     } else {
+                        adapter.updateData(emptyList())
                         selectedTextView.text = "${getString(R.string.filter_purchase_popup_result_Id)} $enteredId"
                     }
                     selectedTextView.visibility = View.VISIBLE
@@ -211,8 +205,8 @@ class PurchaseList : AppCompatActivity() {
             lifecycleScope.launch {
                 showClearButton()
                 val list = dao.getPurchaseforProduct(name)
+                adapter.updateData(list.reversed())
                 if (list.isNotEmpty()) {
-                    adapter.updateData(list.reversed())
                     selectedTextView.text = "${getString(R.string.filter_purchase_popup_entered_product)}: $name"
                 } else {
                     selectedTextView.text = "${getString(R.string.filter_purchase_popup_result_name)} $name"

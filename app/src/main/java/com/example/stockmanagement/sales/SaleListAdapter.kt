@@ -41,7 +41,7 @@ class SaleListAdapter(
             amountgiven.text = "Rs. " + NumberFormat.getNumberInstance(Locale("en", "IN")).format(sale.amountgiven)
             amountonly.text = if (sale.amountonly) "Yes" else "No"
             saleDate.text = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(sale.salesdate)
-            salePurchaseId.text = sale.purchaseid?.toString() ?: "N/A"
+            salePurchaseId.text = if(!sale.purchaseid.toString().equals(0)) sale.purchaseid?.toString() else "N/A"
 
             itemView.setOnClickListener {
                 onItemClick(sale)

@@ -1,7 +1,6 @@
 package com.example.stockmanagement.sales
 
 import android.annotation.SuppressLint
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -32,7 +31,6 @@ import com.example.stockmanagement.R
 import com.example.stockmanagement.products.ProductList
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Locale
 
 class SaleList : AppCompatActivity() {
@@ -242,28 +240,20 @@ class SaleList : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun showDateFilterDialog() {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        GetListOfData.showDatePicker1(this, onDateSelected = { selectedDate ->
+            val sqlDate = java.sql.Date(selectedDate.time)
 
-        val dateSetListener = DatePickerDialog.OnDateSetListener { _, selectedYear, selectedMonth, selectedDay ->
-            val selectedCalendar = Calendar.getInstance().apply {
-                set(selectedYear, selectedMonth, selectedDay, 0, 0, 0)
-                set(Calendar.MILLISECOND, 0)
-            }
-            val startOfDay = java.sql.Date(selectedCalendar.timeInMillis)
-            selectedCalendar.add(Calendar.DAY_OF_MONTH, 1)
             val selectedText = findViewById<TextView>(R.id.TV_SelectedText)
-            selectedText.text = "${getString(R.string.filter_sale_popup_entered_date)}: ${SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(startOfDay)}"
+            selectedText.text = "${getString(R.string.filter_sale_popup_entered_date)}: ${
+                SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(sqlDate)
+            }"
             selectedText.visibility = View.VISIBLE
 
             lifecycleScope.launch {
-                val result = dao.getSalesByDate(startOfDay)
+                val result = dao.getSalesByDate(sqlDate)
                 adapter.updateData(result)
             }
-        }
-        DatePickerDialog(this, dateSetListener, year, month, day).show()
+        })
     }
 
     private fun showInputDialog(

@@ -141,5 +141,38 @@ class GetListOfData(context: Context, private val lifecycleOwner: LifecycleOwner
 
             picker.show((context as AppCompatActivity).supportFragmentManager, "MATERIAL_DATE_PICKER")
         }
+
+        fun showDatePicker1(
+            context: Context,
+            onDateSelected: (Date) -> Unit,
+            format: String = "dd-MM-yyyy"
+        ) {
+            val dateFormat = SimpleDateFormat(format, Locale.getDefault())
+
+            val currentDate = try {
+                MaterialDatePicker.todayInUtcMilliseconds()
+            } catch (e: Exception) {
+                MaterialDatePicker.todayInUtcMilliseconds()
+            }
+
+            val picker = MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Select Date")
+                .setSelection(currentDate)
+                .build()
+
+            picker.addOnPositiveButtonClickListener { selectedDateInMillis ->
+                val calendar = Calendar.getInstance().apply {
+                    timeInMillis = selectedDateInMillis
+                    set(Calendar.HOUR_OF_DAY, 0)
+                    set(Calendar.MINUTE, 0)
+                    set(Calendar.SECOND, 0)
+                    set(Calendar.MILLISECOND, 0)
+                }
+                onDateSelected(calendar.time)
+            }
+
+            picker.show((context as AppCompatActivity).supportFragmentManager, "MATERIAL_DATE_PICKER")
+        }
     }
+
 }

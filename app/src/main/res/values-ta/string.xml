@@ -206,7 +206,7 @@
     <string name="filter_sale_none">எதுவும் இல்லை</string>
     <string name="filter_sale_product_name">விளைபொருள் பெயர்</string>
     <string name="filter_sale_customer_name">வாடிக்கையாளர் பெயர்</string>
-    <string name="filter_sale_purchase_id">கொள்முதல் ஐடி</string>
+    <string name="filter_sale_purchase_id">கொள்முதல் ID</string>
     <string name="filter_sale_amount_only">தொகை மட்டும்</string>
     <string name="filter_sale_customer_amount_only">வாடிக்கையாளர் தொகை மட்டும்</string>
     <string name="filter_sale_created_date">உருவாக்கப்பட்ட தேதி</string>
