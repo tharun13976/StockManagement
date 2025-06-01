@@ -61,9 +61,9 @@ class MainActivity : AppCompatActivity() {
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = when (position) {
-                0 -> "Product Stats"
-                1 -> "Create Record"
-                2 -> "Record List"
+                0 -> getString(R.string.tab_product)
+                1 -> getString(R.string.tab_create_record)
+                2 ->getString(R.string.tab_record_list)
                 else -> ""
             }
         }.attach()

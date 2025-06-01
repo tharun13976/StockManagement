@@ -72,7 +72,7 @@ class CustomerEdit : AppCompatActivity() {
 
                 val confirmed = dataFetcher.showConfirmationDialog(
                     context = this@CustomerEdit,
-                    message = getString(R.string.customer_save_conformation)
+                    message = getString(R.string.customer_update_conformation)
                 )
                 if (!confirmed) return@launch
 

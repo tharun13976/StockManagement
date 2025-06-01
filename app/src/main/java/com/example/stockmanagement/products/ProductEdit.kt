@@ -60,7 +60,7 @@ class ProductEdit : AppCompatActivity() {
             }
         }
 
-        val measurementunits = listOf("None","Kg", "Liter", "Bag", "Nos.")
+        val measurementunits = listOf("Kg", "Liter", "Bag", "Nos.")
         val adapter = ArrayAdapter(this,android.R.layout.simple_spinner_item, measurementunits)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         measurementtype.adapter = adapter

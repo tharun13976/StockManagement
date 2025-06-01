@@ -38,14 +38,13 @@ class ImportActivity : AppCompatActivity() {
         ActivityResultContracts.OpenDocument()
     ) { uri: Uri? ->
         if (uri == null) {
-            showAlert("No File Selected", "Please choose a valid ZIP file.")
+            showAlert(getString(R.string.import_no_file), getString(R.string.import_no_file_error))
             return@registerForActivityResult
         }
-
         contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
 
         if (!isZipFile(uri)) {
-            showAlert("Invalid File", "Please select a ZIP file.")
+            showAlert(getString(R.string.import_no_file), getString(R.string.import_invalid_file_error))
             return@registerForActivityResult
         }
 
@@ -53,11 +52,12 @@ class ImportActivity : AppCompatActivity() {
             try {
                 contentResolver.openInputStream(uri)?.use { inputStream ->
                     val byteArray = inputStream.readBytes()
+
                     processZipFile(byteArray.inputStream())
-                } ?: showAlert("Error", "Unable to read the selected file.")
+                } ?: showAlert(getString(R.string.import_title_error), getString(R.string.import_unable_to_read))
             } catch (e: Exception) {
                 Log.e("SAF", "File read error: ${e.message}")
-                showAlert("Error", "Failed to import ZIP: ${e.localizedMessage}")
+                showAlert("Error", "${getString(R.string.import_Failed_to_import)}: ${e.localizedMessage}")
             }
         }
     }
@@ -169,7 +169,7 @@ class ImportActivity : AppCompatActivity() {
 
             withContext(Dispatchers.Main) {
                 loadingOverlay.visibility = View.GONE
-                Toast.makeText(this@ImportActivity, "Data imported successfully!", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@ImportActivity, getString(R.string.import_success), Toast.LENGTH_LONG).show()
             }
         }
     }

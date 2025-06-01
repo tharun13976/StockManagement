@@ -12,30 +12,45 @@
     <string name="none">எதுவும் இல்லை</string>
     <string name="zero">0</string>
     <string name="date_sample">00–00–0000</string>
-    <string name="clear">தெளிவு</string>
+    <string name="clear">"நீக்கு"</string>
     <string name="rs_0">ரூ. 0</string>
-    <string name="purchase">கொள்முதல்</string>
-    <string name="sale">விற்பனை</string>
-    <string name="product">பொருள்</string>
-    <string name="customer">வாடிக்கையாளர்</string>
+    <string name="purchase">புதிய கொள்முதலை உருவாக்க</string>
+    <string name="sale">புதிய விற்பனையை உருவாக்க</string>
+    <string name="product">புதிய விளைபொருள் உருவாக்க</string>
+    <string name="customer">புதிய வாடிக்கையாளரை உருவாக்க</string>
     <string name="menu">மெனு</string>
     <string name="back">பின்னால்</string>
     <string name="id">அடையாளம்</string>
     <string name="date_format">நாள்-மாதம்-வருடம்</string>
     <string name="popup_save">சேமிக்கவும்</string>
     <string name="popup_cancel">ரத்துசெய்</string>
+    <string name="popup_apply">உள்ளீடு</string>
     <string name="popup_title">செயலை உறுதிப்படுத்து</string>
+    <string name="tab_product">விளைபொருள்கள் புள்ளிவிவரங்கள்</string>
+    <string name="tab_create_record">புதிய பதிவை உருவாக்க</string>
+    <string name="tab_record_list">பதிவுகள் பட்டியலைப் பார்க்க</string>
+    <string name="filter_popup_Enter_Here">இங்கே உள்ளிடவும்</string>
 
     <!--    Import and Backup-->
     <string name="import_data">தரவை இறக்குமதி செய்க</string>
     <string name="import_data_from_zip">ZIP இலிருந்து தரவை இறக்குமதி செய்க</string>
-    <string name="backup_page">முகப்பு காப்பு</string>
     <string name="enter_the_password_to_backup">காப்புப் பதிவுக்கு கடவுச்சொல்லை உள்ளிடுக:-</string>
     <string name="entre_here">இங்கே உள்ளிடவும்…</string>
     <string name="proceed">தொடர்க</string>
     <string name="click_to_backup">காப்பு எடுக்க கிளிக் செய்க:-</string>
-    <string name="backup">காப்பு</string>
+    <string name="backup">ஏற்றுமதி</string>
+    <string name="backup_page">முகப்பு ஏற்றுமதி</string>
     <string name="imports">இறக்குமதி</string>
+    <string name="import_no_file">கோப்பு தேர்ந்தெடுக்கப்படவில்லை</string>
+    <string name="import_no_file_error">தயவுசெய்து சரியான ZIP கோப்பை தேர்ந்தெடுக்கவும்</string>
+    <string name="import_invalid_file">தவறான கோப்பு</string>
+    <string name="import_invalid_file_error">தயவுசெய்து ZIP கோப்பை தேர்ந்தெடுக்கவும்</string>
+    <string name="import_title_error">பிழை</string>
+    <string name="import_unable_to_read">தேர்ந்தெடுத்த கோப்பை வாசிக்க முடியவில்லை</string>
+    <string name="import_Failed_to_import">ZIP இறக்குமதி செய்ய முடியவில்லை</string>
+    <string name="import_success">தரவு வெற்றிகரமாக இறக்குமதி செய்யப்பட்டது!</string>
+    <string name="backup_success">கைமுறை ஏற்றுமதி வெற்றிகரமாக முடிந்தது!</string>
+    <string name="backup_failed">கைமுறை ஏற்றுமதி தோல்வியடைந்தது!</string>
 
     <!--    Dashboard-->
     <string name="dash_product_name">பொருளின் பெயர்</string>
@@ -57,6 +72,7 @@
     <string name="edit_the_customer_details">வாடிக்கையாளர் விவரங்களைத் திருத்துக</string>
     <string name="customer_list">வாடிக்கையாளர் பட்டியல்</string>
     <string name="customer_same_name_alert">ஏற்கனவே அதே பெயரில் ஒரு வாடிக்கையாளர் இருக்கிறார், எனவே பெயரை மாற்றவும்</string>
+    <string name="customer_update_conformation">இந்த வாடிக்கையாளர் விவரங்களைப் புதுப்பிக்க விரும்புகிறீர்களா?</string>
     <string name="customer_name_required">வாடிக்கையாளர் பெயர் அவசியம்</string>
     <string name="customer_name_length">வாடிக்கையாளர் பெயர் 4 எழுத்துக்களுக்கு மேல் இருக்க வேண்டும்</string>
     <string name="customer_address_required">முகவரி அவசியம்</string>
@@ -68,32 +84,56 @@
     <string name="customer_updated">வாடிக்கையாளர் பதிவு புதுப்பிக்கப்பட்டது</string>
 
 
-    <string name="filter_none">எதுவுமில்லை</string>
-    <string name="filter_balance">சமநிலை</string>
-    <string name="filter_name_asc">பெயர் ஏறுவரிசை</string>
-    <string name="filter_name_desc">பெயர் இறங்குவரிசை</string>
+    <string name="filter_customer_none">எதுவுமில்லை</string>
+    <string name="filter_customer_balance">சமநிலை</string>
+    <string name="filter_customer_name_asc">பெயர் ஏறுவரிசை</string>
+    <string name="filter_customer_name_desc">பெயர் இறங்குவரிசை</string>
     <string name="filter_customer_name">வாடிக்கையாளர் பெயர்</string>
-    <string name="filter_phone_number">தொலைபேசி எண்</string>
+    <string name="filter_customer_phone_number">தொலைபேசி எண்</string>
+    <string name="filter_customer_popup_enter_name">வாடிக்கையாளர் பெயரை உள்ளிடவும்</string>
+    <string name="filter_customer_popup_enter_phone">தொலைபேசி எண்ணை உள்ளிடவும்</string>
+    <string name="filter_customer_popup_entered_customer">உள்ளிடப்பட்ட பெயர்</string>
+    <string name="filter_customer_popup_entered_phone">உள்ளிடப்பட்ட தொலைபேசி எண்</string>
+    <string name="filter_customer_popup_phone_validation">2 இலக்கங்களுக்கு மேல் தொலைபேசி எண்ணை உள்ளிடவும்</string>
+    <string name="filter_result_customer">வாடிக்கையாளர் பதிவு கிடைக்கவில்லை</string>
 
     <!--    Product Module-->
     <string name="product_measurement_unit">அளவீட்டு அலகு</string>
     <string name="product_started_date">தொடங்கிய தேதி</string>
-    <string name="product_name_hint">பொருள் பெயரை உள்ளிடவும்</string>
+    <string name="product_name_hint">விளைபொருள் பெயரை உள்ளிடவும்</string>
     <string name="save_product">பொருளை சேமிக்கவும்</string>
-    <string name="product_creation">பொருள் உருவாக்கம்</string>
-    <string name="product_editing">பொருள் திருத்தம்</string>
-    <string name="sample_product_name">பொருள் பெயர்</string>
-    <string name="product_list">பொருள் பட்டியல்</string>
-    <string name="product_details">பொருள் விவரங்கள்</string>
-    <string name="product_id">பொருள் ID</string>
-    <string name="product_stock_count">பொருள் அலகுகள்</string>
+    <string name="product_creation">விளைபொருள் உருவாக்கம்</string>
+    <string name="product_editing">விளைபொருள் திருத்தம்</string>
+    <string name="sample_product_name">விளைபொருள் பெயர்</string>
+    <string name="product_list">விளைபொருள் பட்டியல்</string>
+    <string name="product_details">விளைபொருள் விவரங்கள்</string>
+    <string name="product_id">விளைபொருள் ID</string>
+    <string name="product_stock_count">விளைபொருள் அலகுகள்</string>
     <string name="product_latest_price">சமீபத்திய விலை</string>
-    <string name="edit_the_product_details">பொருள் விவரங்களைத் திருத்துக</string>
+    <string name="edit_the_product_details">விளைபொருள் விவரங்களைத் திருத்துக</string>
+    <string name="product_mes_none">எதுவுமில்லை</string>
+    <string name="product_same_name_alert">ஏற்கனவே அதே பெயரில் ஒரு விளைபொருள் உள்ளது, எனவே விளைபொருள் பெயரை மாற்றவும்</string>
+    <string name="product_name_required">விளைபொருள் பெயர் தேவை</string>
+    <string name="product_mes_required">அளவீட்டு அலகு தேவை</string>
+    <string name="product_start_date_required">விளைபொருள் தொடக்க தேதி அவசியம்.</string>
+    <string name="product_saved">விளைபொருள் பதிவு சேமிக்கப்பட்டது</string>
+    <string name="product_save_conformation">இந்த விளைபொருள் விவரங்களை நீங்கள் நிச்சயமாக சேமிக்க விரும்புகிறீர்களா?</string>
+    <string name="product_update_conformation">இந்த தயாரிப்பு விவரங்களைப் புதுப்பிக்க விரும்புகிறீர்களா?</string>
+
+    <string name="filter_Product_none">எதுவுமில்லை</string>
+    <string name="filter_Product_name_asc">பெயர் ஏறுவரிசை</string>
+    <string name="filter_product_name_desc">பெயர் இறங்குவரிசை</string>
+    <string name="filter_product_name">விளைபொருள் பெயர்</string>
+    <string name="filter_product_stock_available">இருப்பு உள்ள விளைபொருள்கள்</string>
+    <string name="filter_product_stock_unavailable">இருப்பு இல்லாத விளைபொருள்கள்"</string>
+    <string name="filter_product_popup_enter_name">விளைபொருள் பெயரை உள்ளிடவும்</string>
+    <string name="filter_product_popup_entered_name">உள்ளிடப்பட்ட பெயர்</string>
+    <string name="filter_result_product">விளைபொருள் பதிவு கிடைக்கவில்லை</string>
 
     <!--    Purchase Module-->
     <string name="purchase_creation">கொள்முதல் உருவாக்கம்</string>
-    <string name="product_name">பொருள் பெயர்</string>
-    <string name="enter_the_product_name">பொருள் பெயரை உள்ளிடவும்</string>
+    <string name="product_name">விளைபொருள் பெயர்</string>
+    <string name="enter_the_product_name">விளைபொருள் பெயரை உள்ளிடவும்</string>
     <string name="purchase_stock_added_date">பங்கு சேர்க்கப்பட்ட தேதி</string>
     <string name="purchase_cost_per_unit_rs">ஒவ்வொரு அலகுக்கும் செலவு (ரூ.)</string>
     <string name="purchase_cost_per_unit_hint">ஒவ்வொரு அலகிற்கும் செலவை உள்ளிடவும்</string>
@@ -106,12 +146,35 @@
     <string name="purchase_cost_per_unit">ஒவ்வொரு அலகுக்கும் செலவு</string>
     <string name="purchased_count">கொள்முதல் செய்யப்பட்ட அலகுகள்</string>
     <string name="purchase_available_count">இருக்கும் அலகுகள்</string>
+    <string name="purchase_product_name_required">விளைபொருள் பெயர் அவசியம்</string>
+    <string name="purchase_product_not_found">விளைபொருள் காணப்படவில்லை</string>
+    <string name="purchase_added_date_required">பங்கு சேர்க்கப்பட்ட தேதி அவசியம்</string>
+    <string name="purchase_stock_count">விளைபொருள் எண்ணிக்கை 0-இற்கும் மேற்பாக இருக்க வேண்டும்</string>
+    <string name="purchase_stockprice_required">பங்கு விலை அவசியம்</string>
+    <string name="purchase_conformation">இந்த கொள்முதல் பதிவை சேமிக்க விரும்புகிறீர்களா?
+        \n\nகுறிப்பு: இந்த கொள்முதல் பதிவை திருத்த அல்லது நீக்க முடியாது</string>
+    <string name="purchase_saved">கொள்முதல் பதிவு சேமிக்கப்பட்டது</string>
+
+    <string name="filter_purchase_none">எதுவுமில்லை</string>
+    <string name="filter_purchase_product_name">விளைபொருள் பெயர்</string>
+    <string name="filter_purchase_product_available">இருக்கும்</string>
+    <string name="filter_purchase_id">கொள்முதல் ID</string>
+    <string name="filter_purchase_created_date">உருவாக்கப்பட்ட தேதி</string>
+    <string name="filter_purchase_popup_enter_product_name">விளைபொருள் பெயரை உள்ளிடவும்</string>
+    <string name="filter_purchase_popup_enter_id">கொள்முதல் ID உள்ளிடவும்</string>
+    <string name="filter_purchase_popup_entered_product">உள்ளிடப்பட்ட பெயர்</string>
+    <string name="filter_purchase_popup_entered_id">உள்ளிடப்பட்ட ID</string>
+    <string name="filter_purchase_popup_entered_date">உள்ளிடப்பட்ட தேதி</string>
+    <string name="filter_purchase_popup_result_date">கொடுக்கப்பட்ட தேதியில் எந்தக் கொள்முதலும் கிடைக்கவில்லை</string>
+    <string name="filter_purchase_popup_result_Id">அந்த ID எந்தக் கொள்முதலும் கிடைக்கவில்லை</string>
+    <string name="filter_purchase_popup_result_name">அந்த பெயருள்ள விளைபொருளுக்கு எந்தக் கொள்முதலும் கிடைக்கவில்லை</string>
+
 
     <!--    Sale Module-->
     <string name="sale_creation">விற்பனை உருவாக்கம்</string>
     <string name="customer_name">வாடிக்கையாளர் பெயர்</string>
     <string name="sale_date_of_sale">விற்பனை தேதி</string>
-    <string name="sale_product_count">பொருள் அலகுகள்</string>
+    <string name="sale_product_count">விளைபொருள் அலகுகள்</string>
     <string name="sale_enter_the_count_hint">அலகுகளின் எண்ணிக்கையை உள்ளிடவும்</string>
     <string name="sale_amount_given_rs">கொடுக்கப்பட்ட தொகை (ரூ.)</string>
     <string name="save_the_sales_record">விற்பனை பதிவை சேமிக்கவும்</string>
@@ -128,4 +191,32 @@
     <string name="product_list_stock_count">பங்கு அலகுகள்</string>
     <string name="sale_date">விற்பனை தேதி</string>
     <string name="language">மொழி</string>
+    <string name="sale_product_update_error">பங்கு புதுப்பிப்பின் போது எதிர்பாராத பிழை</string>
+    <string name="sale_conformantion">இந்த விற்பனை பதிவை நீங்கள் நிச்சயமாக சேமிக்க
+        விரும்புகிறீர்களா \n\nகுறிப்பு: விற்பனை பதிவைத் திருத்தவோ நீக்கவோ முடியவில்லை.</string>
+    <string name="sale_saved">விற்பனைப் பதிவு சேமிக்கப்பட்டது</string>
+    <string name="sale_customer_not_found">உள்ளிட்ட வாடிக்கையாளர் கிடைக்கவில்லை</string>
+    <string name="sale_product_not_found">உள்ளிட்ட விளைபொருள் கிடைக்கவில்லை</string>
+    <string name="sale_date_required">விற்பனை தேதி அவசியம்</string>
+    <string name="sale_product_count_error">விளைபொருள் எண்ணிக்கை 0-ஐ விட அதிகமாக இருக்க வேண்டும்</string>
+    <string name="sale_amount_only_error">கொடுக்கப்பட்ட தொகை அவசியம்</string>
+    <string name="sale_product_entred_count">விளைபொருள் எண்ணிக்கையை உள்ளிடவும்</string>
+    <string name="sale_product_out_of_stock">விளைபொருள் பங்கு முடிந்துள்ளது அல்லது காணப்படவில்லை</string>
+
+    <string name="filter_sale_none">எதுவும் இல்லை</string>
+    <string name="filter_sale_product_name">விளைபொருள் பெயர்</string>
+    <string name="filter_sale_customer_name">வாடிக்கையாளர் பெயர்</string>
+    <string name="filter_sale_purchase_id">கொள்முதல் ஐடி</string>
+    <string name="filter_sale_amount_only">தொகை மட்டும்</string>
+    <string name="filter_sale_customer_amount_only">வாடிக்கையாளர் தொகை மட்டும்</string>
+    <string name="filter_sale_created_date">உருவாக்கப்பட்ட தேதி</string>
+    <string name="filter_sale_popup_enter_product_name">விளைபொருள் பெயரை உள்ளிடவும்</string>
+    <string name="filter_sale_popup_enter_Customer_name">வாடிக்கையாளர் பெயரை உள்ளிடவும்</string>
+    <string name="filter_sale_popup_enter_purchase_id">கொள்முதல் ஐடியை உள்ளிடவும்</string>
+    <string name="filter_sale_popup_entered_product">உள்ளிடப்பட்ட விளைபொருள்</string>
+    <string name="filter_sale_popup_entered_customer">உள்ளிடப்பட்ட வாடிக்கையாளர்</string>
+    <string name="filter_sale_popup_entered_id">உள்ளிடப்பட்ட ஐடி</string>
+    <string name="filter_sale_popup_entered_date">உள்ளிடப்பட்ட தேதி</string>
+
+
 </resources>

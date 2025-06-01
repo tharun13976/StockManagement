@@ -13,17 +13,22 @@
     <string name="date_sample">00–00–0000</string>
     <string name="clear">Clear</string>
     <string name="rs_0">Rs. 0</string>
-    <string name="purchase">Purchase</string>
-    <string name="sale">Sale</string>
-    <string name="product">Product</string>
-    <string name="customer">Customer</string>
+    <string name="purchase">Create a New Purchase</string>
+    <string name="sale">Create a New Sale</string>
+    <string name="product">Create a New Product</string>
+    <string name="customer">Create a New Customer</string>
     <string name="menu">Menu</string>
     <string name="back">Back</string>
     <string name="id">ID</string>
     <string name="date_format">DD-MM-YYYY</string>
     <string name="popup_save">Save</string>
     <string name="popup_cancel">Cancel</string>
+    <string name="popup_apply">Apply</string>
     <string name="popup_title">Confirm Action</string>
+    <string name="tab_product">Product Stats</string>
+    <string name="tab_create_record">Create a New Record</string>
+    <string name="tab_record_list">See Records List</string>
+    <string name="filter_popup_Enter_Here">Enter Here</string>
 
 <!--    Import and Backup-->
     <string name="import_data">Import Data</string>
@@ -35,6 +40,17 @@
     <string name="click_to_backup">Click to Backup:-</string>
     <string name="backup">Backup</string>
     <string name="imports">Import</string>
+    <string name="import_no_file">No File Selected</string>
+    <string name="import_no_file_error">Please choose a valid ZIP file</string>
+    <string name="import_invalid_file">Invalid File</string>
+    <string name="import_invalid_file_error">Please select a ZIP file</string>
+    <string name="import_title_error">Error</string>
+    <string name="import_unable_to_read">Unable to read the selected file</string>
+    <string name="import_Failed_to_import">Failed to import ZIP</string>
+    <string name="import_success">Data imported successfully!</string>
+    <string name="backup_success">Manual backup successful!</string>
+    <string name="backup_failed">Manual backup failed!</string>
+
 
 <!--    Dashboard-->
     <string name="dash_product_name">Product Name</string>
@@ -64,16 +80,25 @@
     <string name="customer_phone_length">Phone number is not proper</string>
     <string name="customer_saved">Customer record Saved</string>
     <string name="customer_save_conformation">Are you sure you want to save this customer details?</string>
+    <string name="customer_update_conformation">Are you sure you want to update this customer
+        details?</string>
     <string name="customer_not_found">Customer name not Found in Records</string>
     <string name="customer_updated">Customer record updated</string>
 
 
-    <string name="filter_none">None</string>
-    <string name="filter_balance">Balance</string>
-    <string name="filter_name_asc">Name ASC</string>
-    <string name="filter_name_desc">Name DESC</string>
+    <string name="filter_customer_none">None</string>
+    <string name="filter_customer_balance">Balance</string>
+    <string name="filter_customer_name_asc">Name ASC</string>
+    <string name="filter_customer_name_desc">Name DESC</string>
     <string name="filter_customer_name">Customer Name</string>
-    <string name="filter_phone_number">Phone Number</string>
+    <string name="filter_customer_phone_number">Phone Number</string>
+    <string name="filter_customer_popup_enter_name">Enter Customer Name</string>
+    <string name="filter_customer_popup_enter_phone">Enter Phone Number</string>
+    <string name="filter_customer_popup_entered_customer">Entered Name</string>
+    <string name="filter_customer_popup_entered_phone">Entered Phone No.</string>
+    <string name="filter_customer_popup_phone_validation">Enter Phone Number more than 2 digit</string>
+    <string name="filter_result_customer">Customer Record Not Found</string>
+
 
 
 <!--    Product Module-->
@@ -90,8 +115,30 @@
     <string name="product_stock_count">Stock Unit(s)</string>
     <string name="product_latest_price">Latest Price</string>
     <string name="edit_the_product_details">Edit the Product Details</string>
+    <string name="product_mes_none">None</string>
+    <string name="product_same_name_alert">Already we have a Product with the Same Name so Change
+       Product name</string>
+    <string name="product_name_required">Product Name Required</string>
+    <string name="product_mes_required">Measurement unit is required</string>
+    <string name="product_start_date_required">Product start Date is required</string>
+    <string name="product_saved">Product record Saved</string>
+    <string name="product_save_conformation">Are you sure you want to save this Product
+        details?</string>
+    <string name="product_update_conformation">Are you sure you want to update this Product
+        details?</string>
 
-<!--    Purchase Module-->
+    <string name="filter_Product_none">None</string>
+    <string name="filter_Product_name_asc">Name ASC</string>
+    <string name="filter_product_name_desc">Name DESC</string>
+    <string name="filter_product_name">Product Name</string>
+    <string name="filter_product_stock_available">Stock Available</string>
+    <string name="filter_product_stock_unavailable">Stock Unavailable</string>
+    <string name="filter_product_popup_enter_name">Enter Product Name</string>
+    <string name="filter_product_popup_entered_name">Entered Name</string>
+    <string name="filter_result_product">Product Record Not Found</string>
+
+
+    <!--    Purchase Module-->
     <string name="purchase_creation">Purchase Creation</string>
     <string name="product_name">Product Name</string>
     <string name="enter_the_product_name">Enter the Product Name</string>
@@ -107,6 +154,28 @@
     <string name="purchase_cost_per_unit">Cost Per Unit</string>
     <string name="purchased_count">Purchased Unit(s)</string>
     <string name="purchase_available_count">Available Unit(s)</string>
+    <string name="purchase_product_name_required">Product name is required</string>
+    <string name="purchase_product_not_found">Product not found</string>
+    <string name="purchase_added_date_required">Stock added Date is required</string>
+    <string name="purchase_stock_count">Product count must be more than 0</string>
+    <string name="purchase_stockprice_required">Stock price is required</string>
+    <string name="purchase_conformation">Are you sure you want to save this Purchase Entry?
+        \n\nNote: Unable to edit or Delete the Purchase record</string>
+    <string name="purchase_saved">Purchase Entry Saved</string>
+
+    <string name="filter_purchase_none">None</string>
+    <string name="filter_purchase_product_name">Product Name</string>
+    <string name="filter_purchase_product_available">Available</string>
+    <string name="filter_purchase_id">Purchase Id</string>
+    <string name="filter_purchase_created_date">Created Date</string>
+    <string name="filter_purchase_popup_enter_product_name">Enter Product Name</string>
+    <string name="filter_purchase_popup_enter_id">Enter Purchase ID</string>
+    <string name="filter_purchase_popup_entered_product">Entered Name</string>
+    <string name="filter_purchase_popup_entered_id">Entered ID</string>
+    <string name="filter_purchase_popup_entered_date">Entered Date</string>
+    <string name="filter_purchase_popup_result_date">No purchase found in given date</string>
+    <string name="filter_purchase_popup_result_Id">No purchase found for ID</string>
+    <string name="filter_purchase_popup_result_name">No purchase found for product named</string>
 
 <!--    Sale Module-->
     <string name="sale_creation">Sale Creation</string>
@@ -129,5 +198,32 @@
     <string name="product_list_stock_count">Stock Unit(s)</string>
     <string name="sale_date">Sale Date</string>
     <string name="language">Language</string>
+    <string name="sale_product_update_error">Unexpected error during stock update</string>
+    <string name="sale_conformantion">Are you sure you want to save this Sales Entry? \n\nNote:
+        Unable to edit or Delete the Sales record</string>
+    <string name="sale_saved">Sale Record Saved</string>
+    <string name="sale_customer_not_found">Entered Customer not Found</string>
+    <string name="sale_product_not_found">Entered Product not found</string>
+    <string name="sale_date_required">Sale Date is required</string>
+    <string name="sale_product_count_error">Product count must be more than 0</string>
+    <string name="sale_amount_only_error">Amount given is required</string>
+    <string name="sale_product_entred_count">Enter product count</string>
+    <string name="sale_product_out_of_stock">Product Out of Stock or Not Found</string>
+
+    <string name="filter_sale_none">None</string>
+    <string name="filter_sale_product_name">Product Name</string>
+    <string name="filter_sale_customer_name">Customer Name</string>
+    <string name="filter_sale_purchase_id">Purchase ID</string>
+    <string name="filter_sale_amount_only">Amount Only</string>
+    <string name="filter_sale_customer_amount_only">Customer\'s Amount only</string>
+    <string name="filter_sale_created_date">Created Date</string>
+    <string name="filter_sale_popup_enter_product_name">Enter Product Name</string>
+    <string name="filter_sale_popup_enter_Customer_name">Enter Customer Name</string>
+    <string name="filter_sale_popup_enter_purchase_id">Enter Purchase ID</string>
+    <string name="filter_sale_popup_entered_product">Entered Product</string>
+    <string name="filter_sale_popup_entered_customer">Entered Customer</string>
+    <string name="filter_sale_popup_entered_id">Entered ID</string>
+    <string name="filter_sale_popup_entered_date">Entered Date</string>
+
 
 </resources>

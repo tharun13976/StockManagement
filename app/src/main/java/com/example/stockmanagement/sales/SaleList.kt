@@ -29,6 +29,7 @@ import com.example.stockmanagement.GetListOfData
 import com.example.stockmanagement.ManagementDao
 import com.example.stockmanagement.ManagementDatabase
 import com.example.stockmanagement.R
+import com.example.stockmanagement.products.ProductList
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -39,6 +40,10 @@ class SaleList : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: SaleListAdapter
     private lateinit var dao: ManagementDao
+
+    enum class FilterType {
+        NONE,CUSTOMER_NAME, PRODUCT_NAME, PURCHASE_ID, AMOUNT_ONLY,CUSTOMER_AMOUNT_ONLY,CREATED_DATE
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,9 +81,22 @@ class SaleList : AppCompatActivity() {
         val filterDropdown = findViewById<Spinner>(R.id.Spi_SalesFilter)
         val clearButton = findViewById<Button>(R.id.Btn_FilterClear)
         val defaultColor = clearButton.backgroundTintList
-        findViewById<TextView>(R.id.TV_SelectedText).visibility = View.GONE
+        val selectedTextView = findViewById<TextView>(R.id.TV_SelectedText)
+        selectedTextView.visibility = View.GONE
 
-        val filterList = listOf("None","Customer Name","Product Name","Purchase ID","Amount Only","Customer's Amount only","Created Date")
+        //val filterList = listOf("None","Customer Name","Product Name","Purchase ID","Amount Only","Customer's Amount only","Created Date")
+
+        val filterMap = mapOf(
+            getString(R.string.filter_sale_none) to FilterType.NONE,
+            getString(R.string.filter_sale_product_name) to FilterType.PRODUCT_NAME,
+            getString(R.string.filter_sale_customer_name) to FilterType.CUSTOMER_NAME,
+            getString(R.string.filter_sale_purchase_id) to FilterType.PURCHASE_ID,
+            getString(R.string.filter_sale_amount_only) to FilterType.AMOUNT_ONLY,
+            getString(R.string.filter_sale_customer_amount_only) to FilterType.CUSTOMER_AMOUNT_ONLY,
+            getString(R.string.filter_sale_created_date) to FilterType.CREATED_DATE
+        )
+
+        val filterList = filterMap.keys.toList()
         val spinneradapter = ArrayAdapter(this,android.R.layout.simple_spinner_item, filterList)
         spinneradapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         filterDropdown.adapter = spinneradapter
@@ -87,30 +105,32 @@ class SaleList : AppCompatActivity() {
 
         filterDropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, p1: View, position: Int, id: Long) {
-                selectedFilter = parent.getItemAtPosition(position).toString()
-                if (selectedFilter != "None") {
+                val selectedLabel = parent.getItemAtPosition(position).toString()
+                val selectedFilter = filterMap[selectedLabel] ?: ProductList.FilterType.NONE
+
+                if (selectedFilter != FilterType.NONE) {
                     clearButton.visibility = View.VISIBLE
                     clearButton.backgroundTintList=ColorStateList.valueOf(Color.RED)
                     when (selectedFilter) {
-                        "Customer Name" -> {
+                        FilterType.CUSTOMER_NAME -> {
                             showCustomerNameFilterDialog()
                         }
-                        "Product Name" -> {
+                        FilterType.PRODUCT_NAME -> {
                             showProductNameFilterDialog()
                         }
-                        "Purchase ID" -> {
+                        FilterType.PURCHASE_ID -> {
                             showPurchaseIdDialog()
                         }
-                        "Amount Only"-> {
+                        FilterType.AMOUNT_ONLY -> {
                             lifecycleScope.launch {
                                 val result = dao.getSalesByAmountOnly()
                                 adapter.updateData(result.reversed())
                             }
                         }
-                        "Customer's Amount only" -> {
+                        FilterType.CUSTOMER_AMOUNT_ONLY -> {
                             showCustomerAmountOnlyDialog()
                         }
-                        "Created Date" -> {
+                        FilterType.CREATED_DATE -> {
                             showDateFilterDialog()
                         }
                     }
@@ -126,7 +146,7 @@ class SaleList : AppCompatActivity() {
         clearButton.setOnClickListener {
             clearButton.backgroundTintList=defaultColor
             filterDropdown.setSelection(0) // Reset to "None"
-            findViewById<TextView>(R.id.TV_SelectedText).visibility = View.GONE
+            selectedTextView.visibility = View.GONE
             lifecycleScope.launch {
                 val sales = dao.getAllSales()
                 adapter.updateData(sales.reversed())
@@ -137,7 +157,7 @@ class SaleList : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun showCustomerNameFilterDialog() {
         val input = AutoCompleteTextView(this).apply {
-            hint = "Enter Here"
+            hint = getString(R.string.filter_popup_Enter_Here)
             threshold = 1
         }
 
@@ -145,9 +165,9 @@ class SaleList : AppCompatActivity() {
             input.setAdapter(ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, names))
         }
 
-        showInputDialog("Enter Customer Name", "Enter Here", input) { name ->
+        showInputDialog(getString(R.string.filter_sale_popup_enter_Customer_name), input) { name ->
             val selectedText = findViewById<TextView>(R.id.TV_SelectedText)
-            selectedText.text = "Selected Customer: $name"
+            selectedText.text = "${getString(R.string.filter_sale_popup_entered_customer)}: $name"
             selectedText.visibility = View.VISIBLE
             lifecycleScope.launch {
                 val list = dao.getSalesByCustomerName(name)
@@ -159,7 +179,7 @@ class SaleList : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun showProductNameFilterDialog() {
         val input = AutoCompleteTextView(this).apply {
-            hint = "Enter Here"
+            hint = getString(R.string.filter_popup_Enter_Here)
             threshold = 1
         }
 
@@ -167,9 +187,9 @@ class SaleList : AppCompatActivity() {
             input.setAdapter(ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, names))
         }
 
-        showInputDialog("Enter Product Name", "Enter Here", input) { name ->
+        showInputDialog(getString(R.string.filter_sale_popup_enter_product_name), input) { name ->
             val selectedText = findViewById<TextView>(R.id.TV_SelectedText)
-            selectedText.text = "Selected Product: $name"
+            selectedText.text = "${getString(R.string.filter_sale_popup_entered_product)}: $name"
             selectedText.visibility = View.VISIBLE
             lifecycleScope.launch {
                 val list = dao.getSalesByProductName(name)
@@ -181,17 +201,17 @@ class SaleList : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun showPurchaseIdDialog() {
         val input = EditText(this).apply {
-            hint = "Enter Here"
+            hint = getString(R.string.filter_popup_Enter_Here)
             inputType = TYPE_CLASS_NUMBER
         }
-        showInputDialog("Enter Purchase ID", "Enter Here", input) { text ->
+        showInputDialog(getString(R.string.filter_sale_popup_enter_purchase_id), input) { text ->
             val enteredId = text.toIntOrNull()
             val selectedText = findViewById<TextView>(R.id.TV_SelectedText)
             if (enteredId != null && enteredId > 0) {
                 lifecycleScope.launch {
                     val result = dao.getSalesByPurchaseID(enteredId)
                     adapter.updateData(result.reversed())
-                    selectedText.text = "Selected ID: $enteredId"
+                    selectedText.text = "${getString(R.string.filter_sale_popup_entered_id)}: $enteredId"
                     selectedText.visibility = View.VISIBLE
                 }
             }
@@ -201,7 +221,7 @@ class SaleList : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun showCustomerAmountOnlyDialog() {
         val input = AutoCompleteTextView(this).apply {
-            hint = "Enter Here"
+            hint = getString(R.string.filter_popup_Enter_Here)
             threshold = 1
         }
 
@@ -209,9 +229,9 @@ class SaleList : AppCompatActivity() {
             input.setAdapter(ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, names))
         }
 
-        showInputDialog("Enter Customer Name", "Enter Here", input) { name ->
+        showInputDialog(getString(R.string.filter_sale_popup_enter_Customer_name), input) { name ->
             val selectedText = findViewById<TextView>(R.id.TV_SelectedText)
-            selectedText.text = "Selected Customer: $name"
+            selectedText.text = "${getString(R.string.filter_sale_popup_entered_customer)}: $name"
             selectedText.visibility = View.VISIBLE
             lifecycleScope.launch {
                 val list = dao.getSalesByCustomersAmountOnly(name)
@@ -235,7 +255,7 @@ class SaleList : AppCompatActivity() {
             val startOfDay = java.sql.Date(selectedCalendar.timeInMillis)
             selectedCalendar.add(Calendar.DAY_OF_MONTH, 1)
             val selectedText = findViewById<TextView>(R.id.TV_SelectedText)
-            selectedText.text = "Selected Date: ${SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(startOfDay)}"
+            selectedText.text = "${getString(R.string.filter_sale_popup_entered_date)}: ${SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(startOfDay)}"
             selectedText.visibility = View.VISIBLE
 
             lifecycleScope.launch {
@@ -248,7 +268,6 @@ class SaleList : AppCompatActivity() {
 
     private fun showInputDialog(
         title: String,
-        hint: String,
         inputView: View,
         onApply: (inputText: String) -> Unit
     ) {
@@ -258,7 +277,7 @@ class SaleList : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle(title)
             .setView(inputView)
-            .setPositiveButton("Apply") { dialog, _ ->
+            .setPositiveButton(getString(R.string.popup_apply)) { dialog, _ ->
                 val text = when (inputView) {
                     is EditText -> inputView.text.toString()
                     is AutoCompleteTextView -> inputView.text.toString()
@@ -270,7 +289,7 @@ class SaleList : AppCompatActivity() {
                 }
                 dialog.dismiss()
             }
-            .setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
+            .setNegativeButton(getString(R.string.popup_cancel)) { dialog, _ -> dialog.cancel() }
             .show()
     }
 

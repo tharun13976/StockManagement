@@ -103,7 +103,7 @@ class ManualBackuppage : AppCompatActivity() {
 
             Toast.makeText(
                 this@ManualBackuppage,
-                if (backupSuccess) "Manual backup successful!" else "Manual backup failed!",
+                if (backupSuccess) getString(R.string.backup_success) else getString(R.string.backup_failed),
                 Toast.LENGTH_SHORT
             ).show()
             finish()

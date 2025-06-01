@@ -96,7 +96,7 @@ class PurchaseCreate : AppCompatActivity() {
 
                     val confirmed = dataFetcher.showConfirmationDialog(
                         context = this@PurchaseCreate,
-                        message = "Are you sure you want to save this Purchase Entry?\n Note: Unable to edit or Delete the Purchase record"
+                        message = getString(R.string.purchase_conformation)
                     )
                     if (!confirmed) return@launch
 
@@ -118,7 +118,7 @@ class PurchaseCreate : AppCompatActivity() {
                         dao.updateProduct(productrec)
                     }
                 }
-                Toast.makeText(this@PurchaseCreate, "Purchase Entry Saved", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@PurchaseCreate, getString(R.string.purchase_saved), Toast.LENGTH_LONG).show()
                 finish()
             }
         }
@@ -138,11 +138,11 @@ class PurchaseCreate : AppCompatActivity() {
         dataFetcher: GetListOfData
     ): String? {
         return when {
-            productName.isEmpty() -> "Product name is required"
-            !dataFetcher.doesProductExist(productName) -> "Product not found"
-            stockaddeddate.isEmpty() -> "Stock added Date is required"
-            (stockcount.isEmpty() || stockcount == "0") -> "Product count must be more than 0"
-            stockprice.isEmpty() -> "Stock price is required"
+            productName.isEmpty() -> getString(R.string.purchase_product_name_required)
+            !dataFetcher.doesProductExist(productName) -> getString(R.string.purchase_product_not_found)
+            stockaddeddate.isEmpty() -> getString(R.string.purchase_added_date_required)
+            (stockcount.isEmpty() || stockcount == "0") -> getString(R.string.purchase_stock_count)
+            (stockprice.isEmpty() || stockprice =="0")-> getString(R.string.purchase_stockprice_required)
             else -> null
         }
     }

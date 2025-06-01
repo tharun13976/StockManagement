@@ -63,7 +63,7 @@ class ProductCreate : AppCompatActivity() {
         name.onFocusChangeListener = focusScrollListener
 
 
-        val measurementunits = listOf("None","Kg", "Liter", "Bag", "Nos.")
+        val measurementunits = listOf(getString(R.string.product_mes_none),"Kg", "Liter", "Bag", "Nos.")
         val adapter = ArrayAdapter(this,android.R.layout.simple_spinner_item, measurementunits)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         measurementtype.adapter = adapter
@@ -106,7 +106,7 @@ class ProductCreate : AppCompatActivity() {
 
                 val confirmed = dataFetcher.showConfirmationDialog(
                     context = this@ProductCreate,
-                    message = "Are you sure you want to save this product?"
+                    message = getString(R.string.product_save_conformation)
                 )
                 if (!confirmed) return@launch
 
@@ -120,7 +120,7 @@ class ProductCreate : AppCompatActivity() {
                 )
                 dao.insertProduct(product)
                 Log.d("INSERT", "Product inserted")
-                Toast.makeText(this@ProductCreate, "Product is Saved", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@ProductCreate, getString(R.string.product_saved), Toast.LENGTH_LONG).show()
                 finish()
             }
         }
@@ -139,10 +139,10 @@ class ProductCreate : AppCompatActivity() {
         dataFetcher: GetListOfData
     ): String?{
         return when {
-            dataFetcher.doesProductExist(productName) -> "Already we have a Product with Same Name so Change name"
-            productName.isEmpty() -> "Product name is required"
-            measurementType.equals("None") -> "Measurement unit is required."
-            startDate.isEmpty() -> "Product start Date is required"
+            dataFetcher.doesProductExist(productName) -> getString(R.string.product_same_name_alert)
+            productName.isEmpty() -> getString(R.string.product_name_required)
+            measurementType.equals(getString(R.string.product_mes_none)) -> getString(R.string.product_mes_required)
+            startDate.isEmpty() -> getString(R.string.product_start_date_required)
             else -> null
         }
     }

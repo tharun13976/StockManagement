@@ -34,6 +34,10 @@ class ProductList : AppCompatActivity() {
     private lateinit var adapter: ProductListAdapter
     private lateinit var dao: ManagementDao
 
+    enum class FilterType {
+        NONE,NAME_ASC, NAME_DESC, PRODUCT_NAME, STOCK_AVAILABLE, STOCK_UNAVAILABLE
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -68,93 +72,105 @@ class ProductList : AppCompatActivity() {
         val filterDropdown = findViewById<Spinner>(R.id.Spi_ProductFilter)
         val clearButton = findViewById<Button>(R.id.Btn_FilterClear)
         val defaultColor = clearButton.backgroundTintList
-        findViewById<TextView>(R.id.TV_SelectedText).visibility = View.GONE
+        val selectedTextView = findViewById<TextView>(R.id.TV_SelectedText)
+        selectedTextView.visibility = View.GONE
 
-        val filterList = listOf("None","Name ASC","Name DESC","Product Name","Stock Available","Stock Unavailable")
-        val spinneradapter = ArrayAdapter(this,android.R.layout.simple_spinner_item, filterList)
-        spinneradapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        filterDropdown.adapter = spinneradapter
-        var selectedFilter = "None"
+        val filterMap = mapOf(
+            getString(R.string.filter_Product_none) to FilterType.NONE,
+            getString(R.string.filter_Product_name_asc) to FilterType.NAME_ASC,
+            getString(R.string.filter_product_name_desc) to FilterType.NAME_DESC,
+            getString(R.string.filter_product_name) to FilterType.PRODUCT_NAME,
+            getString(R.string.filter_product_stock_available) to FilterType.STOCK_AVAILABLE,
+            getString(R.string.filter_product_stock_unavailable) to FilterType.STOCK_UNAVAILABLE
+        )
+
+        val filterList = filterMap.keys.toList()
+        val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, filterList)
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        filterDropdown.adapter = spinnerAdapter
 
         filterDropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, p1: View, position: Int, id: Long) {
-                selectedFilter = parent.getItemAtPosition(position).toString()
-                if (selectedFilter != "None") {
+                val selectedLabel = parent.getItemAtPosition(position).toString()
+                val selectedFilter = filterMap[selectedLabel] ?: FilterType.NONE
+
+                if (selectedFilter != FilterType.NONE) {
                     clearButton.visibility = View.VISIBLE
-                    clearButton.backgroundTintList=ColorStateList.valueOf(Color.RED)
+                    clearButton.backgroundTintList = ColorStateList.valueOf(Color.RED)
                     when (selectedFilter) {
-                        "Name ASC" -> {
+                        FilterType.NAME_ASC -> {
                             lifecycleScope.launch {
-                                val product = dao.getAllProductSortByName()
-                                adapter.updateData(product)
+                                val products = dao.getAllProductSortByName()
+                                adapter.updateData(products)
                             }
                         }
-                        "Name DESC" -> {
+                        FilterType.NAME_DESC -> {
                             lifecycleScope.launch {
-                                val product = dao.getAllProductSortByNameDesc()
-                                adapter.updateData(product)
+                                val products = dao.getAllProductSortByNameDesc()
+                                adapter.updateData(products)
                             }
                         }
-                        "Product Name" -> {
+                        FilterType.PRODUCT_NAME -> {
                             showProductNameFilterDialog()
                         }
-                        "Stock Available" -> {
+                        FilterType.STOCK_AVAILABLE -> {
                             lifecycleScope.launch {
-                                val product = dao.getAllProductAvailableSortByCount()
-                                adapter.updateData(product)
+                                val products = dao.getAllProductAvailableSortByCount()
+                                adapter.updateData(products)
                             }
                         }
-                        "Stock Unavailable" -> {
+                        FilterType.STOCK_UNAVAILABLE -> {
                             lifecycleScope.launch {
-                                val product = dao.getAllProductUnavailable()
-                                adapter.updateData(product)
+                                val products = dao.getAllProductUnavailable()
+                                adapter.updateData(products)
                             }
                         }
+                        else -> {}
                     }
-                } else {
+                }else {
                     clearButton.visibility = View.GONE
+                    selectedTextView.visibility = View.GONE
+                    clearButton.backgroundTintList = defaultColor
+                    loadProductList() // or loadPurchaseList()
                 }
             }
-
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                selectedFilter = "None"
                 clearButton.visibility = View.GONE
             }
         }
+
         clearButton.setOnClickListener {
-            clearButton.backgroundTintList=defaultColor
-            filterDropdown.setSelection(0) // Reset to "None"
-            findViewById<TextView>(R.id.TV_SelectedText).visibility = View.GONE
-            lifecycleScope.launch {
-                val allData = dao.getAllProduct()
-                adapter.updateData(allData)
-            }
+            clearButton.backgroundTintList = defaultColor
+            filterDropdown.setSelection(0)
+            selectedTextView.visibility = View.GONE
+            clearButton.visibility = View.GONE
+            loadProductList()
         }
     }
 
     @SuppressLint("SetTextI18n")
     private fun showProductNameFilterDialog() {
         val input = AutoCompleteTextView(this).apply {
-            hint = "Enter Here"
+            hint = getString(R.string.filter_popup_Enter_Here)
             threshold = 1
             val padding = resources.getDimensionPixelSize(R.dimen.dialog_input_padding)
             setPadding(padding, padding, padding, padding)
         }
         AlertDialog.Builder(this)
-            .setTitle("Enter Product Name")
+            .setTitle(getString(R.string.filter_product_popup_enter_name))
             .setView(input)
-            .setPositiveButton("Apply") { dialog, _ ->
+            .setPositiveButton(getString(R.string.popup_apply)) { dialog, _ ->
                 val name = input.text.toString().trim()
                 val selectedText = findViewById<TextView>(R.id.TV_SelectedText)
                 if (name.isNotEmpty()) {
-                    selectedText.text = "Selected Product: $name"
+                    selectedText.text = "${getString(R.string.filter_product_popup_entered_name)}: $name"
                     selectedText.visibility = View.VISIBLE
                     lifecycleScope.launch {
                         val customer= dao.getProductByName(name)
                         if(customer != null){
                             adapter.updateData(listOf(customer))
                         } else{
-                            selectedText.text = "Product Not Found"
+                            selectedText.text = getString(R.string.filter_result_product)
                         }
                     }
                 } else {
@@ -162,7 +178,7 @@ class ProductList : AppCompatActivity() {
                 }
                 dialog.dismiss()
             }
-            .setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
+            .setNegativeButton(getString(R.string.popup_cancel)) { dialog, _ -> dialog.cancel() }
             .show()
         GetListOfData(this, this).getAllProductNames{ names ->
             input.setAdapter(ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, names))

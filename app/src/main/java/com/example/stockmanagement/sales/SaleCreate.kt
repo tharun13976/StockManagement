@@ -168,7 +168,6 @@ class SaleCreate : AppCompatActivity() {
 
                 var purchaseId: Int? = null
                 var cost: Int? = null
-
                 if (!isAmountOnly) {
                     try {
                         purchaserec = dao.getOldestPurchase(selectedProduct)
@@ -190,14 +189,15 @@ class SaleCreate : AppCompatActivity() {
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
-                        Toast.makeText(this@SaleCreate, "Unexpected error during stock update", Toast.LENGTH_LONG).show()
+                        Log.e(error, "onCreate sale record", e)
+                        Toast.makeText(this@SaleCreate, getString(R.string.sale_product_update_error), Toast.LENGTH_LONG).show()
                         return@launch
                     }
                 }
 
                 val confirmed = dataFetcher.showConfirmationDialog(
                     context = this@SaleCreate,
-                    message = "Are you sure you want to save this Sales Entry?\n Note: Unable to edit or Delete the Sales record"
+                    message = getString(R.string.sale_conformantion)
                 )
                 if (!confirmed) return@launch
 
@@ -220,7 +220,7 @@ class SaleCreate : AppCompatActivity() {
 
                 dao.insertSale(sale)
                 Log.d("INSERT", "Sale inserted")
-                Toast.makeText(this@SaleCreate, "Sale Entry Saved", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@SaleCreate,getString(R.string.sale_saved) , Toast.LENGTH_LONG).show()
                 finish()
             }
         }
@@ -242,21 +242,21 @@ class SaleCreate : AppCompatActivity() {
         dataFetcher: GetListOfData
     ): String? {
         return when {
-            !dataFetcher.doesCustomerExist(customerName) -> "Customer not found"
-            !dataFetcher.doesProductExist(productName) && !amountOnly -> "Product not found"
-            saleDate.isEmpty() -> "Sale Date is required"
-            (productCount.isEmpty() || productCount == "0") && !amountOnly -> "Product count must be more than 0"
-            amountGiven.isEmpty() -> "Amount given is required"
+            !dataFetcher.doesCustomerExist(customerName) -> getString(R.string.sale_customer_not_found)
+            !dataFetcher.doesProductExist(productName) && !amountOnly -> getString(R.string.sale_product_not_found)
+            saleDate.isEmpty() -> getString(R.string.sale_date_required)
+            (productCount.isEmpty() || productCount == "0") && !amountOnly -> getString(R.string.sale_product_count_error)
+            amountGiven.isEmpty() -> getString(R.string.sale_amount_only_error)
             else -> null
         }
     }
 
     fun productcountmissmatch(count: String?) {
-        Toast.makeText(this, "Enter product count ≤ $count", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "${getString(R.string.sale_product_entred_count)} ≤ $count", Toast.LENGTH_LONG).show()
     }
 
     fun productoutofstock() {
-        Toast.makeText(this, "Product Out of Stock or Not Found", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, getString(R.string.sale_product_out_of_stock), Toast.LENGTH_LONG).show()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

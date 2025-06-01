@@ -9,13 +9,7 @@ import android.os.Bundle
 import android.text.InputType.TYPE_CLASS_NUMBER
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Spinner
-import android.widget.TextView
+import android.widget.*
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -29,16 +23,23 @@ import com.example.stockmanagement.GetListOfData
 import com.example.stockmanagement.ManagementDao
 import com.example.stockmanagement.ManagementDatabase
 import com.example.stockmanagement.R
+import com.example.stockmanagement.products.ProductList
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
+import java.util.*
 
 class PurchaseList : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: PurchaseListAdapter
     private lateinit var dao: ManagementDao
+    private lateinit var clearButton: Button
+    private lateinit var selectedTextView: TextView
+    private var defaultColor: ColorStateList? = null
+
+    enum class FilterType {
+        NONE, PRODUCT_NAME, AVAILABLE, PURCHASE_ID, CREATED_DATE
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,16 +51,14 @@ class PurchaseList : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        // Set up the toolbar
+
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.back_icon)
 
-        // Initialize DAO
         dao = ManagementDatabase.getInstance(this).managementDao
 
-        // Set up RecyclerView with empty adapter
         recyclerView = findViewById(R.id.RV_PurchaseList)
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = PurchaseListAdapter(mutableListOf(), this) { purchase ->
@@ -72,59 +71,74 @@ class PurchaseList : AppCompatActivity() {
         loadPurchaseList()
 
         val filterDropdown = findViewById<Spinner>(R.id.Spi_PurchaseFilter)
-        val clearButton = findViewById<Button>(R.id.Btn_FilterClear)
-        val defaultColor = clearButton.backgroundTintList
-        findViewById<TextView>(R.id.TV_SelectedText).visibility = View.GONE
+        clearButton = findViewById(R.id.Btn_FilterClear)
+        selectedTextView = findViewById(R.id.TV_SelectedText)
+        selectedTextView.visibility = View.GONE
+        defaultColor = clearButton.backgroundTintList
 
-        val filterList = listOf("None","Available","Product Name","Purchase ID","Created Date")
-        val spinneradapter = ArrayAdapter(this,android.R.layout.simple_spinner_item, filterList)
-        spinneradapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        filterDropdown.adapter = spinneradapter
+        val filterMap = mapOf(
+            getString(R.string.filter_purchase_none) to FilterType.NONE,
+            getString(R.string.filter_purchase_product_name) to FilterType.PRODUCT_NAME,
+            getString(R.string.filter_purchase_product_available) to FilterType.AVAILABLE,
+            getString(R.string.filter_purchase_id) to FilterType.PURCHASE_ID,
+            getString(R.string.filter_purchase_created_date) to FilterType.CREATED_DATE
+        )
 
-        var selectedFilter = "None"
+        val filterList = filterMap.keys.toList()
+        val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, filterList)
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        filterDropdown.adapter = spinnerAdapter
 
         filterDropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, p1: View, position: Int, id: Long) {
-                selectedFilter = parent.getItemAtPosition(position).toString()
-                if (selectedFilter != "None") {
-                    clearButton.visibility = View.VISIBLE
-                    clearButton.backgroundTintList=ColorStateList.valueOf(Color.RED)
+                val selectedLabel = parent.getItemAtPosition(position).toString()
+                val selectedFilter = filterMap[selectedLabel] ?: FilterType.NONE
+
+                if (selectedFilter != FilterType.NONE) {
+                    showClearButton()
                     when (selectedFilter) {
-                        "Available" -> {
+                        FilterType.AVAILABLE -> {
                             lifecycleScope.launch {
                                 val purchase = dao.getAllAvailablePurchases()
                                 adapter.updateData(purchase.reversed())
                             }
                         }
-                        "Product Name" -> {
+                        FilterType.PRODUCT_NAME -> {
                             showProductNameFilterDialog()
                         }
-                        "Purchase ID" -> {
+                        FilterType.PURCHASE_ID -> {
                             showPurchaseIdDialog()
                         }
-                        "Created Date" -> {
+                        FilterType.CREATED_DATE -> {
                             showDateFilterDialog()
                         }
+                        else -> {}
                     }
                 } else {
                     clearButton.visibility = View.GONE
+                    selectedTextView.visibility = View.GONE
+                    clearButton.backgroundTintList = defaultColor
+                    loadPurchaseList()
                 }
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                selectedFilter = "None"
                 clearButton.visibility = View.GONE
             }
         }
+
         clearButton.setOnClickListener {
-            clearButton.backgroundTintList=defaultColor
-            filterDropdown.setSelection(0) // Reset to "None"
-            findViewById<TextView>(R.id.TV_SelectedText).visibility = View.GONE
-            lifecycleScope.launch {
-                val allData = dao.getAllPurchases()
-                adapter.updateData(allData.reversed())
-            }
+            clearButton.backgroundTintList = defaultColor
+            filterDropdown.setSelection(0)
+            selectedTextView.visibility = View.GONE
+            clearButton.visibility = View.GONE
+            loadPurchaseList()
         }
+    }
+
+    private fun showClearButton() {
+        clearButton.visibility = View.VISIBLE
+        clearButton.backgroundTintList = ColorStateList.valueOf(Color.RED)
     }
 
     @SuppressLint("SetTextI18n")
@@ -141,13 +155,17 @@ class PurchaseList : AppCompatActivity() {
             }
             val startOfDay = java.sql.Date(selectedCalendar.timeInMillis)
             selectedCalendar.add(Calendar.DAY_OF_MONTH, 1)
-            val selectedText = findViewById<TextView>(R.id.TV_SelectedText)
-            selectedText.text = "Selected Date: ${SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(startOfDay)}"
-            selectedText.visibility = View.VISIBLE
 
             lifecycleScope.launch {
+                showClearButton()
                 val purchases = dao.getPurchasesByDate(startOfDay)
-                adapter.updateData(purchases.reversed())
+                if (purchases.isNotEmpty()) {
+                    adapter.updateData(purchases.reversed())
+                    selectedTextView.text = "${getString(R.string.filter_purchase_popup_entered_date)}: ${SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(startOfDay)}"
+                } else {
+                    selectedTextView.text = "${getString(R.string.filter_purchase_popup_result_date)} ${SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(startOfDay)}"
+                }
+                selectedTextView.visibility = View.VISIBLE
             }
         }
         DatePickerDialog(this, dateSetListener, year, month, day).show()
@@ -156,24 +174,23 @@ class PurchaseList : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun showPurchaseIdDialog() {
         val input = EditText(this).apply {
-            hint = "Enter Here"
+            hint = getString(R.string.filter_popup_Enter_Here)
             inputType = TYPE_CLASS_NUMBER
         }
 
-        showInputDialog("Enter Purchase ID", "Enter Here", input) { text ->
+        showInputDialog(getString(R.string.filter_purchase_popup_enter_id), input) { text ->
             val enteredId = text.toIntOrNull()
-            val selectedText = findViewById<TextView>(R.id.TV_SelectedText)
             if (enteredId != null && enteredId > 0) {
                 lifecycleScope.launch {
+                    showClearButton()
                     val result = dao.getPurchaseByID(enteredId)
                     if (result != null) {
                         adapter.updateData(listOf(result))
-                        selectedText.text = "Selected ID: $enteredId"
-                        selectedText.visibility = View.VISIBLE
+                        selectedTextView.text = "${getString(R.string.filter_purchase_popup_entered_id)}: $enteredId"
                     } else {
-                        selectedText.text = "No purchase found for ID $enteredId"
-                        selectedText.visibility = View.VISIBLE
+                        selectedTextView.text = "${getString(R.string.filter_purchase_popup_result_Id)} $enteredId"
                     }
+                    selectedTextView.visibility = View.VISIBLE
                 }
             }
         }
@@ -182,7 +199,7 @@ class PurchaseList : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun showProductNameFilterDialog() {
         val input = AutoCompleteTextView(this).apply {
-            hint = "Enter Here"
+            hint = getString(R.string.filter_popup_Enter_Here)
             threshold = 1
         }
 
@@ -190,20 +207,23 @@ class PurchaseList : AppCompatActivity() {
             input.setAdapter(ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, names))
         }
 
-        showInputDialog("Enter Product Name", "Enter Here", input) { name ->
-            val selectedText = findViewById<TextView>(R.id.TV_SelectedText)
-            selectedText.text = "Selected Product: $name"
-            selectedText.visibility = View.VISIBLE
+        showInputDialog(getString(R.string.filter_purchase_popup_enter_product_name), input) { name ->
             lifecycleScope.launch {
+                showClearButton()
                 val list = dao.getPurchaseforProduct(name)
-                adapter.updateData(list.reversed())
+                if (list.isNotEmpty()) {
+                    adapter.updateData(list.reversed())
+                    selectedTextView.text = "${getString(R.string.filter_purchase_popup_entered_product)}: $name"
+                } else {
+                    selectedTextView.text = "${getString(R.string.filter_purchase_popup_result_name)} $name"
+                }
+                selectedTextView.visibility = View.VISIBLE
             }
         }
     }
 
     private fun showInputDialog(
         title: String,
-        hint: String,
         inputView: View,
         onApply: (inputText: String) -> Unit
     ) {
@@ -213,7 +233,7 @@ class PurchaseList : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle(title)
             .setView(inputView)
-            .setPositiveButton("Apply") { dialog, _ ->
+            .setPositiveButton(getString(R.string.popup_apply)) { dialog, _ ->
                 val text = when (inputView) {
                     is EditText -> inputView.text.toString()
                     is AutoCompleteTextView -> inputView.text.toString()
@@ -225,7 +245,7 @@ class PurchaseList : AppCompatActivity() {
                 }
                 dialog.dismiss()
             }
-            .setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
+            .setNegativeButton(getString(R.string.popup_cancel)) { dialog, _ -> dialog.cancel() }
             .show()
     }
 

@@ -81,12 +81,12 @@ class CustomerList : AppCompatActivity() {
         selectedTextView.visibility = View.GONE
 
         val filterMap = mapOf(
-            getString(R.string.filter_none) to FilterType.NONE,
-            getString(R.string.filter_balance) to FilterType.BALANCE,
-            getString(R.string.filter_name_asc) to FilterType.NAME_ASC,
-            getString(R.string.filter_name_desc) to FilterType.NAME_DESC,
+            getString(R.string.filter_customer_none) to FilterType.NONE,
+            getString(R.string.filter_customer_balance) to FilterType.BALANCE,
+            getString(R.string.filter_customer_name_asc) to FilterType.NAME_ASC,
+            getString(R.string.filter_customer_name_desc) to FilterType.NAME_DESC,
             getString(R.string.filter_customer_name) to FilterType.CUSTOMER_NAME,
-            getString(R.string.filter_phone_number) to FilterType.PHONE_NUMBER
+            getString(R.string.filter_customer_phone_number) to FilterType.PHONE_NUMBER
         )
 
         val filterList = filterMap.keys.toList()
@@ -134,7 +134,6 @@ class CustomerList : AppCompatActivity() {
                     clearButton.visibility = View.GONE
                 }
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
@@ -142,15 +141,17 @@ class CustomerList : AppCompatActivity() {
             clearButton.backgroundTintList = defaultColor
             filterDropdown.setSelection(0)
             selectedTextView.visibility = View.GONE
+            clearButton.visibility= View.GONE
             lifecycleScope.launch {
                 val allCustomers = dao.getAllCustomer()
                 adapter.updateData(allCustomers)
             }
         }
     }
+    @SuppressLint("SetTextI18n")
     private fun showCustomerPhoneNoDialog() {
         val input = EditText(this).apply {
-            hint = "Enter Here"
+            hint = getString(R.string.filter_popup_Enter_Here)
             inputType = TYPE_CLASS_PHONE
             val padding = resources.getDimensionPixelSize(R.dimen.dialog_input_padding)
             setPadding(padding, padding, padding, padding)
@@ -158,51 +159,55 @@ class CustomerList : AppCompatActivity() {
             keyListener = DigitsKeyListener.getInstance("0123456789")
         }
         AlertDialog.Builder(this)
-            .setTitle("Enter Phone Number")
+            .setTitle(getString(R.string.filter_customer_popup_enter_phone))
             .setView(input)
-            .setPositiveButton("Apply") { dialog, _ ->
+            .setPositiveButton(getString(R.string.popup_apply)) { dialog, _ ->
                 val phoneNo = input.text.toString().toIntOrNull()
                 val selectedText = findViewById<TextView>(R.id.TV_SelectedText)
                 if (phoneNo != null && phoneNo.toString().length >=3 ) {
                     selectedText.visibility = View.VISIBLE
                     lifecycleScope.launch {
-                        selectedText.text= "Entered Number: $phoneNo"
-                       val result = dao.getAllCustomersPhone(phoneNo.toString())
-                        adapter.updateData(result)
+                        selectedText.text= "${getString(R.string.filter_customer_popup_entered_phone)}: $phoneNo"
+                       val customer = dao.getAllCustomersPhone(phoneNo.toString())
+                        if(customer.isNotEmpty()){
+                            adapter.updateData(customer)
+                        } else{
+                            selectedText.text = getString(R.string.filter_result_customer)
+                        }
                     }
                 }
                 else{
-                    Toast.makeText(this@CustomerList,"Enter Phone Number more than 2 digit", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@CustomerList,getString(R.string.filter_customer_popup_phone_validation), Toast.LENGTH_LONG).show()
                 }
                 dialog.dismiss()
             }
-            .setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
+            .setNegativeButton(getString(R.string.popup_cancel)) { dialog, _ -> dialog.cancel() }
             .show()
     }
 
     @SuppressLint("SetTextI18n")
     private fun showCustomerNameFilterDialog() {
         val input = AutoCompleteTextView(this).apply {
-            hint = "Enter Here"
+            hint = getString(R.string.filter_popup_Enter_Here)
             threshold = 1
             val padding = resources.getDimensionPixelSize(R.dimen.dialog_input_padding)
             setPadding(padding, padding, padding, padding)
         }
         AlertDialog.Builder(this)
-            .setTitle("Enter Customer Name")
+            .setTitle(getString(R.string.filter_customer_popup_enter_name))
             .setView(input)
-            .setPositiveButton("Apply") { dialog, _ ->
+            .setPositiveButton(getString(R.string.popup_apply)) { dialog, _ ->
                 val name = input.text.toString().trim()
                 val selectedText = findViewById<TextView>(R.id.TV_SelectedText)
                 if (name.isNotEmpty()) {
-                    selectedText.text = "Selected Customer: $name"
+                    selectedText.text = "${getString(R.string.filter_customer_popup_entered_customer)}: $name"
                     selectedText.visibility = View.VISIBLE
                     lifecycleScope.launch {
                         val customer= dao.getCustomerByname(name)
                         if(customer != null){
                             adapter.updateData(listOf(customer))
                         } else{
-                            selectedText.text = "Customer Not Found"
+                            selectedText.text = getString(R.string.filter_result_customer)
                         }
                     }
                 } else {
@@ -210,7 +215,7 @@ class CustomerList : AppCompatActivity() {
                 }
                 dialog.dismiss()
             }
-            .setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
+            .setNegativeButton(getString(R.string.popup_cancel)) { dialog, _ -> dialog.cancel() }
             .show()
         GetListOfData(this, this).getAllCustomerNames{ names ->
             input.setAdapter(ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, names))
