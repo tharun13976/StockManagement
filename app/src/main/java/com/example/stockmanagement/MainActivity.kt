@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         val editor = sharedPreferences.edit()
         val storedMillis = sharedPreferences.getLong("stored_date", 0L)
         val currentTimeMillis = System.currentTimeMillis()
-        val fifteenDaysInMillis = 15L * 24 * 60 * 60 * 1000
+        val tenDaysInMillis = 10L * 24 * 60 * 60 * 1000
 
         if (storedMillis == 0L) {
             // First-time setup: store current time and skip backup check
@@ -81,16 +81,16 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        if (currentTimeMillis - storedMillis >= fifteenDaysInMillis) {
-            // 15 days passed – schedule backup and update timestamp
+        if (currentTimeMillis - storedMillis >= tenDaysInMillis) {
+            // 10 days passed – schedule backup and update timestamp
             editor.putLong("stored_date", currentTimeMillis).apply()
-            Log.d("Backup", "Backup scheduled after 15 days.")
+            Log.d("Backup", "Backup scheduled after 10 days.")
             setupPeriodicBackup()
         }
     }
 
     private fun setupPeriodicBackup() {
-        val workRequest = PeriodicWorkRequestBuilder<MonthlyBackupWorker>(30, TimeUnit.DAYS)
+        val workRequest = PeriodicWorkRequestBuilder<MonthlyBackupWorker>(10, TimeUnit.DAYS)
             .setConstraints(
                 Constraints.Builder()
                     .setRequiresCharging(true)
