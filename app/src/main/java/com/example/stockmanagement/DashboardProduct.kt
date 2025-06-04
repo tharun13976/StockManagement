@@ -62,7 +62,6 @@ class DashboardProduct : Fragment(R.layout.dashboard_product) {
                 val productData = withContext(Dispatchers.IO) {
                     dao.getProductSalesDashboard(startOfMonth, endOfMonth)
                 }
-                Log.d("Dashboard", "Product count from DAO: ${productData.size}")
                 adapter.updateData(productData.toMutableList())
                 shimmerLayout?.stopShimmer()
                 shimmerLayout?.visibility = View.GONE
