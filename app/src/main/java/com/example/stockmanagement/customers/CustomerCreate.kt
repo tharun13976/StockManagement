@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.example.stockmanagement.ExitConfirmation
 import com.example.stockmanagement.GetListOfData
 import com.example.stockmanagement.ManagementDatabase
 import com.example.stockmanagement.R
@@ -132,7 +133,18 @@ class CustomerCreate : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == android.R.id.home) {
-            finish()
+            val name = findViewById<EditText>(R.id.ET_CustomerName)
+            val address = findViewById<EditText>(R.id.ET_CustomerAddress)
+            val phone = findViewById<EditText>(R.id.ET_CustomerNo)
+
+            if(!name.text.isEmpty()||!address.text.isEmpty()||!phone.text.isEmpty()){
+                ExitConfirmation().show(this) {
+                    finish()
+                }
+            }
+            else{
+                finish()
+            }
             true
         } else {
             super.onOptionsItemSelected(item)

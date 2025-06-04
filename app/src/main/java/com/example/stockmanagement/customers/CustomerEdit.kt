@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.example.stockmanagement.ExitConfirmation
 import com.example.stockmanagement.GetListOfData
 import com.example.stockmanagement.ManagementDatabase
 import com.example.stockmanagement.R
@@ -112,7 +113,9 @@ class CustomerEdit : AppCompatActivity() {
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == android.R.id.home) {
-            finish()
+            ExitConfirmation().show(this) {
+                finish()
+            }
             true
         } else {
             super.onOptionsItemSelected(item)

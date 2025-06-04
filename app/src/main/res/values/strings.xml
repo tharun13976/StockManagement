@@ -29,6 +29,10 @@
     <string name="tab_create_record">Create a New Record</string>
     <string name="tab_record_list">See Records List</string>
     <string name="filter_popup_Enter_Here">Enter Here</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="unsaved_changes_exit">Are you sure you want to go back? Unsaved changes will be lost.</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
 <!--    Import and Backup-->
     <string name="import_data">Import Data</string>

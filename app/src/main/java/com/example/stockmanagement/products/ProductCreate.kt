@@ -19,6 +19,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.example.stockmanagement.ExitConfirmation
 import com.example.stockmanagement.GetListOfData
 import com.example.stockmanagement.ManagementDatabase
 import com.example.stockmanagement.R
@@ -148,7 +149,15 @@ class ProductCreate : AppCompatActivity() {
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == android.R.id.home) {
-            finish()
+            var name=findViewById<EditText>(R.id.ET_ProductName)
+            if(!name.text.isEmpty()){
+                ExitConfirmation().show(this) {
+                    finish()
+                }
+            }
+            else{
+                finish()
+            }
             true
         } else {
             super.onOptionsItemSelected(item)

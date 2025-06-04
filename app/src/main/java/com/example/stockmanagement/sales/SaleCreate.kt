@@ -23,6 +23,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
 import com.example.stockmanagement.CustomFilterArrayAdapter
+import com.example.stockmanagement.ExitConfirmation
 import com.example.stockmanagement.GetListOfData
 import com.example.stockmanagement.ManagementDatabase
 import com.example.stockmanagement.R
@@ -261,7 +262,19 @@ class SaleCreate : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == android.R.id.home) {
-            finish()
+            val customername = findViewById<AutoCompleteTextView>(R.id.AET_CustomerName)
+            val productname = findViewById<AutoCompleteTextView>(R.id.AET_ProductName)
+            val productcount = findViewById<EditText>(R.id.ET_ProductCount)
+            val amountgiven = findViewById<EditText>(R.id.ET_SalesAmountGiven)
+            val amountonly = findViewById<CheckBox>(R.id.CB_OnlyAmount)
+            if(!customername.text.isEmpty()||!productname.text.isEmpty()||!productcount.text.isEmpty()||!amountgiven.text.isEmpty()||amountonly.isChecked){
+                ExitConfirmation().show(this) {
+                    finish()
+                }
+            }
+            else{
+                finish()
+            }
             true
         } else {
             super.onOptionsItemSelected(item)
