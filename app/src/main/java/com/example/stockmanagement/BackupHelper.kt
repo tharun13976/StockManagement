@@ -20,7 +20,7 @@ object BackupHelper {
         activity: Activity? = null,
         checkNotificationPermission: Boolean
     ): Boolean {
-        val backupDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).let { File(it, "StockManagementBackups") }
+        val backupDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).let { File(it, "PeriodicBackups") }
 
         if (!backupDir.exists()) {
             val created = backupDir.mkdirs()

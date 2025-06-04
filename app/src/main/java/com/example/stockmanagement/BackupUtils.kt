@@ -27,8 +27,8 @@ object BackupUtils {
 
             val dao = ManagementDatabase.getInstance(context).managementDao
             val gson = Gson()
-            val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
-            val zipFile = File(backupDir, "backup_$date.zip")
+            val filename = "backup_${SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.getDefault()).format(Date())}.zip"
+            val zipFile = File(backupDir, filename)
 
             // Convert database entries to JSON
             val customerJson = gson.toJson(dao.getAllCustomer())

@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import java.util.*
 
 class MonthlyBackupWorker(
     context: Context,
@@ -12,12 +11,10 @@ class MonthlyBackupWorker(
 ) : CoroutineWorker(context, workerParams) {
 
     override suspend fun doWork(): Result {
-        val today = Calendar.getInstance()
-        val dayOfMonth = today.get(Calendar.DAY_OF_MONTH)
 
-        Log.d("MonthlyBackupWorker", "Running backup check: day $dayOfMonth")
+        Log.d("MonthlyBackupWorker", "Running backup")
 
-        return if (dayOfMonth == 1 || dayOfMonth == 15) {
+        return if (true) {
             val success = BackupHelper.performBackup(
                 context = applicationContext,
                 checkNotificationPermission = true

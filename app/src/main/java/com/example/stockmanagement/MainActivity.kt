@@ -17,10 +17,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import java.util.concurrent.TimeUnit
-import androidx.work.Constraints
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import java.util.Locale
 
@@ -78,7 +75,6 @@ class MainActivity : AppCompatActivity() {
             // First-time setup: store current time and skip backup check
             editor.putLong("stored_date", currentTimeMillis).apply()
             Log.d("Backup", "Backup date initialized.")
-            return
         }
 
         if (currentTimeMillis - storedMillis >= tenDaysInMillis) {
@@ -90,20 +86,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupPeriodicBackup() {
-        val workRequest = PeriodicWorkRequestBuilder<MonthlyBackupWorker>(10, TimeUnit.DAYS)
-            .setConstraints(
-                Constraints.Builder()
-                    .setRequiresCharging(true)
-                    .setRequiresBatteryNotLow(true)
-                    .build()
-            )
-            .build()
-
-        WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork(
-            "MonthlyBackup",
-            ExistingPeriodicWorkPolicy.KEEP,
-            workRequest
-        )
+        val request = OneTimeWorkRequestBuilder<MonthlyBackupWorker>().build()
+        WorkManager.getInstance(applicationContext).enqueue(request)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

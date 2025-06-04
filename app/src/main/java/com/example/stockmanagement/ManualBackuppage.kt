@@ -91,7 +91,7 @@ class ManualBackuppage : AppCompatActivity() {
                     StorageAccessHelper.launchFolderPicker(this@ManualBackuppage, folderPickerLauncher)
                     return@launch
                 }
-                val filename = "backup_${SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())}.zip"
+                val filename = "backup_${SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.getDefault()).format(Date())}.zip"
                 val backupFile = StorageAccessHelper.createBackupFileInSAFDir(this@ManualBackuppage, dir, filename)
                 backupFile?.uri?.let {
                     BackupUtils.backupDatabaseToUri(this@ManualBackuppage, it)
