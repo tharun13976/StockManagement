@@ -34,6 +34,7 @@
     <string name="unsaved_changes_exit">நீங்கள் நிச்சயமாக திரும்பிச் செல்ல விரும்புகிறீர்களா? சேமிக்கப்படாத மாற்றங்கள் இழக்கப்படும்.</string>
     <string name="yes">ஆம்</string>
     <string name="no">இல்லை</string>
+    <string name="record_count">பதிவுகள் எண்ணிக்கை :</string>
 
 
     <!--    Import and Backup-->

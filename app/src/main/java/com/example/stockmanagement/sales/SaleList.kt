@@ -38,6 +38,7 @@ class SaleList : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: SaleListAdapter
     private lateinit var dao: ManagementDao
+    private lateinit var recordCount:TextView
 
     enum class FilterType {
         NONE,CUSTOMER_NAME, PRODUCT_NAME, PURCHASE_ID, AMOUNT_ONLY,CUSTOMER_AMOUNT_ONLY,CREATED_DATE
@@ -80,6 +81,7 @@ class SaleList : AppCompatActivity() {
         val clearButton = findViewById<Button>(R.id.Btn_FilterClear)
         val defaultColor = clearButton.backgroundTintList
         val selectedTextView = findViewById<TextView>(R.id.TV_SelectedText)
+        recordCount = findViewById(R.id.list_record_count)
         selectedTextView.visibility = View.GONE
 
         //val filterList = listOf("None","Customer Name","Product Name","Purchase ID","Amount Only","Customer's Amount only","Created Date")
@@ -122,6 +124,7 @@ class SaleList : AppCompatActivity() {
                         FilterType.AMOUNT_ONLY -> {
                             lifecycleScope.launch {
                                 val result = dao.getSalesByAmountOnly()
+                                recordCount.text=result.size.toString()
                                 adapter.updateData(result.reversed())
                             }
                         }
@@ -145,10 +148,7 @@ class SaleList : AppCompatActivity() {
             clearButton.backgroundTintList=defaultColor
             filterDropdown.setSelection(0) // Reset to "None"
             selectedTextView.visibility = View.GONE
-            lifecycleScope.launch {
-                val sales = dao.getAllSales()
-                adapter.updateData(sales.reversed())
-            }
+            loadSales()
         }
     }
 
@@ -169,6 +169,7 @@ class SaleList : AppCompatActivity() {
             selectedText.visibility = View.VISIBLE
             lifecycleScope.launch {
                 val list = dao.getSalesByCustomerName(name)
+                recordCount.text=list.size.toString()
                 adapter.updateData(list.reversed())
             }
         }
@@ -191,6 +192,7 @@ class SaleList : AppCompatActivity() {
             selectedText.visibility = View.VISIBLE
             lifecycleScope.launch {
                 val list = dao.getSalesByProductName(name)
+                recordCount.text=list.size.toString()
                 adapter.updateData(list.reversed())
             }
         }
@@ -208,6 +210,7 @@ class SaleList : AppCompatActivity() {
             if (enteredId != null && enteredId > 0) {
                 lifecycleScope.launch {
                     val result = dao.getSalesByPurchaseID(enteredId)
+                    recordCount.text=result.size.toString()
                     adapter.updateData(result.reversed())
                     selectedText.text = "${getString(R.string.filter_sale_popup_entered_id)}: $enteredId"
                     selectedText.visibility = View.VISIBLE
@@ -233,6 +236,7 @@ class SaleList : AppCompatActivity() {
             selectedText.visibility = View.VISIBLE
             lifecycleScope.launch {
                 val list = dao.getSalesByCustomersAmountOnly(name)
+                recordCount.text=list.size.toString()
                 adapter.updateData(list.reversed())
             }
         }
@@ -251,6 +255,7 @@ class SaleList : AppCompatActivity() {
 
             lifecycleScope.launch {
                 val result = dao.getSalesByDate(sqlDate)
+                recordCount.text=result.size.toString()
                 adapter.updateData(result)
             }
         })
@@ -286,6 +291,7 @@ class SaleList : AppCompatActivity() {
     private fun loadSales() {
         lifecycleScope.launch {
             val sales = dao.getAllSales()
+            recordCount.text=sales.size.toString()
             adapter.updateData(sales.reversed())
         }
     }

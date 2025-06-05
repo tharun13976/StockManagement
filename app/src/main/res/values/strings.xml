@@ -33,6 +33,7 @@
     <string name="unsaved_changes_exit">Are you sure you want to go back? Unsaved changes will be lost.</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="record_count">Record Count :</string>
 
 <!--    Import and Backup-->
     <string name="import_data">Import Data</string>
@@ -228,6 +229,7 @@
     <string name="filter_sale_popup_entered_customer">Entered Customer</string>
     <string name="filter_sale_popup_entered_id">Entered ID</string>
     <string name="filter_sale_popup_entered_date">Entered Date</string>
+
 
 
 </resources>

@@ -33,6 +33,7 @@ class PurchaseList : AppCompatActivity() {
     private lateinit var dao: ManagementDao
     private lateinit var clearButton: Button
     private lateinit var selectedTextView: TextView
+    private lateinit var recordCount:TextView
     private var defaultColor: ColorStateList? = null
 
     enum class FilterType {
@@ -71,6 +72,7 @@ class PurchaseList : AppCompatActivity() {
         val filterDropdown = findViewById<Spinner>(R.id.Spi_PurchaseFilter)
         clearButton = findViewById(R.id.Btn_FilterClear)
         selectedTextView = findViewById(R.id.TV_SelectedText)
+        recordCount=findViewById(R.id.list_record_count)
         selectedTextView.visibility = View.GONE
         defaultColor = clearButton.backgroundTintList
 
@@ -98,6 +100,7 @@ class PurchaseList : AppCompatActivity() {
                         FilterType.AVAILABLE -> {
                             lifecycleScope.launch {
                                 val purchase = dao.getAllAvailablePurchases()
+                                recordCount.text=purchase.size.toString()
                                 adapter.updateData(purchase.reversed())
                             }
                         }
@@ -153,6 +156,7 @@ class PurchaseList : AppCompatActivity() {
             lifecycleScope.launch {
                 showClearButton()
                 val purchases = dao.getPurchasesByDate(startOfDay)
+                recordCount.text=purchases.size.toString()
                 adapter.updateData(purchases.reversed())
                 if (purchases.isNotEmpty()) {
                     selectedTextView.text = "${getString(R.string.filter_purchase_popup_entered_date)}: ${SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(startOfDay)}"
@@ -179,9 +183,11 @@ class PurchaseList : AppCompatActivity() {
                     val result = dao.getPurchaseByID(enteredId)
                     if (result != null) {
                         adapter.updateData(listOf(result))
+                        recordCount.text="1"
                         selectedTextView.text = "${getString(R.string.filter_purchase_popup_entered_id)}: $enteredId"
                     } else {
                         adapter.updateData(emptyList())
+                        recordCount.text="0"
                         selectedTextView.text = "${getString(R.string.filter_purchase_popup_result_Id)} $enteredId"
                     }
                     selectedTextView.visibility = View.VISIBLE
@@ -206,6 +212,7 @@ class PurchaseList : AppCompatActivity() {
                 showClearButton()
                 val list = dao.getPurchaseforProduct(name)
                 adapter.updateData(list.reversed())
+                recordCount.text=list.size.toString()
                 if (list.isNotEmpty()) {
                     selectedTextView.text = "${getString(R.string.filter_purchase_popup_entered_product)}: $name"
                 } else {
@@ -246,6 +253,7 @@ class PurchaseList : AppCompatActivity() {
     private fun loadPurchaseList() {
         lifecycleScope.launch {
             val purchases = dao.getAllPurchases()
+            recordCount.text=purchases.size.toString()
             adapter.updateData(purchases.toMutableList().reversed())
         }
     }

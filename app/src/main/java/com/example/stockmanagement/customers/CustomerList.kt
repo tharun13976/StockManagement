@@ -38,6 +38,7 @@ class CustomerList : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: CustomerListAdapter
     private lateinit var dao: ManagementDao
+    private lateinit var recordCount:TextView
 
     enum class FilterType {
         NONE, BALANCE, NAME_ASC, NAME_DESC, CUSTOMER_NAME, PHONE_NUMBER
@@ -78,6 +79,7 @@ class CustomerList : AppCompatActivity() {
         val clearButton = findViewById<Button>(R.id.Btn_FilterClear)
         val defaultColor = clearButton.backgroundTintList
         val selectedTextView = findViewById<TextView>(R.id.TV_SelectedText)
+        recordCount = findViewById(R.id.list_record_count)
         selectedTextView.visibility = View.GONE
 
         val filterMap = mapOf(
@@ -107,18 +109,21 @@ class CustomerList : AppCompatActivity() {
                         FilterType.BALANCE -> {
                             lifecycleScope.launch {
                                 val customers = dao.getAllCustomersSortByBalance()
+                                recordCount.text=customers.size.toString()
                                 adapter.updateData(customers)
                             }
                         }
                         FilterType.NAME_ASC -> {
                             lifecycleScope.launch {
                                 val customers = dao.getAllCustomerSortByNameAsc()
+                                recordCount.text=customers.size.toString()
                                 adapter.updateData(customers)
                             }
                         }
                         FilterType.NAME_DESC -> {
                             lifecycleScope.launch {
                                 val customers = dao.getAllCustomerSortByNameDesc()
+                                recordCount.text=customers.size.toString()
                                 adapter.updateData(customers)
                             }
                         }
@@ -142,10 +147,7 @@ class CustomerList : AppCompatActivity() {
             filterDropdown.setSelection(0)
             selectedTextView.visibility = View.GONE
             clearButton.visibility= View.GONE
-            lifecycleScope.launch {
-                val allCustomers = dao.getAllCustomer()
-                adapter.updateData(allCustomers)
-            }
+            loadCustomerList()
         }
     }
     @SuppressLint("SetTextI18n")
@@ -169,9 +171,11 @@ class CustomerList : AppCompatActivity() {
                     lifecycleScope.launch {
                         selectedText.text= "${getString(R.string.filter_customer_popup_entered_phone)}: $phoneNo"
                        val customer = dao.getAllCustomersPhone(phoneNo.toString())
+                        recordCount.text=customer.size.toString()
                         if(customer.isNotEmpty()){
                             adapter.updateData(customer)
                         } else{
+                            adapter.updateData(customer)
                             selectedText.text = getString(R.string.filter_result_customer)
                         }
                     }
@@ -205,8 +209,11 @@ class CustomerList : AppCompatActivity() {
                     lifecycleScope.launch {
                         val customer= dao.getCustomerByname(name)
                         if(customer != null){
+                            recordCount.text="1"
                             adapter.updateData(listOf(customer))
                         } else{
+                            recordCount.text="0"
+                            adapter.updateData(emptyList())
                             selectedText.text = getString(R.string.filter_result_customer)
                         }
                     }
@@ -240,6 +247,7 @@ class CustomerList : AppCompatActivity() {
     private fun loadCustomerList() {
         lifecycleScope.launch {
             val customers = dao.getAllCustomer()
+            recordCount.text=customers.size.toString()
             adapter.updateData(customers.toMutableList())
         }
     }

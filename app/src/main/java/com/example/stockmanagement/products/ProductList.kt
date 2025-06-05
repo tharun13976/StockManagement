@@ -33,6 +33,7 @@ class ProductList : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ProductListAdapter
     private lateinit var dao: ManagementDao
+    private lateinit var recordCount:TextView
 
     enum class FilterType {
         NONE,NAME_ASC, NAME_DESC, PRODUCT_NAME, STOCK_AVAILABLE, STOCK_UNAVAILABLE
@@ -69,10 +70,12 @@ class ProductList : AppCompatActivity() {
         recyclerView.adapter = adapter
         // Load data
         loadProductList()
+
         val filterDropdown = findViewById<Spinner>(R.id.Spi_ProductFilter)
         val clearButton = findViewById<Button>(R.id.Btn_FilterClear)
         val defaultColor = clearButton.backgroundTintList
         val selectedTextView = findViewById<TextView>(R.id.TV_SelectedText)
+        recordCount = findViewById(R.id.list_record_count)
         selectedTextView.visibility = View.GONE
 
         val filterMap = mapOf(
@@ -101,12 +104,14 @@ class ProductList : AppCompatActivity() {
                         FilterType.NAME_ASC -> {
                             lifecycleScope.launch {
                                 val products = dao.getAllProductSortByName()
+                                recordCount.text=products.size.toString()
                                 adapter.updateData(products)
                             }
                         }
                         FilterType.NAME_DESC -> {
                             lifecycleScope.launch {
                                 val products = dao.getAllProductSortByNameDesc()
+                                recordCount.text=products.size.toString()
                                 adapter.updateData(products)
                             }
                         }
@@ -116,12 +121,14 @@ class ProductList : AppCompatActivity() {
                         FilterType.STOCK_AVAILABLE -> {
                             lifecycleScope.launch {
                                 val products = dao.getAllProductAvailableSortByCount()
+                                recordCount.text=products.size.toString()
                                 adapter.updateData(products)
                             }
                         }
                         FilterType.STOCK_UNAVAILABLE -> {
                             lifecycleScope.launch {
                                 val products = dao.getAllProductUnavailable()
+                                recordCount.text=products.size.toString()
                                 adapter.updateData(products)
                             }
                         }
@@ -166,10 +173,12 @@ class ProductList : AppCompatActivity() {
                     selectedText.text = "${getString(R.string.filter_product_popup_entered_name)}: $name"
                     selectedText.visibility = View.VISIBLE
                     lifecycleScope.launch {
-                        val customer= dao.getProductByName(name)
-                        if(customer != null){
-                            adapter.updateData(listOf(customer))
+                        val products= dao.getProductByName(name)
+                        if(products != null){
+                            recordCount.text="1"
+                            adapter.updateData(listOf(products))
                         } else{
+                            recordCount.text="0"
                             selectedText.text = getString(R.string.filter_result_product)
                         }
                     }
@@ -189,6 +198,7 @@ class ProductList : AppCompatActivity() {
     private fun loadProductList() {
         lifecycleScope.launch {
             val products = dao.getAllProduct()
+            recordCount.text=products.size.toString()
             adapter.updateData(products.toMutableList())
         }
     }

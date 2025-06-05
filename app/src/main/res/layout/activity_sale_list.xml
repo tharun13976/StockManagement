@@ -33,6 +33,25 @@ tools:context=".sales.SaleList">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/record_count"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="14sp"
+            android:textColor="@color/green"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/list_record_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/zero"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="14sp"
+            android:layout_marginEnd="3dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/sort_filter"
             android:gravity="center"
             android:layout_gravity="center"
