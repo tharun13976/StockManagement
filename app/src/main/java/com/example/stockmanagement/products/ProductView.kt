@@ -76,6 +76,7 @@ class ProductView : AppCompatActivity() {
             val dao = ManagementDatabase.getInstance(this@ProductView).managementDao
             val product = dao.getProductById(productId)
             product?.let {
+                findViewById<TextView>(R.id.TV_ProductName).text = it.productname.toString()
                 findViewById<TextView>(R.id.TV_ProductMeasureunit).text = it.measurement.toString()
             }
         }

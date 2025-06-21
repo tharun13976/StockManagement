@@ -84,8 +84,9 @@ class CustomerEdit : AppCompatActivity() {
                     dao.updateCustomer(it)
                     Log.d("UPDATE", "Customer updated: Customer Id ${it.cid}")
                     if(name.text.toString() != oldname){
-                        dao.updateCustomerNameInSales(oldname,name.text.toString())
+                        dao.updateCustomerNameInSales(oldname,name.text.trim().toString())
                     }
+                    Log.d("UPDATE", "Customer Updated: Customer Id ${it.cid}")
                     Toast.makeText(this@CustomerEdit, getString(R.string.customer_updated), Toast.LENGTH_LONG).show()
                     finish()
                 } ?: run {

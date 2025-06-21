@@ -35,7 +35,21 @@
     <string name="yes">ஆம்</string>
     <string name="no">இல்லை</string>
     <string name="record_count">பதிவுகள் எண்ணிக்கை :</string>
+    <string name="delete_record">பதிவை நீக்கு</string>
 
+    <!--    Delete Page-->
+    <string name="module_Question">பதிவை நீக்க, தொகுதி பெயரை தேர்ந்தெடுக்கவும்</string>
+    <string name="title_delete_record">நீக்க வேண்டிய பதிவின் ID உள்ளிடவும்</string>
+    <string name="hint_delete_record">பதிவின் ID எண்ணை உள்ளிடவும்</string>
+    <string name="delete_but_delete">நீக்கு</string>
+    <string name="delete_but_proceed">தொடரு</string>
+    <string name="mod_none">எதுவுமில்லை</string>
+    <string name="mod_purchase">கொள்முதல்</string>
+    <string name="mod_sale">விற்பனை</string>
+    <string name="mod_product">விளைபொருள்</string>
+    <string name="mod_customer">வாடிக்கையாளர்</string>
+    <string name="mod_selection_alert">தொகுதியின் பெயரைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="mod_record_id_alert">பதிவின் ID அவசியம்</string>
 
     <!--    Import and Backup-->
     <string name="import_data">தரவை இறக்குமதி செய்க</string>

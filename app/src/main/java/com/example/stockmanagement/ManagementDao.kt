@@ -219,6 +219,13 @@ interface ManagementDao {
     @Update
     suspend fun updateSale(sale: Sale)
 
-    @Query("UPDATE Sale SET customerName = :newName WHERE customerName = :oldName")
+    @Query("UPDATE Sale SET customername = :newName WHERE customername = :oldName")
     suspend fun updateCustomerNameInSales(oldName: String, newName: String)
+
+    @Query("UPDATE Sale SET productname = :newName WHERE productname = :oldName")
+    suspend fun updateProductNameInSales(oldName: String, newName: String): Int
+
+    @Query("UPDATE Purchase SET productname = :newName WHERE productname = :oldName")
+    suspend fun updateProductNameInPurchases(oldName: String, newName: String): Int
+
 }

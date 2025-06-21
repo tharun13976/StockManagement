@@ -203,6 +203,11 @@ class ProductList : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        loadProductList()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == android.R.id.home) {
             finish()

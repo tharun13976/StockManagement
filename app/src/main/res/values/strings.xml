@@ -1,8 +1,8 @@
 <resources>
-<!--    Application Name-->
+    <!--    Application Name-->
     <string name="app_name">Stock Management</string>
 
-<!--    Common for all Module-->
+    <!--    Common for all Module-->
     <string name="home_page">Home</string>
     <string name="sort_filter">Sort/Filter</string>
     <string name="name">Name</string>
@@ -34,8 +34,23 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="record_count">Record Count :</string>
+    <string name="delete_record">Delete Record</string>
 
-<!--    Import and Backup-->
+    <!--    Delete Page-->
+    <string name="module_Question">Select the module Name to delete the record</string>
+    <string name="title_delete_record">Enter the Record ID to Delete</string>
+    <string name="hint_delete_record">Enter the Record ID Number</string>
+    <string name="delete_but_proceed">Proceed</string>
+    <string name="delete_but_delete">Delete</string>
+    <string name="mod_none">None</string>
+    <string name="mod_purchase">Purchase</string>
+    <string name="mod_sale">Sale</string>
+    <string name="mod_product">Product</string>
+    <string name="mod_customer">Customer</string>
+    <string name="mod_selection_alert">Select the Module Name</string>
+    <string name="mod_record_id_alert">Record ID Required</string>
+
+    <!--    Import and Backup-->
     <string name="import_data">Import Data</string>
     <string name="import_data_from_zip">Import Data from ZIP</string>
     <string name="backup_page">Backup Page</string>
@@ -57,12 +72,12 @@
     <string name="backup_failed">Manual backup failed!</string>
 
 
-<!--    Dashboard-->
+    <!--    Dashboard-->
     <string name="dash_product_name">Product Name</string>
     <string name="dash_available_unit_s">Available Unit(s)</string>
     <string name="dash_sales_this_month">Sales This Month</string>
 
-<!--    Customer Module-->
+    <!--    Customer Module-->
     <string name="customer_phone_no">Phone No</string>
     <string name="customer_address">Address</string>
     <string name="customer_address_hint">Enter Address of Customer</string>
@@ -105,8 +120,7 @@
     <string name="filter_result_customer">Customer Record Not Found</string>
 
 
-
-<!--    Product Module-->
+    <!--    Product Module-->
     <string name="product_measurement_unit">Measurement Unit</string>
     <string name="product_started_date">Started Date</string>
     <string name="product_name_hint">Enter the Product Name</string>
@@ -182,7 +196,7 @@
     <string name="filter_purchase_popup_result_Id">No purchase found for ID</string>
     <string name="filter_purchase_popup_result_name">No purchase found for product named</string>
 
-<!--    Sale Module-->
+    <!--    Sale Module-->
     <string name="sale_creation">Sale Creation</string>
     <string name="customer_name">Customer Name</string>
     <string name="sale_date_of_sale">Date of Sale</string>
@@ -229,7 +243,6 @@
     <string name="filter_sale_popup_entered_customer">Entered Customer</string>
     <string name="filter_sale_popup_entered_id">Entered ID</string>
     <string name="filter_sale_popup_entered_date">Entered Date</string>
-
 
 
 </resources>

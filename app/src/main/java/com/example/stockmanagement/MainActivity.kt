@@ -115,6 +115,11 @@ class MainActivity : AppCompatActivity() {
                 showLanguageSelectionDialog()
                 true
             }
+            R.id.action_delete->{
+                val nextScreen = Intent(this, DeletePage::class.java)
+                startActivity(nextScreen)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
