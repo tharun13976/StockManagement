@@ -180,7 +180,7 @@ class PurchaseList : AppCompatActivity() {
             if (enteredId != null && enteredId > 0) {
                 lifecycleScope.launch {
                     showClearButton()
-                    val result = dao.getPurchaseByID(enteredId)
+                    val result = dao.getPurchaseById(enteredId)
                     if (result != null) {
                         adapter.updateData(listOf(result))
                         recordCount.text="1"

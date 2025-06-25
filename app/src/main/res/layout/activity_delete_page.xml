@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".DeletePage">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+        app:title="@string/customer_creation"
+        app:titleCentered="true"
+        app:titleTextAppearance="@style/ToolbarTitleBold" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
+        android:padding="20dp"
+        android:scrollbarStyle="insideOverlay"
+        android:verticalScrollbarPosition="right"
+        android:scrollbarAlwaysDrawVerticalTrack="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
+
+            <!-- Module Spinner Label -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/module_Question"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Module Spinner Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+                <Spinner
+                    android:id="@+id/Spi_ModuleList"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="4dp"
+                    android:spinnerMode="dropdown"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Record ID Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/title_delete_record"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Record ID Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <EditText
+                    android:id="@+id/ET_RecordId"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="@string/hint_delete_record"
+                    android:inputType="number"
+                    tools:ignore="VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Add after GridLayout inside LinearLayout -->
+            <FrameLayout
+                android:id="@+id/frameDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <!-- Customer Record Layout -->
+                <LinearLayout
+                    android:id="@+id/layoutCustomer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+                    <TextView android:text="Customer ID: "
+                        android:textSize="14sp"
+                        android:id="@+id/tvCustomerId"
+                        android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <TextView android:text="Name: "
+                        android:textSize="14sp"
+                        android:id="@+id/tvCustomerName" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <TextView android:text="Phone: "
+                        android:textSize="14sp"
+                        android:id="@+id/tvCustomerPhone"
+                        android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <TextView android:text="Address: "
+                        android:textSize="14sp"
+                        android:id="@+id/tvCustomerAddress"
+                        android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                </LinearLayout>
+
+                <!-- Product Record Layout -->
+                <LinearLayout
+                    android:id="@+id/layoutProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView android:text="Product ID: "
+                        android:textSize="14sp"
+                        android:id="@+id/tvProductId"
+                        android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <TextView android:text="Name: "
+                        android:textSize="14sp"
+                        android:id="@+id/tvProductName"
+                        android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                </LinearLayout>
+
+                <!-- Purchase Record Layout -->
+                <LinearLayout
+                    android:id="@+id/layoutPurchase"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView android:text="Purchase ID: "
+                        android:textSize="14sp"
+                        android:id="@+id/tvPurchaseId"
+                        android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <TextView android:text="Product: "
+                        android:textSize="14sp"
+                        android:id="@+id/tvPurchaseProduct"
+                        android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <TextView android:text="Quantity: "
+                        android:textSize="14sp"
+                        android:id="@+id/tvPurchaseQty"
+                        android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                </LinearLayout>
+
+                <!-- Sale Record Layout -->
+                <LinearLayout
+                    android:id="@+id/layoutSale"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView android:text="Sale ID: "
+                        android:textSize="14sp"
+                        android:id="@+id/tvSaleId"
+                        android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <TextView android:text="Customer: "
+                        android:textSize="14sp"
+                        android:id="@+id/tvSaleCustomer"
+                        android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <TextView android:text="Product: "
+                        android:textSize="14sp"
+                        android:id="@+id/tvSaleProduct"
+                        android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <TextView android:text="Product Count: "
+                        android:textSize="14sp"
+                        android:id="@+id/tvSaleProductCount"
+                        android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <TextView android:text="Amount: "
+                        android:textSize="14sp"
+                        android:id="@+id/tvSaleAmount"
+                        android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+
+                </LinearLayout>
+            </FrameLayout>
+
+
+            <GridLayout
+                android:id="@+id/buttonGrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:padding="8dp"
+                android:columnCount="3"
+                android:useDefaultMargins="true"
+                android:alignmentMode="alignMargins"
+                android:layout_gravity="center_horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/Btn_Proceed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="@string/delete_but_proceed"
+                    android:textStyle="bold"
+                    android:layout_margin="8dp"
+                    android:textSize="16sp"
+                    app:cornerRadius="12dp"
+                    tools:ignore="VisualLintButtonSize" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/Btn_Delete"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="@string/delete_but_delete"
+                    android:backgroundTint="@color/red"
+                    android:visibility="gone"
+                    android:textStyle="bold"
+                    android:layout_margin="8dp"
+                    android:textSize="16sp"
+                    app:cornerRadius="12dp"
+                    tools:ignore="VisualLintButtonSize" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/Btn_Back"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="@string/back"
+                    android:textStyle="bold"
+                    android:layout_margin="8dp"
+                    android:textSize="16sp"
+                    app:cornerRadius="12dp"
+                    tools:ignore="VisualLintButtonSize" />
+            </GridLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

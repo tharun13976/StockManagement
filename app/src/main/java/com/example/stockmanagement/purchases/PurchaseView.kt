@@ -38,7 +38,7 @@ class PurchaseView : AppCompatActivity() {
 
         val dao = ManagementDatabase.Companion.getInstance(this).managementDao
         lifecycleScope.launch {
-            val purchase =dao.getPurchaseById(purchaseId)
+            val purchase =dao.getPurchaseByID(purchaseId)
             val product = dao.getProductByName(purchase.productname)
             val cost = NumberFormat.getNumberInstance(Locale("en", "IN")).format(purchase.stockprice)+"per "+ product?.measurement.toString()
             purchase.let {

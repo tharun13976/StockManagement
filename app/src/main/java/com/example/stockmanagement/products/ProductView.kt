@@ -1,5 +1,6 @@
 package com.example.stockmanagement.products
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -21,6 +22,7 @@ import java.util.Locale
 
 class ProductView : AppCompatActivity() {
     private var product: Product? = null
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -48,7 +50,7 @@ class ProductView : AppCompatActivity() {
                 findViewById<TextView>(R.id.TV_ProductPrice).text = "Rs. $latestprice"
                 findViewById<TextView>(R.id.TV_ProductCreDate).text = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(it.productcreateddate)
             }?: run {
-                findViewById<TextView>(R.id.TV_ProductName).text = "Product not found"
+                findViewById<TextView>(R.id.TV_ProductName).text = getString(R.string.product_not_found_error)
             }
         }
 
@@ -70,14 +72,17 @@ class ProductView : AppCompatActivity() {
         super.onResume()
         loadProductData()
     }
+    @SuppressLint("SetTextI18n")
     private fun loadProductData() {
         lifecycleScope.launch {
             val productId = intent.getIntExtra("PRODUCT_ID", -1)
             val dao = ManagementDatabase.getInstance(this@ProductView).managementDao
             val product = dao.getProductById(productId)
             product?.let {
+                val latestprice= NumberFormat.getNumberInstance(Locale("en", "IN")).format(product.LatestpriceofoneUnit)
                 findViewById<TextView>(R.id.TV_ProductName).text = it.productname.toString()
                 findViewById<TextView>(R.id.TV_ProductMeasureunit).text = it.measurement.toString()
+                findViewById<TextView>(R.id.TV_ProductPrice).text = "Rs. $latestprice"
             }
         }
     }

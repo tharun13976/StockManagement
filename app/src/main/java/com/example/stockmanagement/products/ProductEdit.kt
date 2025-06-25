@@ -19,13 +19,13 @@ import androidx.lifecycle.lifecycleScope
 import com.example.stockmanagement.ExitConfirmation
 import com.example.stockmanagement.GetListOfData
 import com.example.stockmanagement.ManagementDatabase
-import com.example.stockmanagement.R
 import com.example.stockmanagement.entites.Product
+import com.example.stockmanagement.R
 import kotlinx.coroutines.launch
-
 
 class ProductEdit : AppCompatActivity() {
     private var product: Product? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -37,15 +37,17 @@ class ProductEdit : AppCompatActivity() {
             insets
         }
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        // Setup toolbar
+        setSupportActionBar(findViewById<Toolbar>(R.id.toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.back_icon)
 
+        // Views
         val dao = ManagementDatabase.getInstance(this).managementDao
         val productId = intent.getIntExtra("PRODUCT_ID", -1)
         val measurementType = findViewById<Spinner>(R.id.Spi_ProductMeasurement)
         val productName = findViewById<EditText>(R.id.ET_ProductName)
+        val productPrice = findViewById<EditText>(R.id.ET_ProductPrice)
 
         val measurementUnits = listOf("Kg", "Liter", "Bag", "Nos.")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, measurementUnits)
@@ -53,14 +55,8 @@ class ProductEdit : AppCompatActivity() {
         measurementType.adapter = adapter
 
         measurementType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                val selectedItem = parent.getItemAtPosition(position).toString()
-                Toast.makeText(this@ProductEdit, "Selected: $selectedItem", Toast.LENGTH_SHORT).show()
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                // Optional: Handle selection
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -68,10 +64,13 @@ class ProductEdit : AppCompatActivity() {
 
         var oldName = ""
         lifecycleScope.launch {
-            product = dao.getProductById(id = productId)
+            product = dao.getProductById(productId)
             product?.let { product ->
                 productName.setText(product.productname)
+                productPrice.setText(product.LatestpriceofoneUnit.toString())
                 oldName = product.productname
+
+                // Pre-select measurement in spinner
                 val measurementValue = product.measurement
                 for (i in 0 until adapter.count) {
                     if (adapter.getItem(i).equals(measurementValue, ignoreCase = true)) {
@@ -79,15 +78,14 @@ class ProductEdit : AppCompatActivity() {
                         break
                     }
                 }
-            } ?: run {
-                Toast.makeText(this@ProductEdit, "Product Not Found", Toast.LENGTH_LONG).show()
-            }
+            } ?: Toast.makeText(this@ProductEdit, getString(R.string.product_not_found_error), Toast.LENGTH_LONG).show()
         }
 
         val dataFetcher = GetListOfData(this, this)
         findViewById<Button>(R.id.Btn_SaveProduct).setOnClickListener {
             lifecycleScope.launch {
-                val error = validateInputs(oldName, productName.text.toString().trim(), dataFetcher)
+                val newName = productName.text.toString().trim()
+                val error = validateInputs(oldName, newName, dataFetcher,productPrice.text.toString().toIntOrNull())
                 if (error != null) {
                     Toast.makeText(this@ProductEdit, error, Toast.LENGTH_LONG).show()
                     return@launch
@@ -95,39 +93,44 @@ class ProductEdit : AppCompatActivity() {
 
                 val confirmed = dataFetcher.showConfirmationDialog(
                     context = this@ProductEdit,
-                    message = "Are you sure you want to update this product?"
+                    message = getString(R.string.product_update_conformation)
                 )
                 if (!confirmed) return@launch
 
-                product?.let {
-                    it.productname = productName.text.trim().toString()
-                    it.measurement = measurementType.selectedItem.toString()
+                val price = productPrice.text.toString().toInt()
 
-                    if (productName.text.toString() != oldName) {
-                        val updatedSales = dao.updateProductNameInSales(oldName, productName.text.toString().trim())
-                        val updatedPurchases = dao.updateProductNameInPurchases(oldName, productName.text.toString().trim())
-                        Log.d("UPDATE", "Updated $updatedSales sales and $updatedPurchases purchases")
+                product?.let {
+                    it.productname = newName
+                    it.measurement = measurementType.selectedItem.toString()
+                    it.LatestpriceofoneUnit = price
+
+                    if (newName != oldName) {
+                        dao.updateProductNameInSales(oldName, newName)
+                        dao.updateProductNameInPurchases(oldName, newName)
+                        Log.d("UPDATE", "Updated sales and purchases")
                     }
 
                     dao.updateProduct(it)
                     Log.d("UPDATE", "Product Updated: Product Id ${it.pid}")
-                    Toast.makeText(this@ProductEdit, "Product is Updated", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@ProductEdit, getString(R.string.product_updated), Toast.LENGTH_LONG).show()
                     finish()
-                } ?: run {
-                    Toast.makeText(this@ProductEdit, "Product not found", Toast.LENGTH_LONG).show()
-                }
+                } ?: Toast.makeText(this@ProductEdit, getString(R.string.product_not_found_error), Toast.LENGTH_LONG).show()
             }
         }
     }
 
-    suspend fun validateInputs(
+    private suspend fun validateInputs(
         oldName: String,
         productName: String,
-        dataFetcher: GetListOfData
+        dataFetcher: GetListOfData,
+        price: Int?
     ): String? {
         return when {
             productName.isEmpty() -> getString(R.string.product_name_required)
-            !productName.equals(oldName)&& dataFetcher.doesProductExist(productName) -> getString(R.string.product_same_name_alert)
+            !productName.equals(oldName, ignoreCase = true) &&
+                    dataFetcher.doesProductExist(productName) ->
+                getString(R.string.product_same_name_alert)
+            price==null -> getString(R.string.product_update_price_error)
             else -> null
         }
     }

@@ -51,12 +51,39 @@
                 tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!--Product Price-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/product_price"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="4dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ET_ProductPrice"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/product_price_hint"
+                android:inputType="number"
+                android:imeOptions="actionNext"
+                android:maxLength="60"
+                tools:ignore="VisualLintTextFieldSize" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <!-- Measurement Unit Label -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/product_measurement_unit"
             android:textSize="16sp"
+            android:textStyle="bold"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="4dp" />
 
@@ -74,6 +101,7 @@
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp" />
         </com.google.android.material.card.MaterialCardView>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/Btn_SaveProduct"
             android:layout_width="match_parent"

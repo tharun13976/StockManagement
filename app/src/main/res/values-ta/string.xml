@@ -43,13 +43,44 @@
     <string name="hint_delete_record">பதிவின் ID எண்ணை உள்ளிடவும்</string>
     <string name="delete_but_delete">நீக்கு</string>
     <string name="delete_but_proceed">தொடரு</string>
-    <string name="mod_none">எதுவுமில்லை</string>
+    <!-- Modules -->
+    <string name="mod_none">தொகுதியை தேர்ந்தெடுக்கவும்</string>
+    <string name="mod_customer">வாடிக்கையாளர்</string>
+    <string name="mod_product">விளைபொருள்</string>
     <string name="mod_purchase">கொள்முதல்</string>
     <string name="mod_sale">விற்பனை</string>
-    <string name="mod_product">விளைபொருள்</string>
-    <string name="mod_customer">வாடிக்கையாளர்</string>
-    <string name="mod_selection_alert">தொகுதியின் பெயரைத் தேர்ந்தெடுக்கவும்</string>
-    <string name="mod_record_id_alert">பதிவின் ID அவசியம்</string>
+    <!-- Alerts -->
+    <string name="mod_selection_alert">பதிவின் ஐடியை உள்ளிட, தொகுதியை தேர்ந்தெடுக்கவும்</string>
+    <string name="mod_record_id_alert">பதிவின் ஐடி அவசியம்</string>
+    <string name="customer_delete_blocked">இந்த வாடிக்கையாளருக்கான விற்பனை பதிவுகள் உள்ளன. நீக்க முடியாது.</string>
+    <string name="product_delete_blocked">இந்த விளைபொருளுக்கான கொள்முதல் பதிவுகள் உள்ளன. நீக்க முடியாது.</string>
+    <string name="purchase_delete_blocked">இந்த கொள்முதல் ஐடிக்கான விற்பனை பதிவுகள் உள்ளன. நீக்க முடியாது.</string>
+    <string name="sale_delete_blocked">இந்த விற்பனை பதிவு 2 நாட்களுக்கு முந்தையதாக உள்ளது. நீக்க முடியாது.</string>
+
+    <!-- Not Found -->
+    <string name="customer_not_found_error">வாடிக்கையாளர் கிடைக்கவில்லை</string>
+    <string name="product_not_found">விளைபொருள் கிடைக்கவில்லை</string>
+    <string name="purchase_not_found">கொள்முதல் கிடைக்கவில்லை</string>
+    <string name="sale_not_found">விற்பனை கிடைக்கவில்லை</string>
+    <!-- Labels -->
+    <string name="label_customer_id">வாடிக்கையாளர் ஐடி: </string>
+    <string name="label_customer_name">பெயர்: </string>
+    <string name="label_customer_phone">தொலைபேசி: </string>
+    <string name="label_customer_address">முகவரி: </string>
+    <string name="label_product_id">விளைபொருள் ஐடி: </string>
+    <string name="label_product_name">பெயர்: </string>
+    <string name="label_purchase_id">கொள்முதல் ஐடி: </string>
+    <string name="label_purchase_product">விளைபொருள்: </string>
+    <string name="label_purchase_qty">அளவு: </string>
+    <string name="label_sale_id">விற்பனை ஐடி: </string>
+    <string name="label_sale_customer">வாடிக்கையாளர்: </string>
+    <string name="label_sale_product">விளைபொருள்: </string>
+    <string name="label_sale_qty">விளைபொருள் எண்ணிக்கை: </string>
+    <string name="label_sale_amount">கொடுக்கப்பட்ட தொகை: ரூ.</string>
+
+    <!-- Success -->
+    <string name="deleted_success">பதிவு நீக்கப்பட்டது.</string>
+
 
     <!--    Import and Backup-->
     <string name="import_data">தரவை இறக்குமதி செய்க</string>
@@ -139,6 +170,11 @@
     <string name="product_saved">விளைபொருள் பதிவு சேமிக்கப்பட்டது</string>
     <string name="product_save_conformation">இந்த விளைபொருள் விவரங்களை நீங்கள் நிச்சயமாக சேமிக்க விரும்புகிறீர்களா?</string>
     <string name="product_update_conformation">இந்த தயாரிப்பு விவரங்களைப் புதுப்பிக்க விரும்புகிறீர்களா?</string>
+    <string name="product_price">விளைபொருள் விலை (ரூபாய்.)</string>
+    <string name="product_price_hint">ஒரு விளைபொருளின் விலையை உள்ளிடவும்</string>
+    <string name="product_not_found_error">விளைபொருள் காணப்படவில்லை</string>
+    <string name="product_updated">விளைபொருள் புதுப்பிக்கப்பட்டது</string>
+    <string name="product_update_price_error">தயவுசெய்து செல்லுபடியாகும் விலையை உள்ளிடவும்</string>
 
     <string name="filter_Product_none">எதுவுமில்லை</string>
     <string name="filter_Product_name_asc">பெயர் ஏறுவரிசை</string>

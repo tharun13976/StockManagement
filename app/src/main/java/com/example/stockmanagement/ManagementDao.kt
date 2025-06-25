@@ -118,6 +118,7 @@ interface ManagementDao {
     @Query("SELECT COUNT(*) FROM product WHERE LOWER(productname) = LOWER(:name)")
     suspend fun countProductByName(name: String): Int
 
+
     // Purchase-related
     // Get all purchases with their sales
     @Transaction
@@ -126,11 +127,11 @@ interface ManagementDao {
 
     @Transaction
     @Query("SELECT * FROM Purchase WHERE puid = :purchaseId")
-    suspend fun getPurchaseById(purchaseId: Int): Purchase
+    suspend fun getPurchaseByID(purchaseId: Int): Purchase
 
     @Transaction
     @Query("SELECT * FROM Purchase WHERE puid = :purchaseId")
-    suspend fun getPurchaseByID(purchaseId: Int): Purchase?
+    suspend fun getPurchaseById(purchaseId: Int): Purchase?
 
     @Transaction
     @Query("SELECT * FROM Purchase WHERE currentstockcount > 0")
@@ -151,6 +152,11 @@ interface ManagementDao {
     @Transaction
     @Query("SELECT * FROM Purchase WHERE currentstockcount > 0 AND productname = :productName ORDER BY stockaddeddate ASC LIMIT 1")
     suspend fun getOldestPurchase(productName: String): Purchase
+
+    //Get Count of the product's purchases
+    @Query("SELECT COUNT(*) FROM Purchase WHERE productname = :productName")
+    suspend fun getPurchaseCountForProduct(productName: String): Int
+
 
     // Sale-related
     // Get all sale
@@ -191,6 +197,14 @@ interface ManagementDao {
     @Query("SELECT * FROM Sale WHERE salesdate =:date")
     suspend fun getSalesByDate(date: Date): List<Sale>
 
+    // Get count of Sales Entries with customer Name
+    @Query("SELECT COUNT(*) FROM Sale WHERE customername = :customerName")
+    suspend fun getSalesCountForCustomer(customerName: String): Int
+
+    //
+    @Query("SELECT COUNT(*) FROM Sale WHERE purchaseid = :purchaseId")
+    suspend fun getSalesCountForPurchase(purchaseId: Int): Int
+
 
     @Query("""
     SELECT
@@ -227,5 +241,24 @@ interface ManagementDao {
 
     @Query("UPDATE Purchase SET productname = :newName WHERE productname = :oldName")
     suspend fun updateProductNameInPurchases(oldName: String, newName: String): Int
+
+
+    // To Delete Records
+
+    // Delete Customer Record by customer ID
+    @Query("DELETE FROM Customer WHERE cid = :id")
+    suspend fun deleteCustomerById(id: Int): Int
+
+    // Delete Product Record by product ID
+    @Query("DELETE FROM Product WHERE pid = :id")
+    suspend fun deleteProductById(id: Int): Int
+
+    // Delete Purchase Record by purchase ID
+    @Query("DELETE FROM Purchase WHERE puid = :id")
+    suspend fun deletePurchaseById(id: Int): Int
+
+    // Delete Sale Record by sale ID
+    @Query("DELETE FROM Sale WHERE sid = :id")
+    suspend fun deleteSaleById(id: Int): Int
 
 }

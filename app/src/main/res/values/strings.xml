@@ -42,13 +42,41 @@
     <string name="hint_delete_record">Enter the Record ID Number</string>
     <string name="delete_but_proceed">Proceed</string>
     <string name="delete_but_delete">Delete</string>
-    <string name="mod_none">None</string>
+    <!-- Modules -->
+    <string name="mod_none">Select Module</string>
+    <string name="mod_customer">Customer</string>
+    <string name="mod_product">Product</string>
     <string name="mod_purchase">Purchase</string>
     <string name="mod_sale">Sale</string>
-    <string name="mod_product">Product</string>
-    <string name="mod_customer">Customer</string>
-    <string name="mod_selection_alert">Select the Module Name</string>
+    <!-- Alerts -->
+    <string name="mod_selection_alert">Select the Module to Enter Record Id</string>
     <string name="mod_record_id_alert">Record ID Required</string>
+    <string name="customer_delete_blocked">There are sales entries for this customer. Cannot delete.</string>
+    <string name="product_delete_blocked">There are purchase entries for this product. Cannot delete.</string>
+    <string name="purchase_delete_blocked">There are sales entries for this purchase Id. Cannot delete.</string>
+    <string name="sale_delete_blocked">This Sale entry is created before 2 Days. Cannot delete.</string>
+    <!-- Not Found -->
+    <string name="customer_not_found_error">Customer not found</string>
+    <string name="product_not_found">Product not found</string>
+    <string name="purchase_not_found">Purchase not found</string>
+    <string name="sale_not_found">Sale not found</string>
+    <!-- Labels -->
+    <string name="label_customer_id">Customer ID: </string>
+    <string name="label_customer_name">Name: </string>
+    <string name="label_customer_phone">Phone: </string>
+    <string name="label_customer_address">Address: </string>
+    <string name="label_product_id">Product ID: </string>
+    <string name="label_product_name">Name: </string>
+    <string name="label_purchase_id">Purchase ID: </string>
+    <string name="label_purchase_product">Product: </string>
+    <string name="label_purchase_qty">Quantity: </string>
+    <string name="label_sale_id">Sale ID: </string>
+    <string name="label_sale_customer">Customer: </string>
+    <string name="label_sale_product">Product: </string>
+    <string name="label_sale_qty">Product Count: </string>
+    <string name="label_sale_amount">Amount Given: Rs.</string>
+    <!-- Success -->
+    <string name="deleted_success">record deleted.</string>
 
     <!--    Import and Backup-->
     <string name="import_data">Import Data</string>
@@ -145,6 +173,11 @@
         details?</string>
     <string name="product_update_conformation">Are you sure you want to update this Product
         details?</string>
+    <string name="product_price">Product Price (Rs.)</string>
+    <string name="product_price_hint">Enter the Price of One Product</string>
+    <string name="product_not_found_error">Product not found</string>
+    <string name="product_updated">Product is Updated</string>
+    <string name="product_update_price_error">Please enter a valid price</string>
 
     <string name="filter_Product_none">None</string>
     <string name="filter_Product_name_asc">Name ASC</string>
