@@ -23,7 +23,7 @@ import java.util.Locale
 
 class Stock_Price_Change : AppCompatActivity() {
     private lateinit var dao: ManagementDao
-
+    private lateinit var pro: String
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +73,7 @@ class Stock_Price_Change : AppCompatActivity() {
                 // Show price and details
                 findViewById<LinearLayout>(R.id.LL_PriceFields).visibility = View.VISIBLE
                 findViewById<LinearLayout>(R.id.LL_layoutPurchase).visibility = View.VISIBLE
-
+                pro=purchaseRec.productname
                 val oldPrice = NumberFormat.getNumberInstance(Locale("en", "IN")).format(purchaseRec.stockprice)
                 findViewById<TextView>(R.id.tvPurchaseId).text = "Purchase ID          : ${purchaseRec.puid}"
                 findViewById<TextView>(R.id.tvPurchaseProduct).text = "Product Name     : ${purchaseRec.productname}"
@@ -106,6 +106,12 @@ class Stock_Price_Change : AppCompatActivity() {
 
             lifecycleScope.launch {
                 dao.updatePurchasePrice(id, price)
+
+                val productrec = dao.getProductByName(pro)
+                if (productrec != null) {
+                    productrec.LatestpriceofoneUnit = price
+                    dao.updateProduct(productrec)
+                }
                 Log.d("UPDATE", "Purchase: Purchase Id $id updated with new price $price")
                 Toast.makeText(this@Stock_Price_Change, getString(R.string.price_updated), Toast.LENGTH_LONG).show()
                 finish()

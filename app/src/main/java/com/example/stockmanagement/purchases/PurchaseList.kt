@@ -33,7 +33,7 @@ class PurchaseList : AppCompatActivity() {
     private lateinit var dao: ManagementDao
     private lateinit var clearButton: Button
     private lateinit var selectedTextView: TextView
-    private lateinit var recordCount:TextView
+    private lateinit var recordCount: TextView
     private var defaultColor: ColorStateList? = null
 
     enum class FilterType {
@@ -67,15 +67,26 @@ class PurchaseList : AppCompatActivity() {
         }
         recyclerView.adapter = adapter
 
-        loadPurchaseList()
-
-        val filterDropdown = findViewById<Spinner>(R.id.Spi_PurchaseFilter)
         clearButton = findViewById(R.id.Btn_FilterClear)
         selectedTextView = findViewById(R.id.TV_SelectedText)
-        recordCount=findViewById(R.id.list_record_count)
+        recordCount = findViewById(R.id.list_record_count)
+
         selectedTextView.visibility = View.GONE
         defaultColor = clearButton.backgroundTintList
 
+        setupFilterDropdown()
+        loadPurchaseList()
+
+        clearButton.setOnClickListener {
+            clearButton.backgroundTintList = defaultColor
+            selectedTextView.visibility = View.GONE
+            clearButton.visibility = View.GONE
+            loadPurchaseList()
+        }
+    }
+
+    private fun setupFilterDropdown() {
+        val filterDropdown = findViewById<Spinner>(R.id.Spi_PurchaseFilter)
         val filterMap = mapOf(
             getString(R.string.filter_purchase_none) to FilterType.NONE,
             getString(R.string.filter_purchase_product_name) to FilterType.PRODUCT_NAME,
@@ -90,29 +101,17 @@ class PurchaseList : AppCompatActivity() {
         filterDropdown.adapter = spinnerAdapter
 
         filterDropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, p1: View, position: Int, id: Long) {
+            override fun onItemSelected(parent: AdapterView<*>, p1: View?, position: Int, id: Long) {
                 val selectedLabel = parent.getItemAtPosition(position).toString()
                 val selectedFilter = filterMap[selectedLabel] ?: FilterType.NONE
 
                 if (selectedFilter != FilterType.NONE) {
                     showClearButton()
                     when (selectedFilter) {
-                        FilterType.AVAILABLE -> {
-                            lifecycleScope.launch {
-                                val purchase = dao.getAllAvailablePurchases()
-                                recordCount.text=purchase.size.toString()
-                                adapter.updateData(purchase.reversed())
-                            }
-                        }
-                        FilterType.PRODUCT_NAME -> {
-                            showProductNameFilterDialog()
-                        }
-                        FilterType.PURCHASE_ID -> {
-                            showPurchaseIdDialog()
-                        }
-                        FilterType.CREATED_DATE -> {
-                            showDateFilterDialog()
-                        }
+                        FilterType.AVAILABLE -> showAvailableFilter()
+                        FilterType.PRODUCT_NAME -> showProductNameFilterDialog()
+                        FilterType.PURCHASE_ID -> showPurchaseIdDialog()
+                        FilterType.CREATED_DATE -> showDateFilterDialog()
                         else -> {}
                     }
                 } else {
@@ -123,17 +122,7 @@ class PurchaseList : AppCompatActivity() {
                 }
             }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                clearButton.visibility = View.GONE
-            }
-        }
-
-        clearButton.setOnClickListener {
-            clearButton.backgroundTintList = defaultColor
-            filterDropdown.setSelection(0)
-            selectedTextView.visibility = View.GONE
-            clearButton.visibility = View.GONE
-            loadPurchaseList()
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
         }
     }
 
@@ -142,28 +131,42 @@ class PurchaseList : AppCompatActivity() {
         clearButton.backgroundTintList = ColorStateList.valueOf(Color.RED)
     }
 
+    private fun showAvailableFilter() {
+        lifecycleScope.launch {
+            try {
+                val purchase = dao.getAllAvailablePurchases()
+                adapter.updateData(purchase.reversed())
+                selectedTextView.text = getString(R.string.filter_purchase_product_available)
+                selectedTextView.visibility = View.VISIBLE
+                recordCount.text = purchase.size.toString()
+            } catch (e: Exception) {
+                Toast.makeText(this@PurchaseList, "Error loading available purchases", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     private fun showDateFilterDialog() {
         GetListOfData.showDatePicker1(this, onDateSelected = { selectedDate ->
+            val formattedDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(selectedDate)
             val startOfDay = java.sql.Date(selectedDate.time)
-
-            val selectedText = findViewById<TextView>(R.id.TV_SelectedText)
-            selectedText.text = "${getString(R.string.filter_sale_popup_entered_date)}: ${
-                SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(startOfDay)
-            }"
-            selectedText.visibility = View.VISIBLE
 
             lifecycleScope.launch {
                 showClearButton()
-                val purchases = dao.getPurchasesByDate(startOfDay)
-                recordCount.text=purchases.size.toString()
-                adapter.updateData(purchases.reversed())
-                if (purchases.isNotEmpty()) {
-                    selectedTextView.text = "${getString(R.string.filter_purchase_popup_entered_date)}: ${SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(startOfDay)}"
-                } else {
-                    selectedTextView.text = "${getString(R.string.filter_purchase_popup_result_date)} ${SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(startOfDay)}"
+                try {
+                    val purchases = dao.getPurchasesByDate(startOfDay)
+                    adapter.updateData(purchases.reversed())
+                    recordCount.text = purchases.size.toString()
+
+                    selectedTextView.text = if (purchases.isNotEmpty()) {
+                        "${getString(R.string.filter_purchase_popup_entered_date)}: $formattedDate"
+                    } else {
+                        "${getString(R.string.filter_purchase_popup_result_date)} $formattedDate"
+                    }
+                    selectedTextView.visibility = View.VISIBLE
+                } catch (e: Exception) {
+                    Toast.makeText(this@PurchaseList, "Error filtering by date", Toast.LENGTH_SHORT).show()
                 }
-                selectedTextView.visibility = View.VISIBLE
             }
         })
     }
@@ -180,17 +183,21 @@ class PurchaseList : AppCompatActivity() {
             if (enteredId != null && enteredId > 0) {
                 lifecycleScope.launch {
                     showClearButton()
-                    val result = dao.getPurchaseById(enteredId)
-                    if (result != null) {
-                        adapter.updateData(listOf(result))
-                        recordCount.text="1"
-                        selectedTextView.text = "${getString(R.string.filter_purchase_popup_entered_id)}: $enteredId"
-                    } else {
-                        adapter.updateData(emptyList())
-                        recordCount.text="0"
-                        selectedTextView.text = "${getString(R.string.filter_purchase_popup_result_Id)} $enteredId"
+                    try {
+                        val result = dao.getPurchaseById(enteredId)
+                        if (result != null) {
+                            adapter.updateData(listOf(result))
+                            recordCount.text = "1"
+                            selectedTextView.text = "${getString(R.string.filter_purchase_popup_entered_id)}: $enteredId"
+                        } else {
+                            adapter.updateData(emptyList())
+                            recordCount.text = "0"
+                            selectedTextView.text = "${getString(R.string.filter_purchase_popup_result_Id)} $enteredId"
+                        }
+                        selectedTextView.visibility = View.VISIBLE
+                    } catch (e: Exception) {
+                        Toast.makeText(this@PurchaseList, "Error filtering by ID", Toast.LENGTH_SHORT).show()
                     }
-                    selectedTextView.visibility = View.VISIBLE
                 }
             }
         }
@@ -210,24 +217,25 @@ class PurchaseList : AppCompatActivity() {
         showInputDialog(getString(R.string.filter_purchase_popup_enter_product_name), input) { name ->
             lifecycleScope.launch {
                 showClearButton()
-                val list = dao.getPurchaseforProduct(name)
-                adapter.updateData(list.reversed())
-                recordCount.text=list.size.toString()
-                if (list.isNotEmpty()) {
-                    selectedTextView.text = "${getString(R.string.filter_purchase_popup_entered_product)}: $name"
-                } else {
-                    selectedTextView.text = "${getString(R.string.filter_purchase_popup_result_name)} $name"
+                try {
+                    val list = dao.getPurchaseforProduct(name)
+                    adapter.updateData(list.reversed())
+                    recordCount.text = list.size.toString()
+
+                    selectedTextView.text = if (list.isNotEmpty()) {
+                        "${getString(R.string.filter_purchase_popup_entered_product)}: $name"
+                    } else {
+                        "${getString(R.string.filter_purchase_popup_result_name)} $name"
+                    }
+                    selectedTextView.visibility = View.VISIBLE
+                } catch (e: Exception) {
+                    Toast.makeText(this@PurchaseList, "Error filtering by product", Toast.LENGTH_SHORT).show()
                 }
-                selectedTextView.visibility = View.VISIBLE
             }
         }
     }
 
-    private fun showInputDialog(
-        title: String,
-        inputView: View,
-        onApply: (inputText: String) -> Unit
-    ) {
+    private fun showInputDialog(title: String, inputView: View, onApply: (String) -> Unit) {
         val padding = resources.getDimensionPixelSize(R.dimen.dialog_input_padding)
         inputView.setPadding(padding, padding, padding, padding)
 
@@ -241,9 +249,7 @@ class PurchaseList : AppCompatActivity() {
                     else -> ""
                 }.trim()
 
-                if (text.isNotEmpty()) {
-                    onApply(text)
-                }
+                if (text.isNotEmpty()) onApply(text)
                 dialog.dismiss()
             }
             .setNegativeButton(getString(R.string.popup_cancel)) { dialog, _ -> dialog.cancel() }
@@ -252,9 +258,13 @@ class PurchaseList : AppCompatActivity() {
 
     private fun loadPurchaseList() {
         lifecycleScope.launch {
-            val purchases = dao.getAllPurchases()
-            recordCount.text=purchases.size.toString()
-            adapter.updateData(purchases.toMutableList().reversed())
+            try {
+                val purchases = dao.getAllPurchases()
+                recordCount.text = purchases.size.toString()
+                adapter.updateData(purchases.reversed().toMutableList())
+            } catch (e: Exception) {
+                Toast.makeText(this@PurchaseList, "Error loading purchase list", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
