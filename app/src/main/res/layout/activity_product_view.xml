@@ -178,6 +178,16 @@
                     tools:ignore="VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/Btn_SeeSaleRecord"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/product_sale_record"
+                app:cornerRadius="12dp"
+                android:elevation="2dp"
+                tools:ignore="VisualLintButtonSize" />
+
             <!-- Save Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/Btn_EditProduct"

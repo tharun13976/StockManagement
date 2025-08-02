@@ -115,6 +115,11 @@ class MainActivity : AppCompatActivity() {
                 showLanguageSelectionDialog()
                 true
             }
+            R.id.action_priceChange -> {
+                val nextScreen = Intent(this, Stock_Price_Change::class.java)
+                startActivity(nextScreen)
+                true
+            }
             R.id.action_delete->{
                 val nextScreen = Intent(this, DeletePage::class.java)
                 startActivity(nextScreen)

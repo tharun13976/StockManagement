@@ -23,6 +23,7 @@
     <string name="date_format">DD-MM-YYYY</string>
     <string name="popup_save">Save</string>
     <string name="popup_cancel">Cancel</string>
+    <string name="popup_save_new">Save and New</string>
     <string name="popup_apply">Apply</string>
     <string name="popup_title">Confirm Action</string>
     <string name="tab_product">Product Stats</string>
@@ -36,12 +37,26 @@
     <string name="record_count">Record Count :</string>
     <string name="delete_record">Delete Record</string>
 
-    <!--    Delete Page-->
+
+    <!--Delete Page-->
     <string name="module_Question">Select the module Name to delete the record</string>
     <string name="title_delete_record">Enter the Record ID to Delete</string>
     <string name="hint_delete_record">Enter the Record ID Number</string>
     <string name="delete_but_proceed">Proceed</string>
     <string name="delete_but_delete">Delete</string>
+    <!-- Update Page-->
+    <string name="stock_price_update">Stock Price Update</string>
+    <string name="price_update_page">Purchase Record Price Update Page</string>
+    <string name="title_update_record">Enter the Purchase Record ID to Update Price</string>
+    <string name="hint_update_record">Enter the Record ID Number</string>
+    <string name="title_update_price">Enter the new price of the Stock (Rs)</string>
+    <string name="hint_update_price">Enter the amount here</string>
+    <string name="update_button">Update</string>
+    <string name="error_uppage_record_notfound">For given Record ID record not found or invalid record id was given</string>
+    <string name="error_uppage_record_not_applicable">For the given Record ID, there is no product in stock</string>
+    <string name="error_new_invalid_price">Enter the Correct Price of the Product</string>
+    <string name="price_updated">Price was updated</string>
+
     <!-- Modules -->
     <string name="mod_none">Select Module</string>
     <string name="mod_customer">Customer</string>
@@ -118,6 +133,7 @@
     <string name="customer_id">Customer ID</string>
     <string name="customer_balance">Balance</string>
     <string name="edit_the_customer_details">Edit the Customer Details</string>
+    <string name="customers_sale_record">See Sales Entry For this Customer</string>
     <string name="customer_list">Customer List</string>
     <string name="customer_same_name_alert">Already we have a Customer with Same Name so Change
         Customer name</string>
@@ -162,6 +178,7 @@
     <string name="product_stock_count">Stock Unit(s)</string>
     <string name="product_latest_price">Latest Price</string>
     <string name="edit_the_product_details">Edit the Product Details</string>
+    <string name="product_sale_record">See Sales Entry For this Product</string>
     <string name="product_mes_none">None</string>
     <string name="product_same_name_alert">Already we have a Product with the Same Name so Change
        Product name</string>
@@ -211,9 +228,9 @@
     <string name="purchase_added_date_required">Stock added Date is required</string>
     <string name="purchase_stock_count">Product count must be more than 0</string>
     <string name="purchase_stockprice_required">Stock price is required</string>
-    <string name="purchase_conformation">Are you sure you want to save this Purchase Entry?
-        \n\nNote: Unable to edit or Delete the Purchase record</string>
+    <string name="purchase_conformation">Are you sure you want to save this Purchase Entry?</string>
     <string name="purchase_saved">Purchase Entry Saved</string>
+    <string name="purchase_sale_record">See Sales Entry For this Purchase</string>
 
     <string name="filter_purchase_none">None</string>
     <string name="filter_purchase_product_name">Product Name</string>
@@ -251,8 +268,7 @@
     <string name="sale_date">Sale Date</string>
     <string name="language">Language</string>
     <string name="sale_product_update_error">Unexpected error during stock update</string>
-    <string name="sale_conformantion">Are you sure you want to save this Sales Entry? \n\nNote:
-        Unable to edit or Delete the Sales record</string>
+    <string name="sale_conformantion">Are you sure you want to save this Sales Entry?</string>
     <string name="sale_saved">Sale Record Saved</string>
     <string name="sale_customer_not_found">Entered Customer not Found</string>
     <string name="sale_product_not_found">Entered Product not found</string>

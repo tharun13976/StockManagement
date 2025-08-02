@@ -50,6 +50,7 @@ tools:context=".sales.SaleList">
             android:layout_marginEnd="3dp"
             android:textStyle="bold"/>
         <TextView
+            android:id="@+id/Sales_Filter_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sort_filter"

@@ -24,6 +24,7 @@
     <string name="date_format">நாள்-மாதம்-வருடம்</string>
     <string name="popup_save">சேமிக்கவும்</string>
     <string name="popup_cancel">ரத்துசெய்</string>
+    <string name="popup_save_new">சேமித்து புதிய பதிவு செய்</string>
     <string name="popup_apply">உள்ளீடு</string>
     <string name="popup_title">செயலை உறுதிப்படுத்து</string>
     <string name="tab_product">விளைபொருள்கள் புள்ளிவிவரங்கள்</string>
@@ -43,6 +44,19 @@
     <string name="hint_delete_record">பதிவின் ID எண்ணை உள்ளிடவும்</string>
     <string name="delete_but_delete">நீக்கு</string>
     <string name="delete_but_proceed">தொடரு</string>
+    <!-- Update Page-->
+    <string name="stock_price_update">பங்கு விலை புதுப்பிப்பு</string>
+    <string name="price_update_page">கொள்முதல் பதிவு விலை புதுப்பிப்பு பக்கம்</string>
+    <string name="title_update_record">விலையை புதுப்பிக்க, கொள்முதல் பதிவின் ஐடியை உள்ளிடவும்</string>
+    <string name="hint_update_record">பதிவின் ஐடி எண்ணை உள்ளிடவும்</string>
+    <string name="title_update_price">புதிய பங்கு விலையை உள்ளிடவும் (ரூ)</string>
+    <string name="hint_update_price">தொகையை இங்கே உள்ளிடவும்</string>
+    <string name="update_button">புதுப்பிக்க</string>
+    <string name="error_uppage_record_notfound">கொடுக்கப்பட்ட பதிவின் ஐடிக்கு பதிவு கிடைக்கவில்லை அல்லது தவறான ஐடி வழங்கப்பட்டுள்ளது</string>
+    <string name="error_uppage_record_not_applicable">கொடுக்கப்பட்ட பதிவின் ஐடிக்கு பங்கில் எந்த விளைபொருளும் இல்லை</string>
+    <string name="error_new_invalid_price">விளைபொருளின் சரியான விலையை உள்ளிடவும்</string>
+    <string name="price_updated">விலை புதுப்பிக்கப்பட்டது</string>
+
     <!-- Modules -->
     <string name="mod_none">தொகுதியை தேர்ந்தெடுக்கவும்</string>
     <string name="mod_customer">வாடிக்கையாளர்</string>
@@ -121,6 +135,7 @@
     <string name="customer_id">வாடிக்கையாளர் ID</string>
     <string name="customer_balance">மீதம்</string>
     <string name="edit_the_customer_details">வாடிக்கையாளர் விவரங்களைத் திருத்துக</string>
+    <string name="customers_sale_record">இந்த வாடிக்கையாளருக்கான விற்பனை பதிவுகளை பார்க்க</string>
     <string name="customer_list">வாடிக்கையாளர் பட்டியல்</string>
     <string name="customer_same_name_alert">ஏற்கனவே அதே பெயரில் ஒரு வாடிக்கையாளர் இருக்கிறார், எனவே பெயரை மாற்றவும்</string>
     <string name="customer_update_conformation">இந்த வாடிக்கையாளர் விவரங்களைப் புதுப்பிக்க விரும்புகிறீர்களா?</string>
@@ -162,6 +177,7 @@
     <string name="product_stock_count">விளைபொருள் அலகுகள்</string>
     <string name="product_latest_price">சமீபத்திய விலை</string>
     <string name="edit_the_product_details">விளைபொருள் விவரங்களைத் திருத்துக</string>
+    <string name="product_sale_record">இந்த விளைபொருளுக்கான விற்பனை பதிவுகளை பார்க்க</string>
     <string name="product_mes_none">எதுவுமில்லை</string>
     <string name="product_same_name_alert">ஏற்கனவே அதே பெயரில் ஒரு விளைபொருள் உள்ளது, எனவே விளைபொருள் பெயரை மாற்றவும்</string>
     <string name="product_name_required">விளைபொருள் பெயர் தேவை</string>
@@ -207,9 +223,9 @@
     <string name="purchase_added_date_required">பங்கு சேர்க்கப்பட்ட தேதி அவசியம்</string>
     <string name="purchase_stock_count">விளைபொருள் எண்ணிக்கை 0-இற்கும் மேற்பாக இருக்க வேண்டும்</string>
     <string name="purchase_stockprice_required">பங்கு விலை அவசியம்</string>
-    <string name="purchase_conformation">இந்த கொள்முதல் பதிவை சேமிக்க விரும்புகிறீர்களா?
-        \n\nகுறிப்பு: இந்த கொள்முதல் பதிவை திருத்த அல்லது நீக்க முடியாது</string>
+    <string name="purchase_conformation">இந்த கொள்முதல் பதிவை சேமிக்க விரும்புகிறீர்களா?</string>
     <string name="purchase_saved">கொள்முதல் பதிவு சேமிக்கப்பட்டது</string>
+    <string name="purchase_sale_record">இந்த கொள்முதலுக்கான விற்பனை பதிவுகளை பார்க்க</string>
 
     <string name="filter_purchase_none">எதுவுமில்லை</string>
     <string name="filter_purchase_product_name">விளைபொருள் பெயர்</string>
@@ -249,7 +265,7 @@
     <string name="language">மொழி</string>
     <string name="sale_product_update_error">பங்கு புதுப்பிப்பின் போது எதிர்பாராத பிழை</string>
     <string name="sale_conformantion">இந்த விற்பனை பதிவை நீங்கள் நிச்சயமாக சேமிக்க
-        விரும்புகிறீர்களா \n\nகுறிப்பு: விற்பனை பதிவைத் திருத்தவோ நீக்கவோ முடியவில்லை.</string>
+        விரும்புகிறீர்களா?</string>
     <string name="sale_saved">விற்பனைப் பதிவு சேமிக்கப்பட்டது</string>
     <string name="sale_customer_not_found">உள்ளிட்ட வாடிக்கையாளர் கிடைக்கவில்லை</string>
     <string name="sale_product_not_found">உள்ளிட்ட விளைபொருள் கிடைக்கவில்லை</string>

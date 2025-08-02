@@ -15,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.stockmanagement.ManagementDatabase
 import com.example.stockmanagement.R
 import com.example.stockmanagement.entites.Product
+import com.example.stockmanagement.sales.SaleList
 import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -52,6 +53,12 @@ class ProductView : AppCompatActivity() {
             }?: run {
                 findViewById<TextView>(R.id.TV_ProductName).text = getString(R.string.product_not_found_error)
             }
+        }
+
+        findViewById<Button>(R.id.Btn_SeeSaleRecord).setOnClickListener {
+            val nextScreen = Intent(this, SaleList::class.java)
+            nextScreen.putExtra("FILTER_PRODUCT_NAME", product?.productname?:"")
+            startActivity(nextScreen)
         }
 
         findViewById<Button>(R.id.Btn_EditProduct).setOnClickListener {

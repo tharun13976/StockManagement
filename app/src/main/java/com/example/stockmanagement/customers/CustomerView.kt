@@ -1,5 +1,6 @@
 package com.example.stockmanagement.customers
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -14,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.stockmanagement.ManagementDatabase
 import com.example.stockmanagement.R
 import com.example.stockmanagement.entites.Customer
+import com.example.stockmanagement.sales.SaleList
 import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -21,6 +23,7 @@ import java.util.Locale
 
 class CustomerView : AppCompatActivity() {
     private var customer: Customer? = null
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -51,8 +54,14 @@ class CustomerView : AppCompatActivity() {
                 findViewById<TextView>(R.id.TV_CustomerAddress).text = it.address
                 findViewById<TextView>(R.id.TV_CustomerCreDate).text = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(it.customercreatedDate)
             } ?: run {
-                findViewById<TextView>(R.id.TV_CustomerName).text = "Customer not found"
+                findViewById<TextView>(R.id.TV_CustomerName).text = (R.string.customer_not_found_error).toString()
             }
+        }
+
+        findViewById<Button>(R.id.Btn_SeeSaleRecord).setOnClickListener {
+            val nextScreen = Intent(this, SaleList::class.java)
+            nextScreen.putExtra("FILTER_CUSTOMER_NAME", customer?.customername ?: "")
+            startActivity(nextScreen)
         }
 
         findViewById<Button>(R.id.Btn_EditCustomer).setOnClickListener {

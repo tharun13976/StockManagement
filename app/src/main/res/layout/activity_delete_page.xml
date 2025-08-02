@@ -16,7 +16,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
-        app:title="@string/customer_creation"
+        app:title="@string/delete_record"
         app:titleCentered="true"
         app:titleTextAppearance="@style/ToolbarTitleBold" />
 

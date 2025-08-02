@@ -26,6 +26,9 @@
         android:theme="@style/Theme.StockManagement"
         tools:targetApi="31">
         <activity
+            android:name=".Stock_Price_Change"
+            android:exported="false" />
+        <activity
             android:name=".DeletePage"
             android:exported="false" />
         <activity

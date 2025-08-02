@@ -84,6 +84,35 @@ class GetListOfData(context: Context, private val lifecycleOwner: LifecycleOwner
             .show()
     }
 
+    suspend fun saleshowConfirmationDialog(
+        context: Context,
+        title: String = context.getString(R.string.popup_title),
+        message: String
+    ): Int = suspendCancellableCoroutine { cont ->
+
+        val dialog = AlertDialog.Builder(context)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(context.getString(R.string.popup_save)) { dialogInterface, _ ->
+                cont.resume(1)
+                dialogInterface.dismiss()
+            }
+            .setNeutralButton(context.getString(R.string.popup_save_new)) { dialogInterface, _ ->
+                cont.resume(2)
+                dialogInterface.dismiss()
+            }
+            .setNegativeButton(context.getString(R.string.popup_cancel)) { dialogInterface, _ ->
+                cont.resume(0)
+                dialogInterface.dismiss()
+            }
+            .setOnCancelListener {
+                cont.resume(0)
+            }
+            .create()
+        dialog.show()
+    }
+
+
 
     fun getCurrentDate(): Date {
         val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())

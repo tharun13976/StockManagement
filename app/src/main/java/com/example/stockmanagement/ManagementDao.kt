@@ -242,6 +242,9 @@ interface ManagementDao {
     @Query("UPDATE Purchase SET productname = :newName WHERE productname = :oldName")
     suspend fun updateProductNameInPurchases(oldName: String, newName: String): Int
 
+    @Query("UPDATE Purchase SET stockprice = :newPrice WHERE puid =:purchaseId")
+    suspend fun updatePurchasePrice(purchaseId: Int,newPrice: Int)
+
 
     // To Delete Records
 

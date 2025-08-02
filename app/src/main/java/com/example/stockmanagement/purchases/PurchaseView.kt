@@ -1,6 +1,7 @@
 package com.example.stockmanagement.purchases
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
@@ -13,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.stockmanagement.ManagementDatabase
 import com.example.stockmanagement.R
+import com.example.stockmanagement.sales.SaleList
 import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -50,6 +52,13 @@ class PurchaseView : AppCompatActivity() {
                 findViewById<TextView>(R.id.TV_PurchaseCreDate).text = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(it.stockaddeddate)
             }
         }
+
+        findViewById<Button>(R.id.Btn_SeeSaleRecord).setOnClickListener {
+            val nextScreen = Intent(this, SaleList::class.java)
+            nextScreen.putExtra("FILTER_PURCHASE_ID", purchaseId.toString())
+            startActivity(nextScreen)
+        }
+
         findViewById<Button>(R.id.Btn_Back).setOnClickListener {
             finish()
         }

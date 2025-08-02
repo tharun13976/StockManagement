@@ -1,6 +1,7 @@
 package com.example.stockmanagement.sales
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.text.InputType
@@ -196,12 +197,11 @@ class SaleCreate : AppCompatActivity() {
                     }
                 }
 
-                val confirmed = dataFetcher.showConfirmationDialog(
+                val confirmed = dataFetcher.saleshowConfirmationDialog(
                     context = this@SaleCreate,
                     message = getString(R.string.sale_conformantion)
                 )
-                if (!confirmed) return@launch
-
+                if (confirmed==0) return@launch
                 val sale = Sale(
                     sid = null,
                     customername = customername.text.toString(),
@@ -222,7 +222,13 @@ class SaleCreate : AppCompatActivity() {
                 dao.insertSale(sale)
                 Log.d("INSERT", "Sale inserted")
                 Toast.makeText(this@SaleCreate,getString(R.string.sale_saved) , Toast.LENGTH_LONG).show()
-                finish()
+                if(confirmed==1){
+                    finish()
+                }
+                else if(confirmed==2){
+                    startActivity(Intent(this@SaleCreate, SaleCreate::class.java))
+                    finish()
+                }
             }
         }
     }
