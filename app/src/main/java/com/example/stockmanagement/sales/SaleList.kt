@@ -44,7 +44,6 @@ class SaleList : AppCompatActivity() {
         NONE,CUSTOMER_NAME, PRODUCT_NAME, PURCHASE_ID, AMOUNT_ONLY,CUSTOMER_AMOUNT_ONLY,CREATED_DATE
     }
 
-    @SuppressLint("CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -75,15 +74,59 @@ class SaleList : AppCompatActivity() {
         }
         recyclerView.adapter = adapter
 
-        // Load initial data
-        loadSales()
-
         val filterDropdown = findViewById<Spinner>(R.id.Spi_SalesFilter)
         val clearButton = findViewById<Button>(R.id.Btn_FilterClear)
         val defaultColor = clearButton.backgroundTintList
         val selectedTextView = findViewById<TextView>(R.id.TV_SelectedText)
         recordCount = findViewById(R.id.list_record_count)
         selectedTextView.visibility = View.GONE
+
+        val incomingCustomerName = intent.getStringExtra("FILTER_CUSTOMER_NAME")
+        val incomingproductName = intent.getStringExtra("FILTER_PRODUCT_NAME")
+        val incomingpurchaseid = intent.getStringExtra("FILTER_PURCHASE_ID")?.toIntOrNull() ?: -1
+
+        if (!incomingCustomerName.isNullOrEmpty()) {
+            val selectedText = findViewById<TextView>(R.id.TV_SelectedText)
+            selectedText.text = "${getString(R.string.filter_sale_popup_entered_customer)}: $incomingCustomerName"
+            selectedText.visibility = View.VISIBLE
+            findViewById<TextView>(R.id.Sales_Filter_text).visibility=View.GONE
+            clearButton.visibility=View.GONE
+            filterDropdown.visibility=View.GONE
+            lifecycleScope.launch {
+                val result = dao.getSalesByCustomerName(incomingCustomerName)
+                recordCount.text = result.size.toString()
+                adapter.updateData(result.reversed())
+            }
+        }
+        else if (!incomingproductName.isNullOrEmpty()) {
+            val selectedText = findViewById<TextView>(R.id.TV_SelectedText)
+            selectedText.text = "${getString(R.string.filter_sale_popup_entered_product)}: $incomingproductName"
+            selectedText.visibility = View.VISIBLE
+            findViewById<TextView>(R.id.Sales_Filter_text).visibility=View.GONE
+            clearButton.visibility=View.GONE
+            filterDropdown.visibility=View.GONE
+            lifecycleScope.launch {
+                val result = dao.getSalesByProductName(incomingproductName)
+                recordCount.text = result.size.toString()
+                adapter.updateData(result.reversed())
+            }
+        }
+        else if (incomingpurchaseid!=-1) {
+            val selectedText = findViewById<TextView>(R.id.TV_SelectedText)
+            selectedText.text = "${getString(R.string.filter_sale_popup_entered_id)}: $incomingpurchaseid"
+            selectedText.visibility = View.VISIBLE
+            findViewById<TextView>(R.id.Sales_Filter_text).visibility=View.GONE
+            clearButton.visibility=View.GONE
+            filterDropdown.visibility=View.GONE
+            lifecycleScope.launch {
+                val result = dao.getSalesByPurchaseID(incomingpurchaseid)
+                recordCount.text = result.size.toString()
+                adapter.updateData(result.reversed())
+            }
+        }
+        else{
+            loadSales()
+        }
 
         val filterMap = mapOf(
             getString(R.string.filter_sale_none) to FilterType.NONE,
@@ -148,50 +191,6 @@ class SaleList : AppCompatActivity() {
             filterDropdown.setSelection(0) // Reset to "None"
             selectedTextView.visibility = View.GONE
             loadSales()
-        }
-        val incomingCustomerName = intent.getStringExtra("FILTER_CUSTOMER_NAME")
-        if (!incomingCustomerName.isNullOrEmpty()) {
-            val selectedText = findViewById<TextView>(R.id.TV_SelectedText)
-            selectedText.text = "${getString(R.string.filter_sale_popup_entered_customer)}: $incomingCustomerName"
-            selectedText.visibility = View.VISIBLE
-            findViewById<TextView>(R.id.Sales_Filter_text).visibility=View.GONE
-            clearButton.visibility=View.GONE
-            filterDropdown.visibility=View.GONE
-            lifecycleScope.launch {
-                val result = dao.getSalesByCustomerName(incomingCustomerName)
-                recordCount.text = result.size.toString()
-                adapter.updateData(result.reversed())
-            }
-        }
-
-        val incomingproductName = intent.getStringExtra("FILTER_PRODUCT_NAME")
-        if (!incomingproductName.isNullOrEmpty()) {
-            val selectedText = findViewById<TextView>(R.id.TV_SelectedText)
-            selectedText.text = "${getString(R.string.filter_sale_popup_entered_product)}: $incomingproductName"
-            selectedText.visibility = View.VISIBLE
-            findViewById<TextView>(R.id.Sales_Filter_text).visibility=View.GONE
-            clearButton.visibility=View.GONE
-            filterDropdown.visibility=View.GONE
-            lifecycleScope.launch {
-                val result = dao.getSalesByProductName(incomingproductName)
-                recordCount.text = result.size.toString()
-                adapter.updateData(result.reversed())
-            }
-        }
-
-        val incomingpurchaseid = intent.getStringExtra("FILTER_PURCHASE_ID")?.toIntOrNull() ?: -1
-        if (incomingpurchaseid!=-1) {
-            val selectedText = findViewById<TextView>(R.id.TV_SelectedText)
-            selectedText.text = "${getString(R.string.filter_sale_popup_entered_id)}: $incomingpurchaseid"
-            selectedText.visibility = View.VISIBLE
-            findViewById<TextView>(R.id.Sales_Filter_text).visibility=View.GONE
-            clearButton.visibility=View.GONE
-            filterDropdown.visibility=View.GONE
-            lifecycleScope.launch {
-                val result = dao.getSalesByPurchaseID(incomingpurchaseid)
-                recordCount.text = result.size.toString()
-                adapter.updateData(result.reversed())
-            }
         }
     }
 
